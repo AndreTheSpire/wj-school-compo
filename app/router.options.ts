@@ -24,13 +24,13 @@ export default <RouterConfig>{
     }
 
     // this will use saved scroll position on browser forward/back navigation
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          left: savedPosition?.left || 0,
-          top: savedPosition?.top || 0,
-        });
-      }, 30);
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({
+    //       left: savedPosition?.left || 0,
+    //       top: savedPosition?.top || 0,
+    //     });
+    //   }, 100);
+    // });
   },
 };

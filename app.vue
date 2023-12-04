@@ -6,9 +6,7 @@
   </div>
 </template>
 <script>
-  definePageMeta({
-  scrollToTop: true
-})
+
 </script>
 <style lang="scss">
 // html{
@@ -33,5 +31,22 @@
   opacity: 0;
   filter: blur(1rem);
    scroll-behavior:smooth ;
+}
+
+.slide-enter-active{
+  transition: all 0.7s;
+  scroll-behavior:smooth ;
+}
+.slide-leave-active {
+  transition: all 0.2s;
+  scroll-behavior:smooth ;
+}
+.slide-enter-from {
+  opacity: 0;
+  transform: translate(50px, 0);
+}
+.slide-leave-to {
+  opacity: 0;
+  transform: translate(-50px, 0);
 }
 </style>

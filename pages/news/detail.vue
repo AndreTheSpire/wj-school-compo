@@ -80,22 +80,25 @@
   </v-sheet>
 </template>
 
-<script>
-definePageMeta({
-  scrollToTop: true,
-});
-export default {
-  data: () => ({
-    // news:
-    // {
-    //     id:'UWD2',
-    //     type:'TKK',
-    //     date:'11 may 2022',
-    //     imgurl:'/img/news/tkk/ppdb_tk_wijana.jpg',
-    //     header:'PPDB 2022',
-    //     detail:'Pendaftaran segera hubungi : 0321 - 871 132, 081 2744 36919 (Bu Wiwid), 0857 494 72 371 (Bu Sulis). '
-    // },
-    allnews: [
+<script setup>
+// definePageMeta({
+//   pageTransition: {
+//     name: "slide",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       console.log('Before enter...');
+//       window.scrollTo({ top: 0, behavior: 'smooth' });
+     
+//     },
+//     onEnter: (el, done) => {done(), console.log("enterrrrr")},
+//     onAfterEnter: (el) => {},
+//   },
+// });
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const allnews=[
       {
         id: "UWD1",
         type: "TKK",
@@ -121,24 +124,17 @@ export default {
         detail:
           "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
       },
-    ],
-  }),
-  computed: {
-    news() {
-      // if (!this.$store.state.users.profile.fetched) {
-      //   return []
-      // }
-      const getCurrentNews = this.allnews.find((x) => {
-        return x.id === this.$route.query.id;
+    ]
+    let news= computed(() => {
+  const getCurrentNews = allnews.find((x) => {
+        return x.id === route.query.id;
       });
       console.log("output");
       console.log(getCurrentNews);
       return getCurrentNews;
-    },
-  },
-  methods: {},
-};
+});
 </script>
+
 
 <style lang="scss" scoped>
 a {

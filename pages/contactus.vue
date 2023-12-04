@@ -3,18 +3,8 @@
     <div class="content-page">
       <div class="page-title">CONTACT US</div>
       <div class="page-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid id,
-        esse perspiciatis libero consequatur illum fugiat excepturi sunt modi,
-        tempora harum labore deserunt, incidunt quam suscipit architecto.
-        Soluta, impedit amet! Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Obcaecati et sed corporis, optio laudantium, dolorum ut
-        perspiciatis asperiores explicabo ratione unde quo soluta sint
-        voluptatum amet necessitatibus consequuntur sunt voluptatem. lorem Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Eos aperiam fuga
-        animi magnam commodi tempora autem. Natus maxime modi, consectetur
-        inventore recusandae quas perspiciatis, voluptatibus ipsa maiores fuga
-        enim cupiditate.
-        <!-- <v-form class="w-100" ref="formcontact" v-model="valid">
+
+        <v-form class="w-100" ref="formcontact" v-model="valid">
           <InputsTextField
             v-model="name"
             label="Name"
@@ -62,21 +52,60 @@
             >Submit
             <v-icon>mdi-email-fast-outline</v-icon>
           </v-btn>
-        </v-form> -->
+        </v-form>
       </div>
     </div>
   </v-sheet>
 </template>
 
 
-<script setup>
+<script setup >
 definePageMeta({
+  scrollToTop:false,
+
   pageTransition: {
-    name: "page",
+    name: "slide",
     mode: "out-in",
+    onBeforeEnter: (el) => {
+      console.log('Before enter...');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    onEnter: (el, done) => {console.log("enterrrrr")},
+    onAfterEnter: (el) => {},
   },
 });
+
+import { reactive, ref,onMounted } from "vue";
+let valid=ref(true);
+let name=ref("");
+let email=ref("");
+let phone=ref("");
+let message=ref("");
+let upload=ref("");
+let selectedemail=ref("");
+ const formcontact = ref() 
+const itemsemail=
+    [
+      { state: "admin@smpk.wijana.sch.id", value: "admin@smpk.wijana.sch.id" },
+      { state: "admin@sdk.wijana.sch.id", value: "admin@sdk.wijana.sch.id" },
+      { state: "admin@tkk.wijana.sch.id", value: "admin@tkk.wijana.sch.id" },
+    ];
+
+// Assign the form reference to the ref
+
+
+    function validateform() {
+      console.log(valid);
+      if (formcontact.value.validate()) {
+        console.log("berhasil");
+      } else {
+        console.log("gagal");
+      }
+      console.log(valid);
+    }
+
 </script>
+
 
 <style lang="scss" scoped>
 .content-page {
