@@ -81,19 +81,19 @@
 </template>
 
 <script setup>
-// definePageMeta({
-//   pageTransition: {
-//     name: "slide",
-//     mode: "out-in",
-//     onBeforeEnter: (el) => {
-//       console.log('Before enter...');
-//       window.scrollTo({ top: 0, behavior: 'smooth' });
-     
-//     },
-//     onEnter: (el, done) => {done(), console.log("enterrrrr")},
-//     onAfterEnter: (el) => {},
-//   },
-// });
+definePageMeta({
+  scrollToTop:false,
+  pageTransition: {
+    name: "slide",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      console.log('Before enter...');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    onEnter: (el, done) => {console.log("enterrrrr")},
+    onAfterEnter: (el) => {},
+  },
+});
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();

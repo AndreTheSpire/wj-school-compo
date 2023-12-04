@@ -60,19 +60,21 @@
 
 
 <script setup >
+import { TransitionStore } from "../stores/transition";
+const transition=TransitionStore();
+
 definePageMeta({
   scrollToTop:false,
-
-  pageTransition: {
-    name: "slide",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      console.log('Before enter...');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    },
-    onEnter: (el, done) => {console.log("enterrrrr")},
-    onAfterEnter: (el) => {},
-  },
+  pageTransition:{
+        name: "slide",
+        mode: "out-in",
+        onBeforeEnter: (el) => {
+        console.log('Before enter...');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+        onEnter: (el, done) => {console.log("enterrrrr")},
+        onAfterEnter: (el) => {},
+      }
 });
 
 import { reactive, ref,onMounted } from "vue";
@@ -103,6 +105,9 @@ const itemsemail=
       }
       console.log(valid);
     }
+    onMounted(() => {
+    console.log(transition.default);
+  })
 
 </script>
 
