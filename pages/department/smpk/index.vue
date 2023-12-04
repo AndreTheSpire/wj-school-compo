@@ -130,6 +130,7 @@ const data = reactive({
       date: "10 Nov 2020",
       imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
       header: "Selamat kepada Nathan Philbert Ngo",
+      slug:"selamat-kepada-nathan-philbert-ngo",
       detail:
         "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
     },

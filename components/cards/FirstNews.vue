@@ -5,7 +5,7 @@
       width="100%"
       :elevation="isHovering ? 10 : 0"
       v-bind="props"
-      @click="navigatenews(news.id)"
+      :to="`/news/${news.slug}`"
     >
       <v-card-title class="d-flex justify-space-between news-head">
         <div class="news-tag">Pengumuman</div>
@@ -40,12 +40,7 @@ const autoplay = reactive({
 const props = defineProps({
   news: Object,
 });
-function navigatenews(id) {
-  router.push({
-    path: "/news/detail",
-    query: { id: id }, // Replace 123 with the actual value you want to pass
-  });
-}
+
 </script>
 
 <style lang="scss" scoped>

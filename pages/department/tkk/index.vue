@@ -117,6 +117,7 @@ const data = reactive({
       date: "11 May 2022",
       imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
       header: "PPDB 2022",
+      slug:"ppdb-2022",
       detail: "Menerima Peserta Didik Baru 2022",
     },
   ],
