@@ -81,11 +81,10 @@
 </template>
 
 <script>
-  definePageMeta({
-  scrollToTop: true
-})
+definePageMeta({
+  scrollToTop: true,
+});
 export default {
-  
   data: () => ({
     // news:
     // {
@@ -125,10 +124,6 @@ export default {
     ],
   }),
   computed: {
-    // isSSR() {
-    //   console.log(process.server);
-    //   return process.server;
-    // },
     news() {
       // if (!this.$store.state.users.profile.fetched) {
       //   return []

@@ -3,8 +3,17 @@
     <div class="content-page">
       <div class="page-title">CONTACT US</div>
       <div class="page-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid id, esse perspiciatis libero consequatur illum fugiat excepturi sunt modi, tempora harum labore deserunt, incidunt quam suscipit architecto. Soluta, impedit amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati et sed corporis, optio laudantium, dolorum ut perspiciatis asperiores explicabo ratione unde quo soluta sint voluptatum amet necessitatibus consequuntur sunt voluptatem.
-        lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aperiam fuga animi magnam commodi tempora autem. Natus maxime modi, consectetur inventore recusandae quas perspiciatis, voluptatibus ipsa maiores fuga enim cupiditate.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid id,
+        esse perspiciatis libero consequatur illum fugiat excepturi sunt modi,
+        tempora harum labore deserunt, incidunt quam suscipit architecto.
+        Soluta, impedit amet! Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Obcaecati et sed corporis, optio laudantium, dolorum ut
+        perspiciatis asperiores explicabo ratione unde quo soluta sint
+        voluptatum amet necessitatibus consequuntur sunt voluptatem. lorem Lorem
+        ipsum dolor sit amet consectetur adipisicing elit. Eos aperiam fuga
+        animi magnam commodi tempora autem. Natus maxime modi, consectetur
+        inventore recusandae quas perspiciatis, voluptatibus ipsa maiores fuga
+        enim cupiditate.
         <!-- <v-form class="w-100" ref="formcontact" v-model="valid">
           <InputsTextField
             v-model="name"
@@ -60,12 +69,13 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup>
 definePageMeta({
   pageTransition: {
-    name: 'page'
-  }
-})
+    name: "page",
+    mode: "out-in",
+  },
+});
 </script>
 
 <style lang="scss" scoped>

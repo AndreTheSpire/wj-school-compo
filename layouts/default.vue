@@ -1,25 +1,28 @@
 <template>
   <v-app class="background-container" v-if="!isSSR">
     <v-navigation-drawer
-      v-model="leftdrawer"
+      v-model="data.leftdrawer"
       app
-      :mini-variant="miniVariant"
-      @click:mini-variant="miniVariant = !miniVariant"
+      :mini-variant="data.miniVariant"
+      @click:mini-variant="data.miniVariant = !data.miniVariant"
       temporary
       class="sidenav"
       location="start"
     >
       <v-list>
-        <v-list-item @click="navigateroute(routes[3], 3)" class="text-sidebar">
+        <v-list-item
+          @click="navigateroute(data.routes[3], 3)"
+          class="text-sidebar"
+        >
           Beranda
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-navigation-drawer
-      v-model="rightdrawer"
+      v-model="data.rightdrawer"
       app
-      :mini-variant="miniVariant"
-      @click:mini-variant="miniVariant = !miniVariant"
+      :mini-variant="data.miniVariant"
+      @click:mini-variant="data.miniVariant = !data.miniVariant"
       temporary
       class="sidenav"
       location="end"
@@ -27,11 +30,11 @@
       <v-list>
         <v-list-item class="header-sidebar"> Departments </v-list-item>
         <v-list-item
-          v-for="(item, index) in routes"
+          v-for="(item, index) in data.routes"
           :key="index"
           @click="navigateroute(item, index)"
           :class="
-            selectedIndex === index
+            data.selectedIndex === index
               ? 'selected-item text-sidebar'
               : 'text-sidebar'
           "
@@ -53,11 +56,11 @@
       <v-app-bar-nav-icon
         size="x-large"
         color="green"
-        @click.stop="leftdrawer = !leftdrawer"
+        @click.stop="data.leftdrawer = !data.leftdrawer"
       ></v-app-bar-nav-icon>
       <div
         class="text-title text-center w-100 d-flex align-center flex-column justify-center"
-        @click="navigateroute(routes[3], 3)"
+        @click="navigateroute(data.routes[3], 3)"
       >
         <span> SEKOLAH WIJANA </span>
         <span class="text-title-second"> JOMBANG</span>
@@ -66,7 +69,7 @@
       <v-app-bar-nav-icon
         size="x-large"
         color="green"
-        @click.stop="rightdrawer = !rightdrawer"
+        @click.stop="data.rightdrawer = !data.rightdrawer"
       ></v-app-bar-nav-icon>
       <!-- <NotificationBell />
       <ProfileHeader :reset="resetindex"/> -->
@@ -77,7 +80,7 @@
 
       <div
         class="text-title text-center w-100"
-        @click="navigateroute(routes[3], 3)"
+        @click="navigateroute(data.routes[3], 3)"
       >
         SEKOLAH WIJANA JOMBANG
       </div>
@@ -96,64 +99,36 @@
   </v-app>
 </template>
 
-<script>
-import { ref } from "vue";
-
-export default {
-  data() {
-    return {
-      leftdrawer: false, // Controls whether the sidebar is open
-      rightdrawer: false,
-      miniVariant: false, // Controls whether the sidebar is in mini-variant mode (for mobile)
-      routes: [
-        // { text: 'Home', route: '/home', icon:'mdi-home' },
-        { text: "TKK", route: "/department/tkk" },
-        { text: "SDK", route: "/department/sdk" },
-        { text: "SMPK", route: "/department/smpk" },
-        { text: "Yayasan yohanes Gabriel Jombang", route: "/" },
-        // Add more menu items as needed
-      ],
-      selectedIndex: 0, // Index of the selected item
-    };
-  },
-  computed: {
-    isSSR() {
-      console.log(process.server);
-      return process.server;
-    },
-  },
-
-  methods: {
-    resetindex() {
-      console.log("kepanggil");
-      this.selectedIndex = -1;
-      console.log(this.selectedIndex);
-    },
-    toogledrawer() {
-      this.drawer = !this.drawer;
-      console.log(this.drawer);
-      this.toggleSidebar();
-    },
-    navigateroute(route, index) {
-      this.$router.push(route.route);
-      this.selectedIndex = index;
-    },
-    navigateprofile() {
-      this.$router.push("/profile");
-      this.selectedIndex = -1;
-    },
-    toggleSidebar() {
-      this.$emit("toggleSidebar");
-    },
-  },
-  mounted() {
-    //  if (this.$cookies.get('loginProfile')) {
-    //  }else{
-    //   this.$router.push('/');
-    //  }
-  },
-};
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const data = reactive({
+  leftdrawer: false, // Controls whether the sidebar is open
+  rightdrawer: false,
+  miniVariant: false, // Controls whether the sidebar is in mini-variant mode (for mobile)
+  routes: [
+    // { text: 'Home', route: '/home', icon:'mdi-home' },
+    { text: "TKK", route: "/department/tkk" },
+    { text: "SDK", route: "/department/sdk" },
+    { text: "SMPK", route: "/department/smpk" },
+    { text: "Yayasan yohanes Gabriel Jombang", route: "/" },
+    // Add more menu items as needed
+  ],
+  selectedIndex: 0, // Index of the selected item
+});
+let isSSR = computed(() => {
+  console.log(process.server);
+  return process.server;
+});
+function navigateroute(route, index) {
+  router.push(route.route);
+  data.selectedIndex = index;
+}
 </script>
+
+
 
 <style lang="scss" scoped>
 .v-toolbar-title__placeholder {

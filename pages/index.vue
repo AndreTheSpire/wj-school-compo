@@ -4,7 +4,7 @@
       cycle
       fade
       :height="$vuetify.display.smAndDown ? '40vh' : '80vh'"
-      v-model="slidepage"
+      v-model="data.slidepage"
       hide-delimiters
       @mouseenter="hovered = true"
       @mouseleave="hovered = false"
@@ -12,7 +12,7 @@
     >
       <template v-slot:prev="{ props }">
         <v-btn
-          v-show="hovered"
+          v-show="data.hovered"
           variant="elevated"
           color="success"
           @click="props.onClick"
@@ -21,7 +21,7 @@
       </template>
       <template v-slot:next="{ props }">
         <v-btn
-          v-show="hovered"
+          v-show="data.hovered"
           variant="elevated"
           color="success"
           @click="props.onClick"
@@ -29,7 +29,7 @@
         ></v-btn>
       </template>
       <v-carousel-item
-        v-for="(img, i) in headerimg"
+        v-for="(img, i) in data.headerimg"
         class="header-style"
         :key="i"
         :src="img.urlimg"
@@ -45,7 +45,7 @@
             <v-col
               cols="4"
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate1 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -62,7 +62,7 @@
             <v-col
               cols="4"
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate2 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -78,7 +78,7 @@
             <v-col
               cols="4"
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate3 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -98,7 +98,7 @@
           >
             <div
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -108,7 +108,7 @@
             </div>
             <div
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -123,7 +123,7 @@
             </div>
             <div
               :class="
-                load == true
+                data.load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -140,7 +140,9 @@
           <div class="d-flex align-center justify-center animate" v-else>
             <div
               transition="slide-x-transition"
-              :class="load == true ? 'header-item animate1' : 'header-item'"
+              :class="
+                data.load == true ? 'header-item animate1' : 'header-item'
+              "
               @click="navigate(1)"
             >
               <img class="header-item-img" src="/img/home/tkk3.png" alt="" />
@@ -149,7 +151,9 @@
 
             <div
               transition="slide-x-transition"
-              :class="load == true ? 'header-item animate2' : 'header-item'"
+              :class="
+                data.load == true ? 'header-item animate2' : 'header-item'
+              "
               @click="navigate(2)"
             >
               <img class="header-item-img" src="/img/home/sdk3.png" alt="" />
@@ -157,7 +161,9 @@
             </div>
             <div
               transition="slide-x-transition"
-              :class="load == true ? 'header-item animate3' : 'header-item'"
+              :class="
+                data.load == true ? 'header-item animate3' : 'header-item'
+              "
               @click="navigate(3)"
             >
               <img class="header-item-img" src="/img/home/smpk3.png" alt="" />
@@ -182,7 +188,7 @@
     <v-card width="1024px" flat>
       <div class="section-page">
         <div class="section-title">Berita Utama</div>
-        <template v-for="(content, index) in news" :key="index">
+        <template v-for="(content, index) in data.news" :key="index">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -192,112 +198,100 @@
   </v-sheet>
 </template>
 
-<script>
-import { ProfileStore } from "../stores/profilestore";
-export default {
-  data: () => ({
-    name: "",
-    password: "",
-    hovered: false,
-    load: true,
-    slidepage: 0,
-    urlimg: "/img/media/slidehome/slide2.jpg",
-    color: "red",
-    profile: ProfileStore().profile,
-    headerimg: [
-      {
-        nama: "slide1",
-        urlimg: "/img/media/slidehome/slide1.jpg",
-      },
-      {
-        nama: "slide2",
-        urlimg: "/img/media/slidehome/slide2.jpg",
-      },
-      {
-        nama: "slide3",
-        urlimg: "/img/media/slidehome/slide3.jpg",
-      },
-      {
-        nama: "slide4",
-        urlimg: "/img/media/slidehome/slide4.jpg",
-      },
-      {
-        nama: "slide5",
-        urlimg: "/img/media/slidehome/slide5.jpg",
-      },
-      {
-        nama: "slide6",
-        urlimg: "/img/media/slidehome/slide6.jpg",
-      },
-    ],
-    news: [
-      {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 may 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-    ],
-  }),
-  watch: {
-    slidepage() {
-      this.load = false;
+<script setup>
+import { onMounted, reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+
+const props = defineProps({
+  foo: { type: String, required: true },
+  bar: Number,
+});
+
+let slidepage = ref(true);
+
+const data = reactive({
+  name: "",
+  password: "",
+  hovered: false,
+  load: true,
+  slidepage: 0,
+  urlimg: "/img/media/slidehome/slide2.jpg",
+  color: "red",
+  profile: ProfileStore().profile,
+  headerimg: [
+    {
+      nama: "slide1",
+      urlimg: "/img/media/slidehome/slide1.jpg",
     },
-  },
-  props: {
-    reset: Function,
-  },
-  computed: {
-    headerStyles() {
-      return {
-        backgroundImage: `url(${this.urlimg})`,
-        backgroundSize: "cover",
-        width: "1921px",
-        maxHeight: "1080px",
-        minHeight: "650px",
-        marginBottom: "48px",
-      };
+    {
+      nama: "slide2",
+      urlimg: "/img/media/slidehome/slide2.jpg",
     },
-  },
-  methods: {
-    pindahprofile(index) {
-      this.reset();
-      this.$router.push("/profile");
+    {
+      nama: "slide3",
+      urlimg: "/img/media/slidehome/slide3.jpg",
     },
-    navigate(index) {
-      if (index == 1) {
-        this.$router.push("/department/tkk");
-      } else if (index == 2) {
-        this.$router.push("/department/sdk");
-      } else if (index == 3) {
-        this.$router.push("/department/smpk");
-      }
+    {
+      nama: "slide4",
+      urlimg: "/img/media/slidehome/slide4.jpg",
     },
-    logout() {
-      this.$router.push("/");
+    {
+      nama: "slide5",
+      urlimg: "/img/media/slidehome/slide5.jpg",
     },
-  },
-};
+    {
+      nama: "slide6",
+      urlimg: "/img/media/slidehome/slide6.jpg",
+    },
+  ],
+  news: [
+    {
+      id: "UWD1",
+      type: "TKK",
+      date: "11 may 2022",
+      imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
+      header: "PPDB 2022",
+      detail: "Menerima Peserta Didik Baru 2022",
+    },
+    {
+      id: "UWD2",
+      type: "TKK",
+      date: "14 Jan 2021",
+      imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
+      header: "PPDB PENERIMAAN SISWA BARU",
+      detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
+    },
+    {
+      id: "UWD3",
+      type: "SMPK",
+      date: "10 Nov 2020",
+      imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
+      header: "Selamat kepada Nathan Philbert Ngo",
+      detail:
+        "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
+    },
+  ],
+});
+function navigate(index) {
+  if (index == 1) {
+    router.push("/department/tkk");
+  } else if (index == 2) {
+    router.push("/department/sdk");
+  } else if (index == 3) {
+    router.push("/department/smpk");
+  }
+}
+
+watch(
+  () => data.slidepage,
+  (count) => {
+    data.load = false;
+  }
+);
 </script>
+
 
 <style lang="scss" scoped>
 @keyframes floating {

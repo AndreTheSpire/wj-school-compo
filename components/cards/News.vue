@@ -5,7 +5,7 @@
       width="100%"
       :elevation="isHovering ? 16 : 0"
       v-bind="props"
-      @click="navigatenews(news.id,news.header)"
+      @click="navigatenews(news.id, news.header)"
     >
       <v-card-title class="d-flex justify-space-between news-head">
         <div class="news-tag">Pengumuman</div>
@@ -34,27 +34,24 @@
   </v-hover>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-  }),
-  props: {
-    news: Object,
-  },
-  methods: {
-    navigatenews(id,name) {
-      this.$router.push({
-        name:name,
-        path: "/news/detail",
-        query: { id: id }, // Replace 123 with the actual value you want to pass
-      });
-    },
-  },
-};
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const autoplay = reactive({
+  delay: 4000,
+  disableOnInteraction: false,
+});
+const props = defineProps({
+  news: Object,
+});
+function navigatenews(id) {
+  router.push({
+    path: "/news/detail",
+    query: { id: id }, // Replace 123 with the actual value you want to pass
+  });
+}
 </script>
 
 <style lang="scss" scoped>

@@ -6,8 +6,8 @@
   </v-sheet>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { reactive, ref } from "vue";
 </script>
 
 <style lang="scss" scoped>

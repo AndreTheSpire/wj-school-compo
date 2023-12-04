@@ -90,35 +90,12 @@
       default:null
     },
     inputfunc:Function,
-    // rules: {
-    //   type: Array,
-    //   default () {
-    //     // Rules bisa di check di https://vuetifyjs.com/en/components/inputs/#rules
-    //     return []
-    //   }
-    // },
+
     value: {
       type: String,
       default: ''
     },
-    // disabled: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    // error: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    // success: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    // errorMessages: {
-    //   type: Array,
-    //   default () {
-    //     return []
-    //   }
-    // },
+
 
   },
   data () {

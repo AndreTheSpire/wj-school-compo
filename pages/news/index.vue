@@ -13,8 +13,8 @@
         <v-row class="pa-4">
           <v-col>
             <InputsTextField
-              v-model="category"
-              :selectitems="categoryitem"
+              v-model="data.category"
+              :selectitems="data.categoryitem"
               label="Category"
               name="selectedcategory"
               type="selected"
@@ -23,8 +23,8 @@
           </v-col>
           <v-col>
             <InputsTextField
-              v-model="Sort"
-              :selectitems="sortitem"
+              v-model="data.Sort"
+              :selectitems="data.sortitem"
               label="Sort"
               name="selectedsort"
               type="selected"
@@ -34,7 +34,7 @@
           </v-col>
           <v-col>
             <InputsTextField
-              v-model="Search"
+              v-model="data.Search"
               label="Search"
               name="search"
               type="field"
@@ -44,7 +44,7 @@
           </v-col>
         </v-row>
         <div class="pa-4 listnews">
-          <template v-for="(content, index) in filterednews" :key="index">
+          <template v-for="(content, index) in data.filterednews" :key="index">
             <CardsNews :news="content"></CardsNews>
             <br />
           </template>
@@ -54,132 +54,124 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    category: "",
-    Sort: "",
-    Search: "",
-    categoryitem: [
-      { state: "All Category", value: 1 },
-      { state: "Pencapaian", value: 2 },
-      { state: "Kejadian", value: 3 },
-      { state: "Pengumuman", value: 4 },
-    ],
-    sortitem: [
-      { state: "Title A-Z", value: 1 },
-      { state: "Title Z-A", value: 2 },
-      { state: "Latest Date", value: 3 },
-      { state: "Oldest Date", value: 4 },
-    ],
-    filterednews: [
-      {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-    ],
-    allnews: [
-      {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-    ],
-  }),
-  computed: {
-    // isSSR() {
-    //   console.log(process.server);
-    //   return process.server;
-    // },
-  },
-  methods: {
-    searchnews(word) {
-      //--------Search
-      this.filterednews = this.allnews.filter(function (item) {
-        return item.header.toLowerCase().includes(word.toLowerCase());
+<script setup>
+import { reactive, ref } from "vue";
+
+const data = reactive({
+  category: "",
+  Sort: "",
+  Search: "",
+  categoryitem: [
+    { state: "All Category", value: 1 },
+    { state: "Pencapaian", value: 2 },
+    { state: "Kejadian", value: 3 },
+    { state: "Pengumuman", value: 4 },
+  ],
+  sortitem: [
+    { state: "Title A-Z", value: 1 },
+    { state: "Title Z-A", value: 2 },
+    { state: "Latest Date", value: 3 },
+    { state: "Oldest Date", value: 4 },
+  ],
+  filterednews: [
+    {
+      id: "UWD1",
+      type: "TKK",
+      date: "11 May 2022",
+      imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
+      header: "PPDB 2022",
+      detail: "Menerima Peserta Didik Baru 2022",
+    },
+    {
+      id: "UWD2",
+      type: "TKK",
+      date: "14 Jan 2021",
+      imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
+      header: "PPDB PENERIMAAN SISWA BARU",
+      detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
+    },
+    {
+      id: "UWD3",
+      type: "SMPK",
+      date: "10 Nov 2020",
+      imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
+      header: "Selamat kepada Nathan Philbert Ngo",
+      detail:
+        "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
+    },
+  ],
+  allnews: [
+    {
+      id: "UWD1",
+      type: "TKK",
+      date: "11 May 2022",
+      imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
+      header: "PPDB 2022",
+      detail: "Menerima Peserta Didik Baru 2022",
+    },
+    {
+      id: "UWD2",
+      type: "TKK",
+      date: "14 Jan 2021",
+      imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
+      header: "PPDB PENERIMAAN SISWA BARU",
+      detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
+    },
+    {
+      id: "UWD3",
+      type: "SMPK",
+      date: "10 Nov 2020",
+      imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
+      header: "Selamat kepada Nathan Philbert Ngo",
+      detail:
+        "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
+    },
+  ],
+});
+function searchnews(word) {
+  //--------Search
+  data.filterednews = data.allnews.filter(function (item) {
+    return item.header.toLowerCase().includes(word.toLowerCase());
+  });
+}
+function sortnews(selected) {
+  console.log(selected);
+  if (selected) {
+    if (selected.value == 1) {
+      data.filterednews.sort(function (a, b) {
+        var nameA = a.header.toLowerCase(),
+          nameB = b.header.toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
       });
-    },
-    sortnews(selected) {
-      console.log(selected);
-      if (selected) {
-        if (selected.value == 1) {
-          this.filterednews.sort(function (a, b) {
-            var nameA = a.header.toLowerCase(),
-              nameB = b.header.toLowerCase();
-            if (nameA < nameB)
-              //sort string ascending
-              return -1;
-            if (nameA > nameB) return 1;
-            return 0; //default return value (no sorting)
-          });
-        } else if (selected.value == 2) {
-          this.filterednews.sort(function (a, b) {
-            var nameA = a.header.toLowerCase(),
-              nameB = b.header.toLowerCase();
-            if (nameA > nameB)
-              //sort string ascending
-              return -1;
-            if (nameA < nameB) return 1;
-            return 0; //default return value (no sorting)
-          });
-        } else if (selected.value == 3) {
-          this.filterednews.sort(function (a, b) {
-            var dateA = new Date(a.date),
-              dateB = new Date(b.date);
-            return dateA - dateB; //sort by date ascending
-          });
-        } else if (selected.value == 4) {
-          this.filterednews.sort(function (a, b) {
-            var dateA = new Date(a.date),
-              dateB = new Date(b.date);
-            return dateB - dateA; //sort by date ascending
-          });
-        }
-      }
-    },
-  },
-};
+    } else if (selected.value == 2) {
+      data.filterednews.sort(function (a, b) {
+        var nameA = a.header.toLowerCase(),
+          nameB = b.header.toLowerCase();
+        if (nameA > nameB)
+          //sort string ascending
+          return -1;
+        if (nameA < nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
+    } else if (selected.value == 3) {
+      data.filterednews.sort(function (a, b) {
+        var dateA = new Date(a.date),
+          dateB = new Date(b.date);
+        return dateA - dateB; //sort by date ascending
+      });
+    } else if (selected.value == 4) {
+      data.filterednews.sort(function (a, b) {
+        var dateA = new Date(a.date),
+          dateB = new Date(b.date);
+        return dateB - dateA; //sort by date ascending
+      });
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

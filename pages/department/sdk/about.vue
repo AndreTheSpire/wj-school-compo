@@ -154,7 +154,9 @@
         <p style="margin-left: 0cm; margin-right: 0cm">&nbsp;</p>
 
         <ol start="3">
-          <li><span class="text-content"><strong>Tujuan</strong> </span></li>
+          <li>
+            <span class="text-content"><strong>Tujuan</strong> </span>
+          </li>
         </ol>
 
         <ol>
@@ -219,8 +221,8 @@
   </v-sheet>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { reactive, ref } from "vue";
 </script>
 
 <style lang="scss" scoped>
@@ -248,7 +250,6 @@ p {
     width: 90vw;
     object-fit: cover;
   }
-
 }
 </style>
 
