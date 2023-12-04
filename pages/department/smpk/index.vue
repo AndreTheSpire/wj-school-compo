@@ -24,7 +24,7 @@
       <div class="section-page">
         <div class="gukar-title">Daftar Guru & Karyawan</div>
         <div class="d-flex align-center justify-center">
-          <PartsGukarCarousel :items="gukar" />
+          <PartsGukarCarousel :items="data.gukar" />
         </div>
       </div>
     </div>
