@@ -1,5 +1,5 @@
 @mixin phone {
-	@media (min-device-width : 320px) and (max-device-width : 480px) {
+	@media (min-device-width : 0px) and (max-device-width : 560px) {
     @content;
   }
 }

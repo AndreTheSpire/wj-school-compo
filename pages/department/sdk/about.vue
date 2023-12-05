@@ -244,13 +244,16 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-@media (max-width: 40em) {
+img{
+  @include phone{
   img {
     height: auto;
     width: 90vw;
     object-fit: cover;
   }
+  }
 }
+
 </style>
 
      

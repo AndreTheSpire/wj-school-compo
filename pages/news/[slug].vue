@@ -8,7 +8,7 @@
     <div class="news-page" v-else>
       <div class="pb-4">
         <ul class="breadcrumbs">
-          <li><a href="/">HOME</a></li>
+          <li><a href="/" to="/">HOME</a></li>
           <li><a> / </a></li>
           <li><a href="/news">NEWS</a></li>
           <li><a> / </a></li>
@@ -87,25 +87,12 @@
 </template>
 
 <script setup>
-definePageMeta({
-  scrollToTop:false,
-  pageTransition: {
-    name: "slide",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      console.log('Before enter...');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    },
-    onEnter: (el, done) => {console.log("enterrrrr")},
-    onAfterEnter: (el) => {},
-  },
-});
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
-
-let datafetch=ref(false);
 const route = useRoute();
+let datafetch=ref(false);
+
 const allnews=[
       {
         id: "UWD1",
@@ -145,12 +132,7 @@ const allnews=[
       console.log(getCurrentNews);
       return getCurrentNews;
 });
-// let data= computed(() => {
-//       if(!news){
-//         return false
-//       }else{
-//         return true
-// }});
+console.log("computed :"+news.value.header);
 onMounted(() => {
     if(!news){
         datafetch.value=false;
@@ -159,6 +141,27 @@ onMounted(() => {
       }
       console.log(datafetch);
   })
+
+useHead({
+  title:news.value.header,
+  meta: [
+    { name: 'description', content: news.value.detail }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "slide",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0});
+    },
+  },
+});
+
 </script>
 
 
@@ -248,6 +251,9 @@ li {
   font-size: 3rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
+  @include phone{
+     font-size: 1.5rem;
+  }
 }
 .page-content {
   font-weight: normal;
@@ -261,17 +267,14 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-@media (max-width: 40em) {
-  img {
+img{
+  @include phone{
     height: auto;
     width: 90vw;
     object-fit: cover;
   }
-
-  .page-title {
-    font-size: 1.5rem;
-  }
 }
+
 </style>
 
      

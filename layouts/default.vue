@@ -34,7 +34,7 @@
           :key="index"
           @click="navigateroute(item, index)"
           :class="
-            data.selectedIndex === index
+            data.selectedIndex === index&&data.selectedIndex!=3
               ? 'selected-item text-sidebar'
               : 'text-sidebar'
           "

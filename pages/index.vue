@@ -6,8 +6,8 @@
       :height="$vuetify.display.smAndDown ? '40vh' : '80vh'"
       v-model="data.slidepage"
       hide-delimiters
-      @mouseenter="hovered = true"
-      @mouseleave="hovered = false"
+      @mouseenter="data.hovered = true"
+      @mouseleave="data.hovered = false"
       show-arrows="hover"
     >
       <template v-slot:prev="{ props }">
@@ -199,6 +199,17 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0});
+    },
+  },
+});
+
 import { onMounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
@@ -338,6 +349,9 @@ watch(
   font-weight: 700;
   line-height: 1.4;
   font-style: normal;
+   @include phone{
+     font-size: 19px;
+  }
 }
 .container-header {
   top: 40%;
@@ -345,6 +359,13 @@ watch(
 .header-item {
   padding: 2rem;
   transition: transform 0.2s;
+  @include phone{
+    padding: 0rem;
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .header-item:hover {
   transform: scale(1.1);
@@ -352,12 +373,19 @@ watch(
 }
 .header-item-img {
   width: 150px;
+  @include phone{
+    height: 60px;
+    width: auto;
+  }
 }
 .header-item-text {
   color: white;
   text-align: center;
   font-style: normal;
   font-size: 40px;
+  @include phone{
+    font-size: 20px;
+  }
 }
 .header-img-md {
   height: 90px;
@@ -376,6 +404,9 @@ watch(
   font-size: 48px;
   line-height: 1.4;
   font-weight: 700;
+  @include phone{
+    font-size: 24px;
+  }
 }
 .text-dupe {
   font-family: "Open Sans";
@@ -390,31 +421,5 @@ watch(
   }
 }
 
-@media (max-width: 40em) {
-  .text-content-header {
-    font-size: 24px;
-  }
-  .section-title {
-    font-size: 19px;
-  }
-  .header-item-img {
-    height: 60px;
-    width: auto;
-  }
-  .header-item-text {
-    color: white;
-    text-align: center;
-    font-family: "Lusitana", Georgia, serif;
-    font-style: normal;
-    font-size: 20px;
-  }
-  .header-item {
-    padding: 0rem;
-    transition: transform 0.2s;
-    display: flex;
-    justify-items: center;
-    flex-direction: column;
-    align-items: center;
-  }
-}
+
 </style>

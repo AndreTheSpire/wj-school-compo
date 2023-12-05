@@ -55,6 +55,25 @@
 </template>
 
 <script setup>
+useHead({
+  title:'News',
+  meta: [
+    { name: 'description', content: 'Berita Terikini di sekolah wijana jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "slide",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0 });
+    },
+  },
+});
 import { reactive, ref } from "vue";
 
 const data = reactive({
@@ -216,6 +235,9 @@ li {
   font-weight: 700;
   font-size: 3rem;
   margin-bottom: 0.5rem;
+  @include phone{
+    font-size: 1.5rem;
+  }
 }
 .page-content {
   font-weight: normal;
@@ -229,15 +251,11 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-@media (max-width: 40em) {
-  img {
-    height: auto;
+img{
+  @include phone{
+    weight: auto;
     width: 90vw;
     object-fit: cover;
-  }
-
-  .page-title {
-    font-size: 1.5rem;
   }
 }
 </style>

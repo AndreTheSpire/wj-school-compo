@@ -31,13 +31,25 @@
 </template>
 
 <script setup>
-useSeoMeta({
-  title: 'SDK wijana jombang',
-  ogTitle: 'My Amazing Site',
-  description: 'This is my amazing site, let me tell you all about it.',
-  ogDescription: 'This is my amazing site, let me tell you all about it.',
-  ogImage: 'https://example.com/image.png',
+useHead({
+  title:'TKK Sekolah Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'TKK Sekolah Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
 })
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0 });
+    },
+  },
+});
 
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";

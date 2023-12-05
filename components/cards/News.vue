@@ -105,4 +105,12 @@ const props = defineProps({
   margin: auto;
   background-color: #f7f7f7;
 }
+@media screen and (max-width: 400px) {
+  .news-title {
+  padding: 0px 8px;
+}
+.news-detail {
+   padding: 0px 8px;
+}
+}
 </style>

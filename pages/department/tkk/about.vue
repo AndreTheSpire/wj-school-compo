@@ -104,8 +104,9 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-@media (max-width: 40em) {
-  img {
+img{
+  @include phone{
+    
     height: auto;
     width: 90vw;
     object-fit: cover;

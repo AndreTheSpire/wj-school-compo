@@ -17,6 +17,5 @@ import { reactive, ref } from "vue";
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-@media (max-width: 40em) {
-}
+
 </style>
