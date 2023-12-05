@@ -5,7 +5,7 @@
 
        
       <div class="page-content">
-        <div>{{pageData}}</div>
+        <!-- <div>{{pageData}}</div> -->
         <v-form class="w-100" ref="formcontact" v-model="valid">
           <InputsTextField
             v-model="name"
@@ -81,7 +81,6 @@ definePageMeta({
     mode: "out-in",
     onBeforeEnter: (el) => {
       window.scrollTo({ top: 0});
-      console.log("masuk contact");
     },
   },
 });
@@ -106,30 +105,23 @@ const itemsemail=
 // Assign the form reference to the ref
   async function fetch() {
       let payload = null;
-      console.log("masuk fetch isievaluasi");
       try {
         payload = await $fetch("/.netlify/functions/test-view");
       } catch (error) {
-        console.log("gagal total");
+       
       }
-      console.log("payload ini");
-      console.log(payload);
       pageData.value = payload;
-      console.log("berhasil gak nih?");
-      console.log(pageData.value);
     }
 
     function validateform() {
-      console.log(valid);
       if (formcontact.value.validate()) {
-        console.log("berhasil");
+        
       } else {
-        console.log("gagal");
+        
       }
-      console.log(valid);
     }
     onMounted(() => {
-    console.log(transition.default);
+
     fetch();
   })
 

@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="d-flex justify-center">
     <div class="news-page"  v-if="!datafetch">
-          <div class="page-title" @click="datafetch=!datafetch;console.log(datafetch);">
+          <div class="page-title" >
         Tidak ada news yang sesuai
       </div>
     </div>
@@ -92,7 +92,10 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 let datafetch=ref(false);
-
+let dataheader=reactive({
+  title:"Error! News Doesnt Found",
+  desc:"Error! News Doesnt Found",
+})
 const allnews=[
       {
         id: "UWD1",
@@ -128,24 +131,21 @@ const allnews=[
         return x.slug === route.params.slug;
       });
       
-      console.log("output");
-      console.log(getCurrentNews);
       return getCurrentNews;
 });
-console.log("computed :"+news.value.header);
 onMounted(() => {
-    if(!news){
-        datafetch.value=false;
-      }else{
+  datafetch.value=false;
+    if(news){
         datafetch.value=true;
-      }
-      console.log(datafetch);
+        dataheader.title=news.header;
+        dataheader.desc=news.detail;
+    }
   })
 
 useHead({
-  title:news.value.header,
+  title:dataheader.title,
   meta: [
-    { name: 'description', content: news.value.detail }
+    { name: 'description', content: dataheader.desc }
   ],
   bodyAttrs: {
     class: 'test'

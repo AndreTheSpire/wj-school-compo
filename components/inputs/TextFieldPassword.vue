@@ -86,7 +86,6 @@
   },
   watch: {
     inputValue () {
-        console.log(this.inputValue);
       this.$emit('input', this.inputValue)
     },
     value () {

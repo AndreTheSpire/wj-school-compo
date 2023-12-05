@@ -121,7 +121,6 @@
   },
   methods:{
     doparentfunc(){
-      console.log("masuk gak coyyyy");
       this.inputfunc(this.inputValue);
       
     }

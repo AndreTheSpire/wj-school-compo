@@ -119,7 +119,6 @@ const data = reactive({
   selectedIndex: 0, // Index of the selected item
 });
 let isSSR = computed(() => {
-  console.log(process.server);
   return process.server;
 });
 function navigateroute(route, index) {

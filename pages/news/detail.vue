@@ -87,10 +87,9 @@ definePageMeta({
     name: "slide",
     mode: "out-in",
     onBeforeEnter: (el) => {
-      console.log('Before enter...');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
-    onEnter: (el, done) => {console.log("enterrrrr")},
+    onEnter: (el, done) => {},
     onAfterEnter: (el) => {},
   },
 });
@@ -129,8 +128,6 @@ const allnews=[
   const getCurrentNews = allnews.find((x) => {
         return x.id === route.query.id;
       });
-      console.log("output");
-      console.log(getCurrentNews);
       return getCurrentNews;
 });
 </script>

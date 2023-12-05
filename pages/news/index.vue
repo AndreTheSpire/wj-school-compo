@@ -161,7 +161,7 @@ function searchnews(word) {
   });
 }
 function sortnews(selected) {
-  console.log(selected);
+ 
   if (selected) {
     if (selected.value == 1) {
       data.filterednews.sort(function (a, b) {
