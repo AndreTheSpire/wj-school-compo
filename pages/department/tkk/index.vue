@@ -160,7 +160,7 @@ function navigatepage(url) {
     path: url, // Replace 123 with the actual value you want to pass
   });
 }
-onBeforeMount(()=>{
+onMounted(()=>{
     window.scrollTo({ top: 0});
   });
 </script>

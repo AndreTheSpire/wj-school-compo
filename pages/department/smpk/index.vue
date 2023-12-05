@@ -42,16 +42,16 @@ useHead({
   },
 })
 
-definePageMeta({
-  pageTransition: {
-    name: "page",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0 });
-       console.log("masuk smpk")
-    },
-  },
-});
+// definePageMeta({
+//   pageTransition: {
+//     name: "page",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0 });
+//        console.log("masuk smpk")
+//     },
+//   },
+// });
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
@@ -183,6 +183,9 @@ function navigatepage(url) {
     path: url, // Replace 123 with the actual value you want to pass
   });
 }
+onMounted(()=>{
+    window.scrollTo({ top: 0});
+  });
 </script>
 
 <style lang="scss" scoped>

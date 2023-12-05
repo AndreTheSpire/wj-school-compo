@@ -5,7 +5,7 @@
 
        
       <div class="page-content">
-        <!-- <div>{{pageData}}</div> -->
+        <div>{{pageData}}</div>
         <v-form class="w-100" ref="formcontact" v-model="valid">
           <InputsTextField
             v-model="name"
