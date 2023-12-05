@@ -5,12 +5,12 @@ export default <RouterConfig>{
   scrollBehavior: (to, from, savedPosition) => {
     // scroll to hash, useful for using to="#some-id" in NuxtLink
     // ex: <NuxtLink to="#top"> To Top </ NuxtLink>
-    if (to.hash) {
-      console.log('to.hash: ', to.hash);
-      return {
-        el: to.hash,
-      };
-    }
+    // if (to.hash) {
+    //   console.log('to.hash: ', to.hash);
+    //   return {
+    //     el: to.hash,
+    //   };
+    // }
 
     // The remainder is optional but maybe useful as well
 

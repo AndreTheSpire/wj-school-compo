@@ -81,6 +81,7 @@ definePageMeta({
     mode: "out-in",
     onBeforeEnter: (el) => {
       window.scrollTo({ top: 0});
+      console.log("masuk contact");
     },
   },
 });

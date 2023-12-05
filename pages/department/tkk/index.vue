@@ -32,27 +32,26 @@
 
 <script setup>
 useHead({
-  title:'TKK Sekolah Wijana Jombang',
+  title:'TKK Wijana Jombang',
   meta: [
-    { name: 'description', content: 'TKK Sekolah Wijana Jombang' }
+    { name: 'description', content: 'TKK Wijana Jombang' }
   ],
   bodyAttrs: {
     class: 'test'
   },
 })
 
-definePageMeta({
-  pageTransition: {
-    name: "page",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0 });
-    },
-  },
-});
+// definePageMeta({
+//   pageTransition: {
+//     name: "page",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0 });
+//        console.log("masuk tkk")
+//     },
+//   },
+// });
 
-import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const data = reactive({
@@ -161,6 +160,9 @@ function navigatepage(url) {
     path: url, // Replace 123 with the actual value you want to pass
   });
 }
+onBeforeMount(()=>{
+    window.scrollTo({ top: 0});
+  });
 </script>
 
 <style lang="scss" scoped>

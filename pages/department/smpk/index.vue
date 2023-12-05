@@ -32,6 +32,26 @@
 </template>
 
 <script setup>
+useHead({
+  title:'SMPK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'SMPK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0 });
+       console.log("masuk smpk")
+    },
+  },
+});
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();

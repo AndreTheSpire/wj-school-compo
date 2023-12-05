@@ -152,6 +152,7 @@ const data = reactive({
           "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
       },
   ],
+  
 });
 function searchnews(word) {
   //--------Search
@@ -197,6 +198,7 @@ function sortnews(selected) {
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>

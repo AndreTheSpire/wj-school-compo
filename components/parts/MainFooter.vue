@@ -13,15 +13,13 @@
       <v-col cols="6" sm="6" md="3" lg="3" class="footer-content-item">
         <div class="footer-item-header">Tautan Cepat</div>
         <div class="footer-item-text">
-          <span class="tautan-cepat-item" @click="navigatefooter(0)">TKK</span>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/tkk'">TKK</NuxtLink>
           <br />
-          <span class="tautan-cepat-item" @click="navigatefooter(1)">SDK</span>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/sdk'">SDK</NuxtLink>
           <br />
-          <span class="tautan-cepat-item" @click="navigatefooter(2)">SMPK</span>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/smpk'">SMPK</NuxtLink>
           <br />
-          <span class="tautan-cepat-item" @click="navigatefooter(3)"
-            >Hubungi Kami</span
-          >
+           <NuxtLink class="tautan-cepat-item" :to="'/contactus'">Hubungi Kami</NuxtLink>
           <br />
           <span class="tautan-cepat-item" @click="navigatefooter(4)"
             >Kebijakan Kerahasiaan</span

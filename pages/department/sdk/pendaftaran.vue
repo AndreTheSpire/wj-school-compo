@@ -12,6 +12,25 @@
 </template>
 
 <script setup>
+useHead({
+  title:'Pendaftaran SDK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua tentang pendaftaran di SDK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0});
+    },
+  },
+});
 import { reactive, ref } from "vue";
 </script>
 

@@ -3,7 +3,7 @@
     <v-carousel
       cycle
       fade
-      :height="$vuetify.display.smAndDown ? '40vh' : '80vh'"
+      :height="$vuetify.display.smAndDown ? '40vh' : '90vh'"
       v-model="data.slidepage"
       hide-delimiters
       @mouseenter="data.hovered = true"
@@ -206,6 +206,7 @@ definePageMeta({
     mode: "out-in",
     onBeforeEnter: (el) => {
       window.scrollTo({ top: 0});
+      console.log("masuk home")
     },
   },
 });
@@ -304,6 +305,9 @@ watch(
     data.load = false;
   }
 );
+onMounted(()=>{
+    window.scrollTo({ top: 0});
+  });
 </script>
 
 

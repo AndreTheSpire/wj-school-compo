@@ -7,7 +7,25 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+useHead({
+  title:'Pendaftaran TKK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua tentang pendaftaran di TKK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0});
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>

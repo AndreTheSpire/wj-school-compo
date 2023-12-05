@@ -12,6 +12,7 @@
   <v-sheet class="d-flex justify-center">
     <div class="content-news">
       <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
+       <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
       <div class="section-page" v-if="data.news.size > 0">
         <div class="section-title">Berita Terkini</div>
         <template v-for="(content, index) in data.news" :key="index">
@@ -31,6 +32,25 @@
 </template>
 
 <script setup>
+useHead({
+  title:'SDK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'SDK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
+
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0 });
+    },
+  },
+});
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
