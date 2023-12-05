@@ -11,7 +11,6 @@
 
   <v-sheet class="d-flex justify-center">
     <div class="content-news">
-      <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
        <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
       <div class="section-page" v-if="data.news.size > 0">
         <div class="section-title">Berita Terkini</div>
