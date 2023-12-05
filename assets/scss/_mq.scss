@@ -5,7 +5,7 @@
 }
 
 @mixin phone-tablet(){
-  @media (min-device-width : 481px) and (max-device-width : 768px){
+  @media (min-device-width : 560) and (max-device-width : 768px){
     @content;
   }
 }
