@@ -74,8 +74,7 @@
 
 
 <script setup >
-import { TransitionStore } from "../stores/transition";
-const transition=TransitionStore();
+
 
 useHead({
   title:'Contact Us',
