@@ -1,11 +1,20 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <div class="content-page">
+   
+     <FetchStateHandler
+      v-if="pending || error"
+      :fetchpending="pending"
+      :fetcherror="error"
+      :fetchfunction="refresh"
+    />
+     <Transition name="slide-fade" mode="out-in" appear :key="route.name"  v-else>
+    <div class="content-page" v-if="animate">
+      
       <div class="page-title">CONTACT US</div>
-
+      <div class="page-content ">
        
-      <div class="page-content">
-        <!-- <div>{{pageData}}</div> -->
+        <!-- <div>{{posts}}</div> -->
+        
         <v-form class="w-100" ref="formcontact" v-model="valid">
           <InputsTextField
             v-model="name"
@@ -56,7 +65,10 @@
           </v-btn>
         </v-form>
       </div>
+      
     </div>
+     
+   </Transition>
   </v-sheet>
 </template>
 
@@ -76,16 +88,12 @@ useHead({
 })
 
 definePageMeta({
-  pageTransition: {
-    name: "slide",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
-    },
-  },
+  pageTransition: false
 });
 
 import { reactive, ref,onMounted } from "vue";
+const route = useRoute();
+let animate=true;
 let valid=ref(true);
 let name=ref("");
 let email=ref("");
@@ -103,15 +111,21 @@ const itemsemail=
     ];
 
 // Assign the form reference to the ref
-  async function fetch() {
-      let payload = null;
-      try {
-        payload = await $fetch("/.netlify/functions/test-view");
-      } catch (error) {
+const { pending, data: posts, error, execute, refresh } = await useFetch("/.netlify/functions/test-view", {
+  lazy: true
+})
+  // async function fetch() {
+  //     let payload = null;
+  //     try {
+  //       payload = await $fetch("/.netlify/functions/test-view");
+  //       const { pending, data: posts } = useFetch('/api/posts', {
+  //       lazy: true
+  //     })
+  //     } catch (error) {
        
-      }
-      pageData.value = payload;
-    }
+  //     }
+  //     pageData.value = payload;
+  //   }
 
     function validateform() {
       if (formcontact.value.validate()) {
@@ -120,15 +134,30 @@ const itemsemail=
         
       }
     }
-    onMounted(() => {
-
-    fetch();
+    onMounted(()=>{
+    window.scrollTo({ top: 0});
+  });
+  onUnmounted(()=>{
+    animate=false;
   })
 
 </script>
 
 
 <style lang="scss" scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active{
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
 .content-page {
   padding: 2rem 1rem 5rem;
   min-height: 70vh;

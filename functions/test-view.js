@@ -3,8 +3,11 @@ import fetch from 'node-fetch';
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 export const handler = async (event) => {
+ 
   try {
     // const data = JSON.parse(event.body);
+    // const runtimeConfig = useRuntimeConfig();
+    // console.log("API_Secret "+process.env.API_SECRET);
     const url='https://datausa.io/api/data?drilldowns=Nation&measures=Population'
     // const requestUrl = settings.wrapUrl('evaluations/detail/' + data.templateId)
     // axios.defaults.headers.common.Id = process.env.APP_ID

@@ -133,14 +133,15 @@ const allnews=[
       
       return getCurrentNews;
 });
-onMounted(() => {
-  datafetch.value=false;
-    if(news){
+// onMounted(() => {
+ 
+//   })
+   datafetch.value=false;
+    if(news.value){
         datafetch.value=true;
-        dataheader.title=news.header;
-        dataheader.desc=news.detail;
+        dataheader.title=news.value.header;
+        dataheader.desc=news.value.detail;
     }
-  })
 
 useHead({
   title:dataheader.title,
