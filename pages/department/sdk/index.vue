@@ -12,9 +12,9 @@
   <v-sheet class="d-flex justify-center">
     <div class="content-news">
        <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
-      <div class="section-page" v-if="data.news.size > 0">
+      <div class="section-page" v-if="news.size > 0">
         <div class="section-title">Berita Terkini</div>
-        <template v-for="(content, index) in data.news" :key="index">
+        <template v-for="(content, index) in news" :key="index">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -52,14 +52,14 @@ useHead({
 // });
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const router = useRouter();
 const route = useRoute();
 const data = reactive({
   blocktext:
     "SDK Wijana adalah lembaga pendidikan dasar dengan sejarah 60 tahun lebih mendidik anak-anak Jombang menjadi kader Gereja dan masyarakat.",
   urlimg: "/img/media/slidehome/slide2.jpg",
-  profile: ProfileStore().profile,
-
   headerimg: [
     {
       nama: "slide1",
@@ -163,7 +163,6 @@ const data = reactive({
       imgurl: "/img/gukar/sdk/Yohanes_Agus_Prasetyo_S_pd_RfbCH91.jpg",
     },
   ],
-  news: [],
   navigations: [
     {
       text: "TENTANG KAMI",
@@ -187,7 +186,13 @@ const data = reactive({
     },
   ],
 });
-
+let news= computed(() => {
+      const getCurrentNews = newsstore.news.filter((x) => {
+        return x.type.toLowerCase().includes("smpk");
+      });
+      
+      return getCurrentNews;
+});
 function navigatepage(url) {
   router.push({
     path: url, // Replace 123 with the actual value you want to pass

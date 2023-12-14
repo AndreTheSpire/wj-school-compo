@@ -75,7 +75,8 @@ definePageMeta({
   },
 });
 import { reactive, ref } from "vue";
-
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const data = reactive({
   category: "",
   Sort: "",
@@ -92,71 +93,12 @@ const data = reactive({
     { state: "Latest Date", value: 3 },
     { state: "Oldest Date", value: 4 },
   ],
-  filterednews: [
-    {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        slug:"ppdb-2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        slug:"ppdb-penerimaan-siswa-baru",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        slug:"selamat-kepada-nathan-philbert-ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-  ],
-  allnews: [
-   {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-       slug:"ppdb-2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        slug:"ppdb-penerimaan-siswa-baru",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        slug:"selamat-kepada-nathan-philbert-ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-  ],
+  filterednews: newsstore.news,
   
 });
 function searchnews(word) {
   //--------Search
-  data.filterednews = data.allnews.filter(function (item) {
+  data.filterednews = newsstore.news.filter(function (item) {
     return item.header.toLowerCase().includes(word.toLowerCase());
   });
 }

@@ -188,7 +188,7 @@
     <v-card width="1024px" flat>
       <div class="section-page">
         <div class="section-title">Berita Utama</div>
-        <template v-for="(content, index) in data.news" :key="index">
+        <template v-for="(content, index) in news" :key="index">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -212,6 +212,8 @@ definePageMeta({
 
 import { onMounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -230,7 +232,6 @@ const data = reactive({
   slidepage: 0,
   urlimg: "/img/media/slidehome/slide2.jpg",
   color: "red",
-  profile: ProfileStore().profile,
   headerimg: [
     {
       nama: "slide1",
@@ -257,36 +258,13 @@ const data = reactive({
       urlimg: "/img/media/slidehome/slide6.jpg",
     },
   ],
-  news: [
-    {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        slug:"ppdb-2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        slug:"ppdb-penerimaan-siswa-baru",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        slug:"selamat-kepada-nathan-philbert-ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-  ],
+});
+if(!newsstore.alreadyfetch){
+        //dispatch function
+}
+let news= computed(() => {
+    const getCurrentNews = newsstore.news;
+    return getCurrentNews;
 });
 function navigate(index) {
   if (index == 1) {

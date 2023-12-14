@@ -14,7 +14,7 @@
       <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
       <div class="section-page">
         <div class="section-title">Berita Terkini</div>
-        <template v-for="(content, index) in data.news" :key="index">
+        <template v-for="(content, index) in news" :key="index">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -51,13 +51,13 @@ useHead({
 //     },
 //   },
 // });
-
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const router = useRouter();
 const route = useRoute();
 const data = reactive({
   blocktext:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aspernatur tempore ducimus nemo voluptas, omnis, optio! Illo unde enim odio tempora deserunt provident autem repellat voluptatum distinctio architecto! Animi, veritatis.",
-  profile: ProfileStore().profile,
   headerimg: [
     {
       nama: "slide1",
@@ -121,17 +121,6 @@ const data = reactive({
       imgurl: "/img/gukar/tkk/soel.jpg",
     },
   ],
-  news: [
-    {
-      id: "UWD2",
-      type: "TKK",
-      date: "11 May 2022",
-      imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-      header: "PPDB 2022",
-      slug:"ppdb-2022",
-      detail: "Menerima Peserta Didik Baru 2022",
-    },
-  ],
   navigations: [
     {
       text: "TENTANG KAMI",
@@ -154,6 +143,13 @@ const data = reactive({
       url: "/department/tkk",
     },
   ],
+});
+let news= computed(() => {
+      const getCurrentNews = newsstore.news.filter((x) => {
+        return x.type.toLowerCase().includes("tkk");
+      });
+      
+      return getCurrentNews;
 });
 function navigatepage(url) {
   router.push({

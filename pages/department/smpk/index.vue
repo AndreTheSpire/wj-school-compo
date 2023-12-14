@@ -15,7 +15,7 @@
 
       <div class="section-page">
         <div class="section-title">Berita Terkini</div>
-        <template v-for="(content, index) in data.news" :key="index">
+        <template v-for="(content, index) in news" :key="index">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -52,14 +52,16 @@ useHead({
 //     },
 //   },
 // });
+
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const router = useRouter();
 const route = useRoute();
 const data = reactive({
   blocktext:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aspernatur tempore ducimus nemo voluptas, omnis, optio! Illo unde enim odio tempora deserunt provident autem repellat voluptatum distinctio architecto! Animi, veritatis.",
-  profile: ProfileStore().profile,
   headerimg: [
     {
       nama: "slide1",
@@ -143,18 +145,6 @@ const data = reactive({
       imgurl: "/img/gukar/smpk/Sofia_Fitri_Ika_Verawati_SE.jpg",
     },
   ],
-  news: [
-    {
-      id: "UWD2",
-      type: "SMPK",
-      date: "10 Nov 2020",
-      imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-      header: "Selamat kepada Nathan Philbert Ngo",
-      slug:"selamat-kepada-nathan-philbert-ngo",
-      detail:
-        "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-    },
-  ],
   navigations: [
     {
       text: "TENTANG KAMI",
@@ -177,6 +167,13 @@ const data = reactive({
       url: "/department/smpk",
     },
   ],
+});
+let news= computed(() => {
+      const getCurrentNews = newsstore.news.filter((x) => {
+        return x.type.toLowerCase().includes("smpk");
+      });
+      
+      return getCurrentNews;
 });
 function navigatepage(url) {
   router.push({

@@ -89,6 +89,8 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { NewsStore } from "../stores/newsstore";
+const newsstore=NewsStore();
 const router = useRouter();
 const route = useRoute();
 let datafetch=ref(false);
@@ -96,38 +98,8 @@ let dataheader=reactive({
   title:"Error! News Doesnt Found",
   desc:"Error! News Doesnt Found",
 })
-const allnews=[
-      {
-        id: "UWD1",
-        type: "TKK",
-        date: "11 May 2022",
-        imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-        header: "PPDB 2022",
-        slug:"ppdb-2022",
-        detail: "Menerima Peserta Didik Baru 2022",
-      },
-      {
-        id: "UWD2",
-        type: "TKK",
-        date: "14 Jan 2021",
-        imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-        header: "PPDB PENERIMAAN SISWA BARU",
-        slug:"ppdb-penerimaan-siswa-baru",
-        detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-      },
-      {
-        id: "UWD3",
-        type: "SMPK",
-        date: "10 Nov 2020",
-        imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-        header: "Selamat kepada Nathan Philbert Ngo",
-        slug:"selamat-kepada-nathan-philbert-ngo",
-        detail:
-          "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-      },
-    ];
     let news= computed(() => {
-      const getCurrentNews = allnews.find((x) => {
+      const getCurrentNews = newsstore.news.find((x) => {
         return x.slug === route.params.slug;
       });
       
