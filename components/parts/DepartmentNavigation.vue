@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="d-flex justify-center">
     <div class="nav-content d-flex align-center justify-center">
-      <template v-for="(item, index) in props.navigations" :key="index">
+      <template v-for="(item, index) in navigations" :key="index">
         <div class="nav-content-item" @click="navigate(item.url)">
           {{ item.text }}
         </div>
@@ -10,15 +10,18 @@
   </v-sheet>
 </template>
 
-
-<script setup>
-const props = defineProps({
-  navigations: Array,
-  navigatepage: Function,
-});
-function navigate(url) {
-  props.navigatepage(url);
-}
+<script>
+export default {
+  props: {
+    navigations: Array,
+    navigatepage: Function,
+  },
+  methods: {
+    navigate(url) {
+      this.navigatepage(url);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

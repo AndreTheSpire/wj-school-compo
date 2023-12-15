@@ -9,16 +9,16 @@
   </v-sheet>
 </template>
 
-<script setup>
-useHead({
-  title:'Info Untuk Orang Tua SMPK Wijana Jombang',
-  meta: [
-    { name: 'description', content: 'semua info untuk orang tua dari SMPK Wijana Jombang' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
-})
+<script >
+// useHead({
+//   title:'Info Untuk Orang Tua SMPK Wijana Jombang',
+//   meta: [
+//     { name: 'description', content: 'semua info untuk orang tua dari SMPK Wijana Jombang' }
+//   ],
+//   bodyAttrs: {
+//     class: 'test'
+//   },
+// })
 
 definePageMeta({
   pageTransition: {
@@ -29,7 +29,6 @@ definePageMeta({
     },
   },
 });
-import { reactive, ref } from "vue";
 </script>
 
 <style lang="scss" scoped>

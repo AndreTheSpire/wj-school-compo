@@ -86,7 +86,7 @@
     </div>
   </v-sheet>
 </template>
-
+<!-- 
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -106,9 +106,7 @@ let news = computed(() => {
 
   return getCurrentNews;
 });
-// onMounted(() => {
 
-//   })
 datafetch.value = false;
 if (news.value) {
   datafetch.value = true;
@@ -133,6 +131,58 @@ definePageMeta({
     },
   },
 });
+</script> -->
+
+<script>
+import { NewsStore } from "../stores/newsstore";
+definePageMeta({
+  pageTransition: {
+    name: "slide",
+    mode: "out-in",
+    onBeforeEnter: (el) => {
+      window.scrollTo({ top: 0 });
+    },
+  },
+});
+export default {
+  data: () => ({
+    dataheader: {
+      title: "Error! News Doesnt Found",
+      desc: "Error! News Doesnt Found",
+    },
+    datafetch: false,
+  }),
+  computed: {
+
+    news() {
+
+      console.log(this.$route.params.slug);
+      const getCurrentNews = NewsStore().news.find((x) => {
+        return x.slug === this.$route.params.slug;
+      });
+      console.log(getCurrentNews);
+      return getCurrentNews;
+    },
+  },
+  methods: {},
+  head() {
+    return {
+      title: this.dataheader.title,
+      meta: [{ name: "description", content: this.dataheader.desc }],
+      bodyAttrs: {
+        class: "test",
+      },
+    };
+  },
+  mounted() {
+    if (this.news) {
+      console.log("masuk");
+      this.datafetch = true;
+      this.dataheader.title = this.news.header;
+      this.dataheader.desc = this.news.detail;
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>

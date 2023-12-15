@@ -1,8 +1,15 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <v-carousel cycle fade v-model="data.slidepage" height="80vh" hide-delimiters show-arrows="hover">
+    <v-carousel
+      cycle
+      fade
+      v-model="slidepage"
+      height="80vh"
+      hide-delimiters
+      show-arrows="hover"
+    >
       <v-carousel-item
-        v-for="(img, i) in props.headerimg"
+        v-for="(img, i) in headerimg"
         class="header-style"
         :key="i"
         :src="img.urlimg"
@@ -11,36 +18,35 @@
         reverse-transition="fade"
       >
         <div class="d-flex justify-center align-center h-100">
-          <img :class="
-                data.load == true
-                  ? 'logo-img animate'
-                  : 'logo-img'
-              " :src="props.logo" />
+          <img
+            :class="load == true ? 'logo-img animate' : 'logo-img'"
+            :src="logo"
+          />
         </div>
       </v-carousel-item>
     </v-carousel>
   </v-sheet>
 </template>
 
-<script setup>
-const props = defineProps({
-  logo: {
-    type: String,
-    default: null,
+<script>
+export default {
+  data: () => ({
+    load: true,
+    slidepage: 0,
+  }),
+  props: {
+    logo: {
+      type: String,
+      default: null,
+    },
+    headerimg: Array,
   },
-  headerimg: Array,
-});
-
-const data = reactive({
-  load: true,
-  slidepage: 0,
-})
-watch(
-  () => data.slidepage,
-  () => {
-    data.load = false;
-  }
-);
+  watch: {
+    slidepage() {
+      this.load = false;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

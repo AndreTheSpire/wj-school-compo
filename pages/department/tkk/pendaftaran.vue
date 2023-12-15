@@ -6,23 +6,23 @@
   </v-sheet>
 </template>
 
-<script setup>
-useHead({
-  title:'Pendaftaran TKK Wijana Jombang',
-  meta: [
-    { name: 'description', content: 'semua tentang pendaftaran di TKK Wijana Jombang' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
-})
+<script>
+// useHead({
+//   title:'Pendaftaran TKK Wijana Jombang',
+//   meta: [
+//     { name: 'description', content: 'semua tentang pendaftaran di TKK Wijana Jombang' }
+//   ],
+//   bodyAttrs: {
+//     class: 'test'
+//   },
+// })
 
 definePageMeta({
   pageTransition: {
     name: "page",
     mode: "out-in",
     onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
+      window.scrollTo({ top: 0 });
     },
   },
 });
@@ -35,5 +35,4 @@ definePageMeta({
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-
 </style>

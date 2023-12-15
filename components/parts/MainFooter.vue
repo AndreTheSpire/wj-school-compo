@@ -74,23 +74,31 @@
   </v-footer>
 </template>
 
-<script setup>
-import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-const router = useRouter();
-const route = useRoute();
-const data = reactive({});
-function navigatefooter(index) {
-  if (index == 0) {
-    router.push("/department/tkk");
-  } else if (index == 1) {
-    router.push("/department/sdk");
-  } else if (index == 2) {
-    router.push("/department/smpk");
-  } else if (index == 3) {
-    router.push("/contactus");
+
+<script>
+export default {
+  data() {
+    return {
+    };
+  
+  },
+  methods:{
+    navigatefooter(index){
+      if(index==0){
+        this.$router.push("/department/tkk");
+      }
+      else if(index==1){
+        this.$router.push("/department/sdk");
+      }
+       else if(index==2){
+        this.$router.push("/department/smpk");
+      }
+       else if(index==3){
+        this.$router.push("/contactus");
+      }
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

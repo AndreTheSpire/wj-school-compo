@@ -34,19 +34,22 @@
   </v-hover>
 </template>
 
-<script setup>
-import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-const router = useRouter();
-const route = useRoute();
-const autoplay = reactive({
-  delay: 4000,
-  disableOnInteraction: false,
-});
-const props = defineProps({
-  news: Object,
-});
-
+<script>
+export default {
+  data: () => ({
+  }),
+  props: {
+    news: Object,
+  },
+  methods: {
+    navigatenews(id) {
+      this.$router.push({
+        path: "/news/detail",
+        query: { id: id }, // Replace 123 with the actual value you want to pass
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -107,10 +110,10 @@ const props = defineProps({
 }
 @media screen and (max-width: 400px) {
   .news-title {
-  padding: 0px 8px;
-}
-.news-detail {
-   padding: 0px 8px;
-}
+    padding: 0px 8px;
+  }
+  .news-detail {
+    padding: 0px 8px;
+  }
 }
 </style>

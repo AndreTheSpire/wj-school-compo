@@ -1,17 +1,17 @@
 <template>
   <PartsHeaderCarousel
-    :headerimg="data.headerimg"
+    :headerimg="headerimg"
     logo="/img/icon/logo-tkk-glow.png"
   ></PartsHeaderCarousel>
 
   <PartsDepartmentNavigation
-    :navigations="data.navigations"
+    :navigations="navigations"
     :navigatepage="navigatepage"
   ></PartsDepartmentNavigation>
 
   <v-sheet class="d-flex justify-center">
     <div class="content-news">
-      <PartsBlockText :blocktext="data.blocktext"></PartsBlockText>
+      <PartsBlockText :blocktext="blocktext"></PartsBlockText>
       <div class="section-page">
         <div class="section-title">Berita Terkini</div>
         <template v-for="(content, index) in news" :key="index">
@@ -23,142 +23,132 @@
       <div class="section-page">
         <div class="gukar-title">Daftar Guru & Karyawan</div>
         <div class="d-flex align-center justify-center">
-          <PartsGukarCarousel :items="data.gukar" />
+          <PartsGukarCarousel :items="gukar" />
         </div>
       </div>
     </div>
   </v-sheet>
 </template>
 
-<script setup>
-useHead({
-  title:'TKK Wijana Jombang',
-  meta: [
-    { name: 'description', content: 'TKK Wijana Jombang' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
-})
-
-// definePageMeta({
-//   pageTransition: {
-//     name: "page",
-//     mode: "out-in",
-//     onBeforeEnter: (el) => {
-//       window.scrollTo({ top: 0 });
-//        console.log("masuk tkk")
-//     },
-//   },
-// });
+<script>
 import { NewsStore } from "../stores/newsstore";
-const newsstore=NewsStore();
-const router = useRouter();
-const route = useRoute();
-const data = reactive({
-  blocktext:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aspernatur tempore ducimus nemo voluptas, omnis, optio! Illo unde enim odio tempora deserunt provident autem repellat voluptatum distinctio architecto! Animi, veritatis.",
-  headerimg: [
-    {
-      nama: "slide1",
-      urlimg: "/img/media/slidehome/slide1.jpg",
-    },
-    {
-      nama: "slide2",
-      urlimg: "/img/media/slidehome/slide2.jpg",
-    },
-    {
-      nama: "slide3",
-      urlimg: "/img/media/slidehome/slide3.jpg",
-    },
-    {
-      nama: "slide4",
-      urlimg: "/img/media/slidehome/slide4.jpg",
-    },
-    {
-      nama: "slide5",
-      urlimg: "/img/media/slidehome/slide5.jpg",
-    },
-    {
-      nama: "slide6",
-      urlimg: "/img/media/slidehome/slide6.jpg",
-    },
-  ],
-  gukar: [
-    {
-      nama: "ANTIKA PRIMANINGRUM",
-      jabatan: "GURU KELAS",
-      imgurl: "/img/gukar/tkk/antika.jpg",
-    },
-    {
-      nama: "BEDJO",
-      jabatan: "TUKANG KEBUN",
-      imgurl: "/img/gukar/tkk/bedjo.jpg",
-    },
-    {
-      nama: "VALENTINA SUWITIN. S.P.D",
-      jabatan: "KEPALA SEKOLAH",
-      imgurl: "/img/gukar/tkk/valentina.jpg",
-    },
-    {
-      nama: "DWI WIJI RAHAYI",
-      jabatan: "GURU KELAS",
-      imgurl: "/img/gukar/tkk/dwi.jpg",
-    },
-    {
-      nama: "MONICA AGUS TININGSIH",
-      jabatan: "GURU KELAS",
-      imgurl: "/img/gukar/tkk/monica.jpg",
-    },
-    {
-      nama: "SHINTA NOVIANA",
-      jabatan: "GURU KELAS",
-      imgurl: "/img/gukar/tkk/shinta.jpg",
-    },
-    {
-      nama: "SOELISTYONINGSIH",
-      jabatan: "GURU KELAS",
-      imgurl: "/img/gukar/tkk/soel.jpg",
-    },
-  ],
-  navigations: [
-    {
-      text: "TENTANG KAMI",
-      url: "/department/tkk/about",
-    },
-    {
-      text: "PROGRAM",
-      url: "/department/tkk/program",
-    },
-    {
-      text: "PENDAFTARAN",
-      url: "/department/tkk/pendaftaran",
-    },
-    {
-      text: "UNTUK ORANG TUA",
-      url: "/department/tkk/orangtua",
-    },
-    {
-      text: "BERITA",
-      url: "/department/tkk",
-    },
-  ],
-});
-let news= computed(() => {
-      const getCurrentNews = newsstore.news.filter((x) => {
+export default {
+  data: () => ({
+    blocktext:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aspernatur tempore ducimus nemo voluptas, omnis, optio! Illo unde enim odio tempora deserunt provident autem repellat voluptatum distinctio architecto! Animi, veritatis.",
+    headerimg: [
+      {
+        nama: "slide1",
+        urlimg: "/img/media/slidehome/slide1.jpg",
+      },
+      {
+        nama: "slide2",
+        urlimg: "/img/media/slidehome/slide2.jpg",
+      },
+      {
+        nama: "slide3",
+        urlimg: "/img/media/slidehome/slide3.jpg",
+      },
+      {
+        nama: "slide4",
+        urlimg: "/img/media/slidehome/slide4.jpg",
+      },
+      {
+        nama: "slide5",
+        urlimg: "/img/media/slidehome/slide5.jpg",
+      },
+      {
+        nama: "slide6",
+        urlimg: "/img/media/slidehome/slide6.jpg",
+      },
+    ],
+    gukar: [
+      {
+        nama: "ANTIKA PRIMANINGRUM",
+        jabatan: "GURU KELAS",
+        imgurl: "/img/gukar/tkk/antika.jpg",
+      },
+      {
+        nama: "BEDJO",
+        jabatan: "TUKANG KEBUN",
+        imgurl: "/img/gukar/tkk/bedjo.jpg",
+      },
+      {
+        nama: "VALENTINA SUWITIN. S.P.D",
+        jabatan: "KEPALA SEKOLAH",
+        imgurl: "/img/gukar/tkk/valentina.jpg",
+      },
+      {
+        nama: "DWI WIJI RAHAYI",
+        jabatan: "GURU KELAS",
+        imgurl: "/img/gukar/tkk/dwi.jpg",
+      },
+      {
+        nama: "MONICA AGUS TININGSIH",
+        jabatan: "GURU KELAS",
+        imgurl: "/img/gukar/tkk/monica.jpg",
+      },
+      {
+        nama: "SHINTA NOVIANA",
+        jabatan: "GURU KELAS",
+        imgurl: "/img/gukar/tkk/shinta.jpg",
+      },
+      {
+        nama: "SOELISTYONINGSIH",
+        jabatan: "GURU KELAS",
+        imgurl: "/img/gukar/tkk/soel.jpg",
+      },
+    ],
+    navigations: [
+      {
+        text: "TENTANG KAMI",
+        url: "/department/tkk/about",
+      },
+      {
+        text: "PROGRAM",
+        url: "/department/tkk/program",
+      },
+      {
+        text: "PENDAFTARAN",
+        url: "/department/tkk/pendaftaran",
+      },
+      {
+        text: "UNTUK ORANG TUA",
+        url: "/department/tkk/orangtua",
+      },
+      {
+        text: "BERITA",
+        url: "/department/tkk",
+      },
+    ],
+  }),
+  computed: {
+    news() {
+      const getCurrentNews = NewsStore().news.filter((x) => {
         return x.type.toLowerCase().includes("tkk");
       });
-      
+
       return getCurrentNews;
-});
-function navigatepage(url) {
-  router.push({
-    path: url, // Replace 123 with the actual value you want to pass
-  });
-}
-onMounted(()=>{
-    window.scrollTo({ top: 0});
-  });
+    },
+  },
+  watch: {},
+  methods: {
+    navigatenews(id) {
+      this.$router.push({
+        path: "/news/detail",
+        query: { id: id }, // Replace 123 with the actual value you want to pass
+      });
+    },
+    navigatepage(url) {
+      this.$router.push({
+        path: url, // Replace 123 with the actual value you want to pass
+      });
+    },
+  },
+  mounted() {
+    window.scrollTo({ top: 0 });
+  },
+};
 </script>
 
 <style lang="scss" scoped>

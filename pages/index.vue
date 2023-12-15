@@ -300,9 +300,9 @@ onMounted(() => {
 <!-- format scriptnya harus mengikuti yang ini, karena
 penggunaannya yang secara javascript sudah menjadi standar disini -->
 <script>
+import { NewsStore } from "../stores/newsstore";
 export default {
   name: "Home",
-  layout: "default-story",
   data() {
     return {
       name: "",
@@ -338,70 +338,36 @@ export default {
           urlimg: "/img/media/slidehome/slide6.jpg",
         },
       ],
-      news: [
-        {
-          id: "UWD1",
-          type: "TKK",
-          date: "11 May 2022",
-          imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
-          header: "PPDB 2022",
-          slug: "ppdb-2022",
-          detail: "Menerima Peserta Didik Baru 2022",
-        },
-        {
-          id: "UWD2",
-          type: "umum",
-          date: "14 Jan 2021",
-          imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
-          header: "PPDB PENERIMAAN SISWA BARU",
-          slug: "ppdb-penerimaan-siswa-baru",
-          detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
-        },
-        {
-          id: "UWD3",
-          type: "SMPK",
-          date: "10 Nov 2020",
-          imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
-          header: "Selamat kepada Nathan Philbert Ngo",
-          slug: "selamat-kepada-nathan-philbert-ngo",
-          detail:
-            "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
-        },
-      ],
     };
   },
   async fetch() {
-    try {
-      const response = await this.$axios.$get("api/stories/home-contents");
-      // console.log(response)]
-
-      this.banners = response.banners;
-      this.trendingList = response.trendingList;
-      this.profVideos = response.profVideos;
-      this.majorVideos = response.majorVideos;
-      this.induVideos = response.induVideos;
-      this.poShowVideos = response.poShowVideos;
-      this.dualCombinations = response.dualCombinations;
-      const lang = this.$i18n.locale;
-
-      if (this.$cookies.get("story-profile")) {
-        const response2 = await this.$axios.$get(
-          "api/stories/profiles/home/recommendations/" + lang,
-          {
-            headers: {
-              Authorization:
-                "Bearer " + this.$cookies.get("story-profile").profileToken,
-            },
-          }
-        );
-        // console.log(response2)
-
-        this.recommendationList = response2;
-      }
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    // try {
+    //   const response = await this.$axios.$get("api/stories/home-contents");
+    //   this.banners = response.banners;
+    //   this.trendingList = response.trendingList;
+    //   this.profVideos = response.profVideos;
+    //   this.majorVideos = response.majorVideos;
+    //   this.induVideos = response.induVideos;
+    //   this.poShowVideos = response.poShowVideos;
+    //   this.dualCombinations = response.dualCombinations;
+    //   const lang = this.$i18n.locale;
+    //   if (this.$cookies.get("story-profile")) {
+    //     const response2 = await this.$axios.$get(
+    //       "api/stories/profiles/home/recommendations/" + lang,
+    //       {
+    //         headers: {
+    //           Authorization:
+    //             "Bearer " + this.$cookies.get("story-profile").profileToken,
+    //         },
+    //       }
+    //     );
+    //     // console.log(response2)
+    //     this.recommendationList = response2;
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   throw error;
+    // }
   },
   head() {
     return {
@@ -410,10 +376,10 @@ export default {
   },
   computed: {
     // penggunaan store yang standar akan diajarkan nanti
-    // news() {
-    //   const getCurrentNews = this.$store.news;
-    //   return getCurrentNews;
-    // },
+    news() {
+      const getCurrentNews = NewsStore().news;
+      return getCurrentNews;
+    },
   },
   methods: {
     navigate(index) {

@@ -13,8 +13,8 @@
         <v-row class="pa-4">
           <v-col>
             <InputsTextField
-              v-model="data.category"
-              :selectitems="data.categoryitem"
+              v-model="category"
+              :selectitems="categoryitem"
               label="Category"
               name="selectedcategory"
               type="selected"
@@ -23,8 +23,8 @@
           </v-col>
           <v-col>
             <InputsTextField
-              v-model="data.Sort"
-              :selectitems="data.sortitem"
+              v-model="Sort"
+              :selectitems="sortitem"
               label="Sort"
               name="selectedsort"
               type="selected"
@@ -34,7 +34,7 @@
           </v-col>
           <v-col>
             <InputsTextField
-              v-model="data.Search"
+              v-model="Search"
               label="Search"
               name="search"
               type="field"
@@ -44,7 +44,7 @@
           </v-col>
         </v-row>
         <div class="pa-4 listnews">
-          <template v-for="(content, index) in data.filterednews" :key="index">
+          <template v-for="(content, index) in filterednews" :key="index">
             <CardsNews :news="content"></CardsNews>
             <br />
           </template>
@@ -54,16 +54,20 @@
   </v-sheet>
 </template>
 
-<script setup>
-useHead({
-  title:'News',
-  meta: [
-    { name: 'description', content: 'Berita Terikini di sekolah wijana jombang' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
-})
+<script>
+import { NewsStore } from "../stores/newsstore";
+// useHead({
+//   title: "News",
+//   meta: [
+//     {
+//       name: "description",
+//       content: "Berita Terikini di sekolah wijana jombang",
+//     },
+//   ],
+//   bodyAttrs: {
+//     class: "test",
+//   },
+// });
 
 definePageMeta({
   pageTransition: {
@@ -74,73 +78,79 @@ definePageMeta({
     },
   },
 });
-import { reactive, ref } from "vue";
-import { NewsStore } from "../stores/newsstore";
-const newsstore=NewsStore();
-const data = reactive({
-  category: "",
-  Sort: "",
-  Search: "",
-  categoryitem: [
-    { state: "All Category", value: 1 },
-    { state: "Pencapaian", value: 2 },
-    { state: "Kejadian", value: 3 },
-    { state: "Pengumuman", value: 4 },
-  ],
-  sortitem: [
-    { state: "Title A-Z", value: 1 },
-    { state: "Title Z-A", value: 2 },
-    { state: "Latest Date", value: 3 },
-    { state: "Oldest Date", value: 4 },
-  ],
-  filterednews: newsstore.news,
-  
-});
-function searchnews(word) {
-  //--------Search
-  data.filterednews = newsstore.news.filter(function (item) {
-    return item.header.toLowerCase().includes(word.toLowerCase());
-  });
-}
-function sortnews(selected) {
- 
-  if (selected) {
-    if (selected.value == 1) {
-      data.filterednews.sort(function (a, b) {
-        var nameA = a.header.toLowerCase(),
-          nameB = b.header.toLowerCase();
-        if (nameA < nameB)
-          //sort string ascending
-          return -1;
-        if (nameA > nameB) return 1;
-        return 0; //default return value (no sorting)
-      });
-    } else if (selected.value == 2) {
-      data.filterednews.sort(function (a, b) {
-        var nameA = a.header.toLowerCase(),
-          nameB = b.header.toLowerCase();
-        if (nameA > nameB)
-          //sort string ascending
-          return -1;
-        if (nameA < nameB) return 1;
-        return 0; //default return value (no sorting)
-      });
-    } else if (selected.value == 3) {
-      data.filterednews.sort(function (a, b) {
-        var dateA = new Date(a.date),
-          dateB = new Date(b.date);
-        return dateA - dateB; //sort by date ascending
-      });
-    } else if (selected.value == 4) {
-      data.filterednews.sort(function (a, b) {
-        var dateA = new Date(a.date),
-          dateB = new Date(b.date);
-        return dateB - dateA; //sort by date ascending
-      });
-    }
-  }
-}
+export default {
+  data: () => ({
+    category: "",
+    Sort: "",
+    Search: "",
+    categoryitem: [
+      { state: "All Category", value: 1 },
+      { state: "Pencapaian", value: 2 },
+      { state: "Kejadian", value: 3 },
+      { state: "Pengumuman", value: 4 },
+    ],
+    sortitem: [
+      { state: "Title A-Z", value: 1 },
+      { state: "Title Z-A", value: 2 },
+      { state: "Latest Date", value: 3 },
+      { state: "Oldest Date", value: 4 },
+    ],
+    filterednews: NewsStore().news,
+  }),
+  computed: {
+    // isSSR() {
+    //   console.log(process.server);
+    //   return process.server;
+    // },
+  },
+  methods: {
+    searchnews(word) {
+      //--------Search
 
+      this.filterednews = NewsStore().news.filter(function (item) {
+        return item.header.toLowerCase().includes(word.toLowerCase());
+      });
+    },
+    sortnews(selected) {
+      console.log(selected);
+      if (selected) {
+        if (selected.value == 1) {
+          this.filterednews.sort(function (a, b) {
+            var nameA = a.header.toLowerCase(),
+              nameB = b.header.toLowerCase();
+            if (nameA < nameB)
+              //sort string ascending
+              return -1;
+            if (nameA > nameB) return 1;
+            return 0; //default return value (no sorting)
+          });
+        } else if (selected.value == 2) {
+          this.filterednews.sort(function (a, b) {
+            var nameA = a.header.toLowerCase(),
+              nameB = b.header.toLowerCase();
+            if (nameA > nameB)
+              //sort string ascending
+              return -1;
+            if (nameA < nameB) return 1;
+            return 0; //default return value (no sorting)
+          });
+        } else if (selected.value == 3) {
+          this.filterednews.sort(function (a, b) {
+            var dateA = new Date(a.date),
+              dateB = new Date(b.date);
+            return dateA - dateB; //sort by date ascending
+          });
+        } else if (selected.value == 4) {
+          this.filterednews.sort(function (a, b) {
+            var dateA = new Date(a.date),
+              dateB = new Date(b.date);
+            return dateB - dateA; //sort by date ascending
+          });
+        }
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -179,7 +189,7 @@ li {
   font-weight: 700;
   font-size: 3rem;
   margin-bottom: 0.5rem;
-  @include phone{
+  @include phone {
     font-size: 1.5rem;
   }
 }
@@ -195,13 +205,11 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-img{
-  @include phone{
+img {
+  @include phone {
     weight: auto;
     width: 90vw;
     object-fit: cover;
   }
 }
 </style>
-
-     

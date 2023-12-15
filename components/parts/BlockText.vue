@@ -1,17 +1,20 @@
 <template>
   <div class="block-section">
-    <div class="block-news">{{ props.blocktext }}</div>
+    <div class="block-news">{{ blocktext }}</div>
   </div>
 </template>
-<script setup>
-const props = defineProps({
-  blocktext: {
-    type: String,
-    default: null,
-  },
-});
-</script>
 
+<script>
+export default {
+  data: () => ({}),
+  props: {
+    blocktext: {
+      type: String,
+      default: null,
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .block-section {

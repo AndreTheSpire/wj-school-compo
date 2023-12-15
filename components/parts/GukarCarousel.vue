@@ -43,31 +43,47 @@
   </div>
 </template>
 
-<script setup>
+
+<script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide, useSwiper } from "swiper/vue";
+import { Swiper, SwiperSlide,useSwiper } from 'swiper/vue';
 
 // Import Swiper styles
-import "swiper/css";
+import 'swiper/css';
 
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
+import 'swiper/css/pagination';
+  import 'swiper/css/navigation';
+   import 'swiper/css/autoplay';
 
 // import required modules
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination,Autoplay } from 'swiper/modules';
 
-const autoplay = reactive({
-  delay: 4000,
-  disableOnInteraction: false,
-});
-const props = defineProps({
-  items: Array,
-});
-const wiper = useSwiper();
-const modules = [Pagination, Navigation, Autoplay];
+
+
+export default {
+  data: () => ({
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false
+      },
+  }),
+  props:{
+    items:Array
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    const wiper = useSwiper();
+    return {
+        
+      modules: [Pagination,Navigation,Autoplay],
+      wiper
+    };
+  },
+};
 </script>
-
 <style>
 .gukar-name {
   font-weight: 700 !important;
