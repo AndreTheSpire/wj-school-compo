@@ -1,4 +1,8 @@
 <template>
+  <Head>
+    <Title>About TKK Wijana Jombang</Title>
+    <Meta name="description" content="semua tentang TKK Wijana Jombang" />
+  </Head>
   <v-sheet class="d-flex justify-center">
     <div class="content-page">
       <div class="page-title">TKK TENTANG</div>
@@ -94,22 +98,26 @@
 </template>
 
 <script>
-// useHead({
-//   title:'About TKK Wijana Jombang',
-//   meta: [
-//     { name: 'description', content: 'semua tentang TKK Wijana Jombang' }
-//   ],
-//   bodyAttrs: {
-//     class: 'test'
-//   },
-// })
+export default {
+  head() {
+    return {
+      title: "About TKK Wijana Jombang",
+      meta: [
+        { name: "description", content: "semua tentang TKK Wijana Jombang" },
+      ],
+      bodyAttrs: {
+        class: "test",
+      },
+    };
+  },
+};
 
 definePageMeta({
   pageTransition: {
     name: "page",
     mode: "out-in",
     onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
+      window.scrollTo({ top: 0 });
     },
   },
 });
@@ -122,14 +130,11 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-img{
-  @include phone{
-    
+img {
+  @include phone {
     height: auto;
     width: 90vw;
     object-fit: cover;
   }
 }
 </style>
-
-     

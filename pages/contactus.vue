@@ -99,6 +99,9 @@ export default {
       console.log(this.valid);
     },
   },
+  mounted() {
+    window.scrollTo({ top: 0 });
+  },
 };
 </script>
 
