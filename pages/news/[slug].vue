@@ -153,14 +153,10 @@ export default {
     datafetch: false,
   }),
   computed: {
-
     news() {
-
-      console.log(this.$route.params.slug);
       const getCurrentNews = NewsStore().news.find((x) => {
         return x.slug === this.$route.params.slug;
       });
-      console.log(getCurrentNews);
       return getCurrentNews;
     },
   },
@@ -176,7 +172,6 @@ export default {
   },
   mounted() {
     if (this.news) {
-      console.log("masuk");
       this.datafetch = true;
       this.dataheader.title = this.news.header;
       this.dataheader.desc = this.news.detail;

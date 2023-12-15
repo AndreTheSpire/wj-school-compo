@@ -89,14 +89,9 @@ export default {
   }),
   methods: {
     validateform() {
-      console.log(this.valid);
-
       if (this.$refs.formcontact.validate()) {
-        console.log("berhasil");
       } else {
-        console.log("gagal");
       }
-      console.log(this.valid);
     },
   },
   mounted() {

@@ -36,9 +36,9 @@
       <!-- hindari menggunakan i saja sebagai index
         jauh lebih baik menggunakan index sebagai nama -->
       <v-carousel-item
-        v-for="(img, i) in headerimg"
+        v-for="(img, index) in headerimg"
         class="header-style"
-        :key="i"
+        :key="index"
         :src="img.urlimg"
         cover
         transition="scale"
@@ -190,7 +190,7 @@
 
   <v-sheet class="d-flex justify-center news-page">
     <!-- Alasannya apa widthnya dispesifikkan begini, apakah pengaruh ke responsivenya juga? -->
-    <v-card width="1024px" flat>
+    <v-card flat>
       <div class="section-page">
         <div class="section-title">Berita Utama</div>
         <template v-for="(content, index) in news" :key="index">

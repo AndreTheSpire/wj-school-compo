@@ -112,7 +112,6 @@ export default {
       });
     },
     sortnews(selected) {
-      console.log(selected);
       if (selected) {
         if (selected.value == 1) {
           this.filterednews.sort(function (a, b) {
