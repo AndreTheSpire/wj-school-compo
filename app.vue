@@ -1,13 +1,11 @@
 <template>
   <div>
-   <NuxtLayout>
-        <NuxtPage page-key="static"  />
-      </NuxtLayout>
+    <NuxtLayout>
+      <NuxtPage page-key="static" />
+    </NuxtLayout>
   </div>
 </template>
-<script>
-
-</script>
+<script></script>
 <style lang="scss">
 // html{
 //   height: auto !important;
@@ -18,28 +16,28 @@
 //   font-family: "Lusitana", Georgia, serif !important;
 //   color: #212121 !important;
 // }
-.page-enter-active{
+.page-enter-active {
   transition: all 0.7s;
-  scroll-behavior:smooth ;
+  scroll-behavior: smooth;
 }
 .page-leave-active {
   transition: all 0.2s;
-  scroll-behavior:smooth ;
+  scroll-behavior: smooth;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-   scroll-behavior:smooth ;
+  scroll-behavior: smooth;
 }
 
-.slide-enter-active{
+.slide-enter-active {
   transition: all 0.7s;
-  scroll-behavior:smooth ;
+  scroll-behavior: smooth;
 }
 .slide-leave-active {
   transition: all 0.2s;
-  scroll-behavior:smooth ;
+  scroll-behavior: smooth;
 }
 .slide-enter-from {
   opacity: 0;

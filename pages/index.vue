@@ -1,35 +1,42 @@
 <template>
   <v-sheet class="d-flex justify-center">
+    <!-- Responsivitas mobile sudah oke overall -->
     <v-carousel
       cycle
       fade
       :height="$vuetify.display.smAndDown ? '40vh' : '90vh'"
-      v-model="data.slidepage"
+      v-model="slidepage"
       hide-delimiters
-      @mouseenter="data.hovered = true"
-      @mouseleave="data.hovered = false"
+      @mouseenter="hovered = true"
+      @mouseleave="hovered = false"
       show-arrows="hover"
     >
+      <!-- $vuetify.display.smAndDown dan hovered ini tujuannya apa ya? -->
       <template v-slot:prev="{ props }">
         <v-btn
-          v-show="data.hovered"
+          v-show="hovered"
           variant="elevated"
           color="success"
           @click="props.onClick"
           icon="mdi-chevron-left"
         ></v-btn>
       </template>
+
+      <!-- Sering"-in kasih jarak antar elemen agar gak kelihatan berdempetan -->
       <template v-slot:next="{ props }">
         <v-btn
-          v-show="data.hovered"
+          v-show="hovered"
           variant="elevated"
           color="success"
           @click="props.onClick"
           icon="mdi-chevron-right"
         ></v-btn>
       </template>
+
+      <!-- hindari menggunakan i saja sebagai index
+        jauh lebih baik menggunakan index sebagai nama -->
       <v-carousel-item
-        v-for="(img, i) in data.headerimg"
+        v-for="(img, i) in headerimg"
         class="header-style"
         :key="i"
         :src="img.urlimg"
@@ -45,7 +52,7 @@
             <v-col
               cols="4"
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate1 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -62,7 +69,7 @@
             <v-col
               cols="4"
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate2 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -78,7 +85,7 @@
             <v-col
               cols="4"
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate3 d-flex align-center flex-column justify-center'
                   : 'header-item d-flex align-center flex-column justify-center'
               "
@@ -98,7 +105,7 @@
           >
             <div
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -108,7 +115,7 @@
             </div>
             <div
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -123,7 +130,7 @@
             </div>
             <div
               :class="
-                data.load == true
+                load == true
                   ? 'header-item animate1 d-flex align-center justify-center pa-4'
                   : 'header-item d-flex align-center justify-center pa-4'
               "
@@ -140,9 +147,7 @@
           <div class="d-flex align-center justify-center animate" v-else>
             <div
               transition="slide-x-transition"
-              :class="
-                data.load == true ? 'header-item animate1' : 'header-item'
-              "
+              :class="load == true ? 'header-item animate1' : 'header-item'"
               @click="navigate(1)"
             >
               <img class="header-item-img" src="/img/home/tkk3.png" alt="" />
@@ -151,9 +156,7 @@
 
             <div
               transition="slide-x-transition"
-              :class="
-                data.load == true ? 'header-item animate2' : 'header-item'
-              "
+              :class="load == true ? 'header-item animate2' : 'header-item'"
               @click="navigate(2)"
             >
               <img class="header-item-img" src="/img/home/sdk3.png" alt="" />
@@ -161,9 +164,7 @@
             </div>
             <div
               transition="slide-x-transition"
-              :class="
-                data.load == true ? 'header-item animate3' : 'header-item'
-              "
+              :class="load == true ? 'header-item animate3' : 'header-item'"
               @click="navigate(3)"
             >
               <img class="header-item-img" src="/img/home/smpk3.png" alt="" />
@@ -184,7 +185,11 @@
     </div>
   </v-sheet>
 
+  <!-- Jarak antara line 184 dan 195 terlalu besar
+  Jangan terlalu sering pakai v-sheet -->
+
   <v-sheet class="d-flex justify-center news-page">
+    <!-- Alasannya apa widthnya dispesifikkan begini, apakah pengaruh ke responsivenya juga? -->
     <v-card width="1024px" flat>
       <div class="section-page">
         <div class="section-title">Berita Utama</div>
@@ -198,14 +203,14 @@
   </v-sheet>
 </template>
 
-<script setup>
-
+<!-- <script setup>
+// Ini fungsinya apa?
 definePageMeta({
   pageTransition: {
     name: "page",
     mode: "out-in",
     onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
+      window.scrollTo({ top: 0 });
     },
   },
 });
@@ -213,7 +218,8 @@ definePageMeta({
 import { onMounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { NewsStore } from "../stores/newsstore";
-const newsstore=NewsStore();
+
+const newsstore = NewsStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -259,13 +265,16 @@ const data = reactive({
     },
   ],
 });
-if(!newsstore.alreadyfetch){
-        //dispatch function
+
+if (!newsstore.alreadyfetch) {
+  //dispatch function
 }
-let news= computed(() => {
-    const getCurrentNews = newsstore.news;
-    return getCurrentNews;
+let news = computed(() => {
+  const getCurrentNews = newsstore.news;
+  return getCurrentNews;
 });
+// biasakan kasih jarak
+
 function navigate(index) {
   if (index == 1) {
     router.push("/department/tkk");
@@ -277,16 +286,160 @@ function navigate(index) {
 }
 
 watch(
-  () => data.slidepage,
+  () => slidepage,
   (count) => {
-    data.load = false;
+    load = false;
   }
 );
-onMounted(()=>{
-    window.scrollTo({ top: 0});
-  });
-</script>
 
+onMounted(() => {
+  window.scrollTo({ top: 0 });
+});
+</script> -->
+
+<!-- format scriptnya harus mengikuti yang ini, karena
+penggunaannya yang secara javascript sudah menjadi standar disini -->
+<script>
+export default {
+  name: "Home",
+  layout: "default-story",
+  data() {
+    return {
+      name: "",
+      password: "",
+      hovered: false,
+      load: true,
+      slidepage: 0,
+      urlimg: "/img/media/slidehome/slide2.jpg",
+      color: "red",
+      headerimg: [
+        {
+          nama: "slide1",
+          urlimg: "/img/media/slidehome/slide1.jpg",
+        },
+        {
+          nama: "slide2",
+          urlimg: "/img/media/slidehome/slide2.jpg",
+        },
+        {
+          nama: "slide3",
+          urlimg: "/img/media/slidehome/slide3.jpg",
+        },
+        {
+          nama: "slide4",
+          urlimg: "/img/media/slidehome/slide4.jpg",
+        },
+        {
+          nama: "slide5",
+          urlimg: "/img/media/slidehome/slide5.jpg",
+        },
+        {
+          nama: "slide6",
+          urlimg: "/img/media/slidehome/slide6.jpg",
+        },
+      ],
+      news: [
+        {
+          id: "UWD1",
+          type: "TKK",
+          date: "11 May 2022",
+          imgurl: "/img/news/tkk/ppdb_tk_wijana.jpg",
+          header: "PPDB 2022",
+          slug: "ppdb-2022",
+          detail: "Menerima Peserta Didik Baru 2022",
+        },
+        {
+          id: "UWD2",
+          type: "umum",
+          date: "14 Jan 2021",
+          imgurl: "/img/news/general/IMG-20201014-WA0010.jpg",
+          header: "PPDB PENERIMAAN SISWA BARU",
+          slug: "ppdb-penerimaan-siswa-baru",
+          detail: "Penerimaan Pendaftaran tahun ajaran baru 2021",
+        },
+        {
+          id: "UWD3",
+          type: "SMPK",
+          date: "10 Nov 2020",
+          imgurl: "/img/news/smpk/Screen_Shot_2020-11-10_at_185650.jpg",
+          header: "Selamat kepada Nathan Philbert Ngo",
+          slug: "selamat-kepada-nathan-philbert-ngo",
+          detail:
+            "Selamat atas keberhasilannya mendapatakn MERIT AWARD pada Global Business Mathematics Olympiad 2020",
+        },
+      ],
+    };
+  },
+  async fetch() {
+    try {
+      const response = await this.$axios.$get("api/stories/home-contents");
+      // console.log(response)]
+
+      this.banners = response.banners;
+      this.trendingList = response.trendingList;
+      this.profVideos = response.profVideos;
+      this.majorVideos = response.majorVideos;
+      this.induVideos = response.induVideos;
+      this.poShowVideos = response.poShowVideos;
+      this.dualCombinations = response.dualCombinations;
+      const lang = this.$i18n.locale;
+
+      if (this.$cookies.get("story-profile")) {
+        const response2 = await this.$axios.$get(
+          "api/stories/profiles/home/recommendations/" + lang,
+          {
+            headers: {
+              Authorization:
+                "Bearer " + this.$cookies.get("story-profile").profileToken,
+            },
+          }
+        );
+        // console.log(response2)
+
+        this.recommendationList = response2;
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+  head() {
+    return {
+      title: "Home",
+    };
+  },
+  computed: {
+    // penggunaan store yang standar akan diajarkan nanti
+    // news() {
+    //   const getCurrentNews = this.$store.news;
+    //   return getCurrentNews;
+    // },
+  },
+  methods: {
+    navigate(index) {
+      if (index == 1) {
+        this.$router.push("/department/tkk");
+      } else if (index == 2) {
+        this.$router.push("/department/sdk");
+      } else if (index == 3) {
+        this.$router.push("/department/smpk");
+      }
+    },
+  },
+  mounted() {
+    window.scrollTo({ top: 0 });
+  },
+  // kalau bisa, gak usah pakai watch ini
+  //  karena cukup tricky
+  // antara dihapus atau coba convert ke computed
+  watch: {
+    slidepage(count) {
+      console.log("masuk");
+      this.load = false;
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 @keyframes floating {
@@ -330,8 +483,8 @@ onMounted(()=>{
   font-weight: 700;
   line-height: 1.4;
   font-style: normal;
-   @include phone{
-     font-size: 19px;
+  @include phone {
+    font-size: 19px;
   }
 }
 .container-header {
@@ -340,7 +493,7 @@ onMounted(()=>{
 .header-item {
   padding: 2rem;
   transition: transform 0.2s;
-  @include phone{
+  @include phone {
     padding: 0rem;
     display: flex;
     justify-items: center;
@@ -354,7 +507,7 @@ onMounted(()=>{
 }
 .header-item-img {
   width: 150px;
-  @include phone{
+  @include phone {
     height: 60px;
     width: auto;
   }
@@ -364,7 +517,7 @@ onMounted(()=>{
   text-align: center;
   font-style: normal;
   font-size: 40px;
-  @include phone{
+  @include phone {
     font-size: 20px;
   }
 }
@@ -385,7 +538,7 @@ onMounted(()=>{
   font-size: 48px;
   line-height: 1.4;
   font-weight: 700;
-  @include phone{
+  @include phone {
     font-size: 24px;
   }
 }
@@ -401,6 +554,4 @@ onMounted(()=>{
     width: auto;
   }
 }
-
-
 </style>

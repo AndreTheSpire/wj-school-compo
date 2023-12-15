@@ -18,6 +18,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-navigation-drawer
       v-model="data.rightdrawer"
       app
@@ -34,7 +35,7 @@
           :key="index"
           @click="navigateroute(item, index)"
           :class="
-            data.selectedIndex === index&&data.selectedIndex!=3
+            data.selectedIndex === index && data.selectedIndex != 3
               ? 'selected-item text-sidebar'
               : 'text-sidebar'
           "
@@ -126,8 +127,6 @@ function navigateroute(route, index) {
   data.selectedIndex = index;
 }
 </script>
-
-
 
 <style lang="scss" scoped>
 .v-toolbar-title__placeholder {

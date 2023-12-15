@@ -1,11 +1,12 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <div class="news-page"  v-if="!datafetch">
-          <div class="page-title" >
-        Tidak ada news yang sesuai
-      </div>
+    <div class="news-page" v-if="!datafetch">
+      <div class="page-title">Tidak ada news yang sesuai</div>
     </div>
+    <!-- Jangan lupa kasih jarak antar elemen -->
+
     <div class="news-page" v-else>
+      <!-- Bagus ada breadcrumbsnya -->
       <div class="pb-4">
         <ul class="breadcrumbs">
           <li><a href="/" to="/">HOME</a></li>
@@ -17,7 +18,8 @@
           </li>
         </ul>
       </div>
-      <div class="page-title" >
+
+      <div class="page-title">
         {{ news.header }}
       </div>
       <div class="page-content">
@@ -82,7 +84,6 @@
         </div>
       </div>
     </div>
-
   </v-sheet>
 </template>
 
@@ -90,53 +91,49 @@
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { NewsStore } from "../stores/newsstore";
-const newsstore=NewsStore();
+const newsstore = NewsStore();
 const router = useRouter();
 const route = useRoute();
-let datafetch=ref(false);
-let dataheader=reactive({
-  title:"Error! News Doesnt Found",
-  desc:"Error! News Doesnt Found",
-})
-    let news= computed(() => {
-      const getCurrentNews = newsstore.news.find((x) => {
-        return x.slug === route.params.slug;
-      });
-      
-      return getCurrentNews;
+let datafetch = ref(false);
+let dataheader = reactive({
+  title: "Error! News Doesnt Found",
+  desc: "Error! News Doesnt Found",
+});
+let news = computed(() => {
+  const getCurrentNews = newsstore.news.find((x) => {
+    return x.slug === route.params.slug;
+  });
+
+  return getCurrentNews;
 });
 // onMounted(() => {
- 
+
 //   })
-   datafetch.value=false;
-    if(news.value){
-        datafetch.value=true;
-        dataheader.title=news.value.header;
-        dataheader.desc=news.value.detail;
-    }
+datafetch.value = false;
+if (news.value) {
+  datafetch.value = true;
+  dataheader.title = news.value.header;
+  dataheader.desc = news.value.detail;
+}
 
 useHead({
-  title:dataheader.title,
-  meta: [
-    { name: 'description', content: dataheader.desc }
-  ],
+  title: dataheader.title,
+  meta: [{ name: "description", content: dataheader.desc }],
   bodyAttrs: {
-    class: 'test'
+    class: "test",
   },
-})
+});
 
 definePageMeta({
   pageTransition: {
     name: "slide",
     mode: "out-in",
     onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
+      window.scrollTo({ top: 0 });
     },
   },
 });
-
 </script>
-
 
 <style lang="scss" scoped>
 a {
@@ -224,8 +221,8 @@ li {
   font-size: 3rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
-  @include phone{
-     font-size: 1.5rem;
+  @include phone {
+    font-size: 1.5rem;
   }
 }
 .page-content {
@@ -240,14 +237,11 @@ p {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-img{
-  @include phone{
+img {
+  @include phone {
     height: auto;
     width: 90vw;
     object-fit: cover;
   }
 }
-
 </style>
-
-     
