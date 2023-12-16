@@ -3,7 +3,7 @@
     <div class="news-page">
       <div class="pb-4">
         <ul class="breadcrumbs">
-          <li><a href="/">HOME</a></li>
+          <li><NuxtLink :to="`/`">HOME</NuxtLink></li>
           <li><a> / </a></li>
           <li><b>NEWS</b></li>
         </ul>
@@ -44,7 +44,7 @@
           </v-col>
         </v-row>
         <div class="pa-4 listnews">
-          <template v-for="(content, index) in filterednews" :key="index">
+          <template v-for="content in filterednews" :key="content.slug">
             <CardsNews :news="content"></CardsNews>
             <br />
           </template>

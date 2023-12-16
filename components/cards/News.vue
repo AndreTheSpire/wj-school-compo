@@ -5,49 +5,44 @@
       width="100%"
       :elevation="isHovering ? 16 : 0"
       v-bind="props"
-      :to="`/news/${news.slug}`"
     >
-      <v-card-title class="d-flex justify-space-between news-head">
-        <div class="news-tag">Pengumuman</div>
-        <div class="news-date d-flex align-center">
-          {{ news.date }}
-        </div>
-      </v-card-title>
-      <v-divider thickness="4" color="red"> </v-divider>
+      <NuxtLink :to="`/news/${news.slug}`">
+        <v-card-title class="d-flex justify-space-between news-head">
+          <div class="news-tag">Pengumuman</div>
+          <div class="news-date d-flex align-center">
+            {{ news.date }}
+          </div>
+        </v-card-title>
+        <v-divider thickness="4" color="red"> </v-divider>
 
-      <v-row class="news-content">
-        <v-col sm="1" cols="3" class="pr-0">
-          <v-img :src="news.imgurl" height="65px" width="65px" cover></v-img>
-        </v-col>
-        <v-col sm="11" cols="9" class="px-0">
-          <v-card-text class="news-title py-0">
-            {{ news.header }}
-          </v-card-text>
+        <v-row class="news-content">
+          <v-col sm="1" cols="3" class="pr-0">
+            <v-img :src="news.imgurl" height="65px" width="65px" cover></v-img>
+          </v-col>
+          <v-col sm="11" cols="9" class="px-0">
+            <v-card-text class="news-title py-0">
+              {{ news.header }}
+            </v-card-text>
 
-          <v-card-text class="news-detail">
-            {{ news.detail }}
-          </v-card-text>
-          <v-card-text class="news-read-more"> Lihat </v-card-text>
-        </v-col>
-      </v-row>
+            <v-card-text class="news-detail">
+              {{ news.detail }}
+            </v-card-text>
+            <v-card-text class="news-read-more"> Lihat </v-card-text>
+          </v-col>
+        </v-row>
+      </NuxtLink>
     </v-card>
   </v-hover>
 </template>
 
 <script>
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
   props: {
     news: Object,
   },
   methods: {
-    navigatenews(id) {
-      this.$router.push({
-        path: "/news/detail",
-        query: { id: id }, // Replace 123 with the actual value you want to pass
-      });
-    },
+   
   },
 };
 </script>

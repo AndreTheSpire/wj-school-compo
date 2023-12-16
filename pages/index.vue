@@ -193,7 +193,7 @@
     <v-card flat>
       <div class="section-page">
         <div class="section-title">Berita Utama</div>
-        <template v-for="(content, index) in news" :key="index">
+        <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
@@ -395,12 +395,8 @@ export default {
   mounted() {
     window.scrollTo({ top: 0 });
   },
-  // kalau bisa, gak usah pakai watch ini
-  //  karena cukup tricky
-  // antara dihapus atau coba convert ke computed
   watch: {
-    slidepage(count) {
-      console.log("masuk");
+    slidepage() {
       this.load = false;
     },
   },

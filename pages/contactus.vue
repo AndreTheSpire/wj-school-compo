@@ -1,16 +1,16 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <!-- <FetchStateHandler
+    <FetchStateHandler
       v-if="pending || error"
       :fetchpending="pending"
       :fetcherror="error"
       :fetchfunction="refresh"
-    /> -->
-    <Transition name="slide-fade" mode="out-in" appear>
+    />
+    <Transition name="slide-fade" mode="out-in" appear v-else>
       <div class="content-page" v-if="animate">
         <div class="page-title">CONTACT US</div>
         <div class="page-content">
-          <!-- <div>{{posts}}</div> -->
+          <div>{{ posts }}</div>
 
           <v-form class="w-100" ref="formcontact" v-model="valid">
             <InputsTextField
@@ -72,6 +72,18 @@ definePageMeta({
   pageTransition: false,
 });
 export default {
+  async setup() {
+    const {
+      pending,
+      data: posts,
+      error,
+      execute,
+      refresh,
+    } = await useFetch("/.netlify/functions/test-view", {
+      lazy: true,
+    });
+    return { pending, error, refresh, posts };
+  },
   data: () => ({
     valid: true,
     name: "",
@@ -80,6 +92,10 @@ export default {
     phone: "",
     message: "",
     upload: null,
+    fetchpending: null,
+    fetcherror: null,
+    fetchrefresh: {},
+    fetchdata: [],
     selectedemail: "",
     itemsemail: [
       { state: "admin@smpk.wijana.sch.id", value: "admin@smpk.wijana.sch.id" },
@@ -87,6 +103,27 @@ export default {
       { state: "admin@tkk.wijana.sch.id", value: "admin@tkk.wijana.sch.id" },
     ],
   }),
+  // async fetch() {
+  //     const {
+  //       pending,
+  //       data: posts,
+  //       error,
+  //       execute,
+  //       refresh,
+  //     } = await useFetch("/.netlify/functions/test-view", {
+  //       lazy: true,
+  //       onResponse({ request, response, options }) {
+  //       // Process the response data
+  //       localStorage.setItem('token', response._data.token)
+  //     },
+  //     });
+  //     console.log(pending);
+  //     this.fetchpending = pending;
+  //     this.fetcherror = error;
+  //     this.fetchdata = posts;
+  //     this.fetchrefresh = refresh;
+  //     console.log(this.fetchdata);
+  //   },
   methods: {
     validateform() {
       if (this.$refs.formcontact.validate()) {
@@ -94,6 +131,7 @@ export default {
       }
     },
   },
+
   mounted() {
     window.scrollTo({ top: 0 });
   },

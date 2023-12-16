@@ -5,44 +5,39 @@
       width="100%"
       :elevation="isHovering ? 10 : 0"
       v-bind="props"
-      :to="`/news/${news.slug}`"
     >
-      <v-card-title class="d-flex justify-space-between news-head">
-        <div class="news-tag">Pengumuman</div>
-        <div class="news-date d-flex align-center">
-          {{ news.date }}
-        </div>
-      </v-card-title>
-      <v-divider thickness="4" color="red"> </v-divider>
-      <v-img :src="news.imgurl" height="200px" cover></v-img>
-      <div class="news-content">
-        <v-card-text class="news-title">
-          {{ news.header }}
-        </v-card-text>
+      <NuxtLink :to="`/news/${news.slug}`">
+        <v-card-title class="d-flex justify-space-between news-head">
+          <div class="news-tag">Pengumuman</div>
+          <div class="news-date d-flex align-center">
+            {{ news.date }}
+          </div>
+        </v-card-title>
+        <v-divider thickness="4" color="red"> </v-divider>
+        <v-img :src="news.imgurl" height="200px" cover></v-img>
+        <div class="news-content">
+          <v-card-text class="news-title">
+            {{ news.header }}
+          </v-card-text>
 
-        <v-card-text class="news-detail">
-          {{ news.detail }}
-        </v-card-text>
-        <v-card-subtitle class="news-read-more"> Lihat </v-card-subtitle>
-      </div>
+          <v-card-text class="news-detail">
+            {{ news.detail }}
+          </v-card-text>
+          <v-card-subtitle class="news-read-more"> Lihat </v-card-subtitle>
+        </div>
+      </NuxtLink>
     </v-card>
   </v-hover>
 </template>
 
 <script>
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
   props: {
     news: Object,
   },
   methods: {
-    navigatenews(id) {
-      this.$router.push({
-        path: "/news/detail",
-        query: { id: id }, // Replace 123 with the actual value you want to pass
-      });
-    },
+    
   },
 };
 </script>

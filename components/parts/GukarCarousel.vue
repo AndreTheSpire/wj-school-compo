@@ -43,32 +43,29 @@
   </div>
 </template>
 
-
 <script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide,useSwiper } from 'swiper/vue';
+import { Swiper, SwiperSlide, useSwiper } from "swiper/vue";
 
 // Import Swiper styles
-import 'swiper/css';
+import "swiper/css";
 
-import 'swiper/css/pagination';
-  import 'swiper/css/navigation';
-   import 'swiper/css/autoplay';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
 // import required modules
-import { Navigation, Pagination,Autoplay } from 'swiper/modules';
-
-
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 export default {
   data: () => ({
     autoplay: {
-        delay: 4000,
-        disableOnInteraction: false
-      },
+      delay: 4000,
+      disableOnInteraction: false,
+    },
   }),
-  props:{
-    items:Array
+  props: {
+    items: Array,
   },
   components: {
     Swiper,
@@ -77,9 +74,8 @@ export default {
   setup() {
     const wiper = useSwiper();
     return {
-        
-      modules: [Pagination,Navigation,Autoplay],
-      wiper
+      modules: [Pagination, Navigation, Autoplay],
+      wiper,
     };
   },
 };
@@ -141,7 +137,6 @@ export default {
 .swiper-slide img {
   display: block;
   width: 80%;
-  height: 100%;
   object-fit: cover;
 }
 .mySwiper {
@@ -149,6 +144,7 @@ export default {
   margin: 0px;
 }
 .img-swiper {
+  height: 300px;
 }
 @media screen and (max-width: 599px) {
   .swiper {

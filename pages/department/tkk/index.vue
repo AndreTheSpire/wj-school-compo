@@ -14,7 +14,7 @@
       <PartsBlockText :blocktext="blocktext"></PartsBlockText>
       <div class="section-page">
         <div class="section-title">Berita Terkini</div>
-        <template v-for="(content, index) in news" :key="index">
+        <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
           <br />
