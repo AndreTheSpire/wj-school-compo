@@ -55,131 +55,132 @@
   </v-sheet>
 </template>
 
-<script>
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { NewsStore } from "../stores/newsstore";
-// useHead({
-//   title: "News",
-//   meta: [
-//     {
-//       name: "description",
-//       content: "Berita Terikini di sekolah wijana jombang",
-//     },
-//   ],
-//   bodyAttrs: {
-//     class: "test",
-//   },
-// });
+
+const newsstore = NewsStore();
+const router = useRouter();
+const route = useRoute();
+const runTimeConfig = useRuntimeConfig();
+const posts = await fetch("https://api.imavi.org/imavi/news/get-all", {
+  headers: {
+    Id: runTimeConfig.public.APP_ID,
+    Secret: runTimeConfig.public.APP_SECRET,
+    partner: runTimeConfig.public.PARTNER,
+  },
+  lazy: true,
+});
+const datapost = ref(await posts.json());
+let filterpost = ref(datapost.value);
+console.log("post");
+console.log(filterpost);
+let currentPage = ref(1);
+let category = ref("");
+let Sort = ref("");
+let Search = ref("");
+const categoryitem = [
+  { state: "All Category", value: 1 },
+  { state: "Pencapaian", value: 2 },
+  { state: "Kejadian", value: 3 },
+  { state: "Pengumuman", value: 4 },
+];
+const sortitem = [
+  { state: "Title A-Z", value: 1 },
+  { state: "Title Z-A", value: 2 },
+  { state: "Latest Date", value: 3 },
+  { state: "Oldest Date", value: 4 },
+];
+let datafetch = ref(false);
+let dataheader = reactive({
+  title: "Error! News Doesnt Found",
+  desc: "Error! News Doesnt Found",
+});
+let news = computed(() => {
+  const getCurrentNews = newsstore.news.find((x) => {
+    return x.slug === route.params.slug;
+  });
+
+  return getCurrentNews;
+});
+let rows = computed(() => {
+  return Math.ceil(filterpost.value.length / 5);
+});
+let showpost = computed(() => {
+  const indexMin = (currentPage.value - 1) * 5;
+  const indexMax = indexMin + 5;
+
+  return filterpost.value.slice(indexMin, indexMax);
+});
+console.log("show");
+console.log(showpost);
+
+function searchnews(word) {
+  //--------Search
+  console.log("masuk" + word);
+  filterpost.value = datapost.value.filter(function (item) {
+    return item.title.toLowerCase().includes(word.toLowerCase());
+  });
+  console.log(filterpost.value);
+  console.log(showpost);
+}
+function sortnews(selected) {
+  if (selected) {
+    if (selected.value == 1) {
+      filterpost.value.sort(function (a, b) {
+        var nameA = a.title.toLowerCase(),
+          nameB = b.title.toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
+    } else if (selected.value == 2) {
+      filterpost.value.sort(function (a, b) {
+        var nameA = a.title.toLowerCase(),
+          nameB = b.title.toLowerCase();
+        if (nameA > nameB)
+          //sort string ascending
+          return -1;
+        if (nameA < nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
+    } else if (selected.value == 3) {
+      filterpost.value.sort(function (a, b) {
+        var dateA = new Date(a.publishDate),
+          dateB = new Date(b.publishDate);
+        return dateB - dateA; //sort by date ascending
+      });
+    } else if (selected.value == 4) {
+      filterpost.value.sort(function (a, b) {
+        var dateA = new Date(a.publishDate),
+          dateB = new Date(b.publishDate);
+        return dateA - dateB; //sort by date ascending
+      });
+    }
+    // const indexMin = (this.currentPage - 1) * 5;
+    // const indexMax = indexMin + 5;
+    // this.showpost = this.filterpost.filter(
+    //   (x, index) => index >= indexMin && index < indexMax
+    // );
+    // this.currentPage = 1;
+    console.log(showpost);
+  }
+}
+
+useHead({
+  title: dataheader.title,
+  meta: [{ name: "description", content: dataheader.desc }],
+  bodyAttrs: {
+    class: "test",
+  },
+});
 
 definePageMeta({
   pageTransition: false,
 });
-export default {
-  async setup() {
-    const runTimeConfig = useRuntimeConfig();
-    const posts = await fetch("https://api.imavi.org/imavi/news/get-all", {
-      headers: {
-        Id: runTimeConfig.public.APP_ID,
-        Secret: runTimeConfig.public.APP_SECRET,
-        partner: runTimeConfig.public.PARTNER,
-      },
-      lazy: true,
-    });
-    const datapost = await posts.json();
-    const indexMin = 0;
-    const indexMax = 5;
-    console.log(datapost);
-    return { posts, datapost };
-  },
-  data: () => ({
-    category: "",
-    Sort: "",
-    Search: "",
-    currentPage: 1,
-    categoryitem: [
-      { state: "All Category", value: 1 },
-      { state: "Pencapaian", value: 2 },
-      { state: "Kejadian", value: 3 },
-      { state: "Pengumuman", value: 4 },
-    ],
-    sortitem: [
-      { state: "Title A-Z", value: 1 },
-      { state: "Title Z-A", value: 2 },
-      { state: "Latest Date", value: 3 },
-      { state: "Oldest Date", value: 4 },
-    ],
-    filterpost: [],
-    filterednews: NewsStore().news,
-  }),
-  computed: {
-    rows() {
-      return Math.ceil(this.filterpost.length / 5);
-    },
-    showpost() {
-      const indexMin = (this.currentPage - 1) * 5;
-      const indexMax = indexMin + 5;
-      return this.filterpost.filter(
-        (x, index) => index >= indexMin && index < indexMax
-      );
-    },
-  },
-  methods: {
-    searchnews(word) {
-      //--------Search
-
-      this.filterpost = this.datapost.filter(function (item) {
-        return item.title.toLowerCase().includes(word.toLowerCase());
-      });
-    },
-    sortnews(selected) {
-      if (selected) {
-        if (selected.value == 1) {
-          this.filterpost.sort(function (a, b) {
-            var nameA = a.title.toLowerCase(),
-              nameB = b.title.toLowerCase();
-            if (nameA < nameB)
-              //sort string ascending
-              return -1;
-            if (nameA > nameB) return 1;
-            return 0; //default return value (no sorting)
-          });
-        } else if (selected.value == 2) {
-          this.filterpost.sort(function (a, b) {
-            var nameA = a.title.toLowerCase(),
-              nameB = b.title.toLowerCase();
-            if (nameA > nameB)
-              //sort string ascending
-              return -1;
-            if (nameA < nameB) return 1;
-            return 0; //default return value (no sorting)
-          });
-        } else if (selected.value == 3) {
-          this.filterpost.sort(function (a, b) {
-            var dateA = new Date(a.publishDate),
-              dateB = new Date(b.publishDate);
-            return dateB - dateA; //sort by date ascending
-          });
-        } else if (selected.value == 4) {
-          this.filterpost.sort(function (a, b) {
-            var dateA = new Date(a.publishDate),
-              dateB = new Date(b.publishDate);
-            return dateA - dateB; //sort by date ascending
-          });
-        }
-        // const indexMin = (this.currentPage - 1) * 5;
-        // const indexMax = indexMin + 5;
-        // this.showpost = this.filterpost.filter(
-        //   (x, index) => index >= indexMin && index < indexMax
-        // );
-        // this.currentPage = 1;
-        console.log(this.showpost);
-      }
-    },
-  },
-  watch: {},
-  mounted() {
-    this.filterpost = this.datapost;
-  },
-};
 </script>
 
 <style lang="scss" scoped>

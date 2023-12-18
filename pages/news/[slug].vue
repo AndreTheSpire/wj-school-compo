@@ -90,14 +90,26 @@
     </div>
   </v-sheet>
 </template>
-<!-- 
+
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { NewsStore } from "../stores/newsstore";
+
 const newsstore = NewsStore();
 const router = useRouter();
 const route = useRoute();
+const runTimeConfig = useRuntimeConfig();
+
+const endpoint = "https://api.imavi.org/imavi/news/view/" + route.params.slug;
+const News = await fetch(endpoint, {
+  headers: {
+    Id: runTimeConfig.public.APP_ID,
+    Secret: runTimeConfig.public.APP_SECRET,
+    partner: runTimeConfig.public.PARTNER,
+  },
+});
+const NewsDetail = await News.json();
 let datafetch = ref(false);
 let dataheader = reactive({
   title: "Error! News Doesnt Found",
@@ -117,6 +129,34 @@ if (news.value) {
   dataheader.title = news.value.header;
   dataheader.desc = news.value.detail;
 }
+const formatDate = (dateString) => {
+  const dateObject = new Date(dateString);
+  const day = dateObject.getDate();
+  const month = formatMonthName(dateObject.getMonth() + 1);
+  const year = dateObject.getFullYear();
+
+  return `${day < 10 ? "0" : ""}${day} ${
+    month < 10 ? "0" : ""
+  }${month}, ${year}`;
+};
+
+const formatMonthName = (monthNumber) => {
+  const monthNames = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+  return monthNames[monthNumber - 1] || "";
+};
 
 useHead({
   title: dataheader.title,
@@ -135,8 +175,8 @@ definePageMeta({
     },
   },
 });
-</script> -->
-
+</script>
+<!-- 
 <script>
 import { NewsStore } from "../stores/newsstore";
 
@@ -245,7 +285,7 @@ export default {
     // }
   },
 };
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 a {
