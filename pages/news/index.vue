@@ -171,8 +171,10 @@ function sortnews(selected) {
 }
 
 useHead({
-  title: dataheader.title,
-  meta: [{ name: "description", content: dataheader.desc }],
+  title: "NEWS",
+  meta: [
+    { name: "description", content: "daftar news di Sekolah Wijana Jombang" },
+  ],
   bodyAttrs: {
     class: "test",
   },

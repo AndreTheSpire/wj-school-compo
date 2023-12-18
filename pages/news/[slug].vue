@@ -6,7 +6,6 @@
     <!-- Jangan lupa kasih jarak antar elemen -->
 
     <div class="news-page">
-      <!-- Bagus ada breadcrumbsnya -->
       <div class="pb-4">
         <ul class="breadcrumbs">
           <li><a href="/" to="/">HOME</a></li>
@@ -124,10 +123,10 @@ let news = computed(() => {
 });
 
 datafetch.value = false;
-if (news.value) {
+if (NewsDetail) {
   datafetch.value = true;
-  dataheader.title = news.value.header;
-  dataheader.desc = news.value.detail;
+  dataheader.title = NewsDetail.title;
+  dataheader.desc = NewsDetail.content;
 }
 const formatDate = (dateString) => {
   const dateObject = new Date(dateString);
