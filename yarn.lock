@@ -2187,6 +2187,11 @@ domhandler@^5.0.2, domhandler@^5.0.3:
   dependencies:
     domelementtype "^2.3.0"
 
+dompurify@^3.0.0:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.0.6.tgz#925ebd576d54a9531b5d76f0a5bef32548351dae"
+  integrity sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==
+
 domutils@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-3.1.0.tgz#c47f551278d3dc4b0b1ab8cbb42d751a6f0d824e"
@@ -5247,6 +5252,13 @@ vue-devtools-stub@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/vue-devtools-stub/-/vue-devtools-stub-0.1.0.tgz#a65b9485edecd4273cedcb8102c739b83add2c81"
   integrity sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==
+
+vue-dompurify-html@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/vue-dompurify-html/-/vue-dompurify-html-5.0.1.tgz#870e3636f1e1a452c8bf1732e9e10b917176f61f"
+  integrity sha512-8yoMbo7PX4vt01k0dcCHvP4tY0fOCLkQeMhXXRNmH7/muIUTkFOQNzkAtE0RmqgaF/unabvYnsnCu2CjIMgueg==
+  dependencies:
+    dompurify "^3.0.0"
 
 vue-router@^4.2.5:
   version "4.2.5"

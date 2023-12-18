@@ -10,8 +10,12 @@
       <div class="content-page" v-if="animate">
         <div class="page-title">CONTACT US</div>
         <div class="page-content">
-          <div>{{ posts }}</div>
-
+          <v-text-field
+            label="Coba Search"
+            v-model="search"
+            @input="searchdata(search)"
+          ></v-text-field>
+          <div>{{ filterpost }}</div>
           <v-form class="w-100" ref="formcontact" v-model="valid">
             <InputsTextField
               v-model="name"
@@ -79,10 +83,16 @@ export default {
       error,
       execute,
       refresh,
-    } = await useFetch("/.netlify/functions/test-view", {
+    } = await useFetch("https://api.imavi.org/imavi/news/get-all", {
+      headers: {
+        Id: "6163b0c663bd513e8b3b8553",
+        Secret: "2213be40-3625-4111-9b52-e828b5d335d8",
+        partner: "cim",
+      },
       lazy: true,
     });
-    return { pending, error, refresh, posts };
+    let filterpost = posts;
+    return { pending, error, refresh, posts, filterpost };
   },
   data: () => ({
     valid: true,
@@ -94,7 +104,9 @@ export default {
     upload: null,
     fetchpending: null,
     fetcherror: null,
+    search: "",
     fetchrefresh: {},
+    temppost: null,
     fetchdata: [],
     selectedemail: "",
     itemsemail: [
@@ -130,10 +142,24 @@ export default {
       } else {
       }
     },
+    searchdata(search) {
+      console.log("masuk??");
+      if (!this.temppost) {
+        this.temppost = this.posts;
+      }
+      console.log(this.allpost);
+      this.filterpost = this.temppost.filter(function (item) {
+        console.log("ini search" + search);
+        console.log("ini item" + item.Population);
+        return item.title.includes(search);
+      });
+      console.log(this.temppost);
+    },
   },
 
   mounted() {
     window.scrollTo({ top: 0 });
+    console.log("ini postku " + this.posts);
   },
 };
 </script>

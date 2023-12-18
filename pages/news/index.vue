@@ -44,10 +44,11 @@
           </v-col>
         </v-row>
         <div class="pa-4 listnews">
-          <template v-for="content in filterednews" :key="content.slug">
+          <template v-for="content in showpost" :key="content.slug">
             <CardsNews :news="content"></CardsNews>
             <br />
           </template>
+          <v-pagination v-model="currentPage" :length="rows"></v-pagination>
         </div>
       </div>
     </div>
@@ -70,19 +71,30 @@ import { NewsStore } from "../stores/newsstore";
 // });
 
 definePageMeta({
-  pageTransition: {
-    name: "slide",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0 });
-    },
-  },
+  pageTransition: false,
 });
 export default {
+  async setup() {
+    const runTimeConfig = useRuntimeConfig();
+    const posts = await fetch("https://api.imavi.org/imavi/news/get-all", {
+      headers: {
+        Id: runTimeConfig.public.APP_ID,
+        Secret: runTimeConfig.public.APP_SECRET,
+        partner: runTimeConfig.public.PARTNER,
+      },
+      lazy: true,
+    });
+    const datapost = await posts.json();
+    const indexMin = 0;
+    const indexMax = 5;
+    console.log(datapost);
+    return { posts, datapost };
+  },
   data: () => ({
     category: "",
     Sort: "",
     Search: "",
+    currentPage: 1,
     categoryitem: [
       { state: "All Category", value: 1 },
       { state: "Pencapaian", value: 2 },
@@ -95,28 +107,35 @@ export default {
       { state: "Latest Date", value: 3 },
       { state: "Oldest Date", value: 4 },
     ],
+    filterpost: [],
     filterednews: NewsStore().news,
   }),
   computed: {
-    // isSSR() {
-    //   console.log(process.server);
-    //   return process.server;
-    // },
+    rows() {
+      return Math.ceil(this.filterpost.length / 5);
+    },
+    showpost() {
+      const indexMin = (this.currentPage - 1) * 5;
+      const indexMax = indexMin + 5;
+      return this.filterpost.filter(
+        (x, index) => index >= indexMin && index < indexMax
+      );
+    },
   },
   methods: {
     searchnews(word) {
       //--------Search
 
-      this.filterednews = NewsStore().news.filter(function (item) {
-        return item.header.toLowerCase().includes(word.toLowerCase());
+      this.filterpost = this.datapost.filter(function (item) {
+        return item.title.toLowerCase().includes(word.toLowerCase());
       });
     },
     sortnews(selected) {
       if (selected) {
         if (selected.value == 1) {
-          this.filterednews.sort(function (a, b) {
-            var nameA = a.header.toLowerCase(),
-              nameB = b.header.toLowerCase();
+          this.filterpost.sort(function (a, b) {
+            var nameA = a.title.toLowerCase(),
+              nameB = b.title.toLowerCase();
             if (nameA < nameB)
               //sort string ascending
               return -1;
@@ -124,9 +143,9 @@ export default {
             return 0; //default return value (no sorting)
           });
         } else if (selected.value == 2) {
-          this.filterednews.sort(function (a, b) {
-            var nameA = a.header.toLowerCase(),
-              nameB = b.header.toLowerCase();
+          this.filterpost.sort(function (a, b) {
+            var nameA = a.title.toLowerCase(),
+              nameB = b.title.toLowerCase();
             if (nameA > nameB)
               //sort string ascending
               return -1;
@@ -134,20 +153,31 @@ export default {
             return 0; //default return value (no sorting)
           });
         } else if (selected.value == 3) {
-          this.filterednews.sort(function (a, b) {
-            var dateA = new Date(a.date),
-              dateB = new Date(b.date);
-            return dateA - dateB; //sort by date ascending
-          });
-        } else if (selected.value == 4) {
-          this.filterednews.sort(function (a, b) {
-            var dateA = new Date(a.date),
-              dateB = new Date(b.date);
+          this.filterpost.sort(function (a, b) {
+            var dateA = new Date(a.publishDate),
+              dateB = new Date(b.publishDate);
             return dateB - dateA; //sort by date ascending
           });
+        } else if (selected.value == 4) {
+          this.filterpost.sort(function (a, b) {
+            var dateA = new Date(a.publishDate),
+              dateB = new Date(b.publishDate);
+            return dateA - dateB; //sort by date ascending
+          });
         }
+        // const indexMin = (this.currentPage - 1) * 5;
+        // const indexMax = indexMin + 5;
+        // this.showpost = this.filterpost.filter(
+        //   (x, index) => index >= indexMin && index < indexMax
+        // );
+        // this.currentPage = 1;
+        console.log(this.showpost);
       }
     },
+  },
+  watch: {},
+  mounted() {
+    this.filterpost = this.datapost;
   },
 };
 </script>

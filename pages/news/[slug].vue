@@ -1,11 +1,11 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <div class="news-page" v-if="!datafetch">
+    <!-- <div class="news-page" v-if="!datafetch">
       <div class="page-title">Tidak ada news yang sesuai</div>
-    </div>
+    </div> -->
     <!-- Jangan lupa kasih jarak antar elemen -->
 
-    <div class="news-page" v-else>
+    <div class="news-page">
       <!-- Bagus ada breadcrumbsnya -->
       <div class="pb-4">
         <ul class="breadcrumbs">
@@ -14,33 +14,37 @@
           <li><a href="/news">NEWS</a></li>
           <li><a> / </a></li>
           <li>
-            <b>{{ news.header }}</b>
+            <b>{{ NewsDetail.title }}</b>
           </li>
         </ul>
       </div>
 
       <div class="page-title">
-        {{ news.header }}
+        {{ NewsDetail.title }}
       </div>
       <div class="page-content">
         <v-card class="mx-auto card-news" width="100%" flat>
           <v-card-title class="d-flex justify-space-between news-head">
             <div class="news-tag">Pengumuman</div>
             <div class="news-date d-flex align-center">
-              {{ news.date }}
+              {{ formatDate(NewsDetail.publishDate) }}
             </div>
           </v-card-title>
           <div class="d-flex flex-column justify-center align-center">
             <v-divider thickness="4" color="red"> </v-divider>
             <FancyBox :options="{}">
-              <a :href="news.imgurl" data-fancybox>
-                <img :src="news.imgurl" max-width="768px" cover /><img />
+              <a :href="NewsDetail.imageLink" data-fancybox>
+                <img
+                  :src="NewsDetail.imageLink"
+                  max-width="768px"
+                  cover
+                /><img />
               </a>
             </FancyBox>
           </div>
           <div class="news-content">
             <v-card-text class="news-detail">
-              {{ news.detail }}
+              <p v-dompurify-html="NewsDetail.content"></p>
             </v-card-text>
           </div>
         </v-card>
@@ -135,6 +139,7 @@ definePageMeta({
 
 <script>
 import { NewsStore } from "../stores/newsstore";
+
 definePageMeta({
   pageTransition: {
     name: "slide",
@@ -145,12 +150,43 @@ definePageMeta({
   },
 });
 export default {
+  async setup() {
+    const runTimeConfig = useRuntimeConfig();
+    const route = useRoute();
+    const endpoint =
+      "https://api.imavi.org/imavi/news/view/" + route.params.slug;
+    const News = await fetch(endpoint, {
+      headers: {
+        Id: runTimeConfig.public.APP_ID,
+        Secret: runTimeConfig.public.APP_SECRET,
+        partner: runTimeConfig.public.PARTNER,
+      },
+    });
+    const NewsDetail = await News.json();
+    console.log(NewsDetail);
+    return { News, NewsDetail };
+  },
   data: () => ({
     dataheader: {
       title: "Error! News Doesnt Found",
       desc: "Error! News Doesnt Found",
     },
     datafetch: false,
+    // NewsDetail: {
+    //   author: "Admin CIM",
+    //   content:
+    //     "<p>Hallooo...</p><p>Sahabat Katolik Indonesia dimanapun Anda berada.</p><p>Persiapan menyambut Tahun Politik 2024 sudah sangat dekat! Kita sebagai orang Katolik dipanggil untuk ambil bagian dalam setiap kegiatan Negara Republik Indonesia termasuk dalam bidang Politik.</p><p>&nbsp;</p><p>Dalam masa persiapan ini, Gereja hadir untuk membantu umat untuk melek akan politik sehingga umat juga terlibat aktif dengan benar. Ingat kita tidak bisa berpangkutangan saja! 100% Katolik 100% Indonesia</p><p>&nbsp;</p><p>Untuk itu Pusat Studi Teologi Centrum Ivan Merz Keuskupan Surabaya mengadakan Kuliah Umum dengan tema GEREJA BERPOLITIK (Sudut Pandang Ajaran Gereja dan Nilai-Nilai Pancasila)</p><p>&nbsp;</p><p>NARASUMBER :</p><p>- RP. Prof. Dr. FX. Eko Armada Riyanto, CM. (Guru Besar STFT Malang)</p><p>- RD. Dr. Benny Susetiyo (Staff Khusus Ketua Badan Pembinaan Ideologi Pancasila)</p><p>- Yunarto Wijaya, M.M. (Direktur Eksekutif Charta Politika Indonesia)</p><p>&nbsp;</p><p>MODERATOR :</p><p>- Untara Simon, S.S., M.Hum. (Dosen Fakultas Filsafat UKWMS)</p><p>&nbsp;</p><p>&nbsp;</p><p>📍 Auditorium UKWMS Ruang Widya Manggala Lt. 2</p><p>Jl. Kalisari Selatan No. 1 - Pakuwon City</p><p>🗓 : Sabtu, 10 Juni 2023</p><p>🕘 : Pukul 09.00 - 12.00</p><p>ditutup dengan Perayaan Ekaristi</p><p>&nbsp;</p><p>Link pendaftaran</p><p>https://linktr.ee/seminarcim</p><p>Catatan dapatkan Diskon 60% bagi Mahasiswa</p><p>&nbsp;</p><p>Informasi dan Pendaftaran :</p><p>http://wa.me/+6282141001975 isti</p><p>http://wa.me/+6281269905502 galan</p>",
+    //   excerpt: "",
+    //   imageLink:
+    //     "https://cdn.imavi.org/news~NJ9Y4LG~WhatsApp Image 2023-06-06 at 12.57.16.jpeg",
+    //   originalUrl: "https://my.imavi.org/news/gereja-berpolitik",
+    //   outlets: ["cim"],
+    //   publishDate: "2023-06-07T00:00:00.000Z",
+    //   slug: "gereja-berpolitik",
+    //   status: true,
+    //   title: "GEREJA BERPOLITIK",
+    //   _id: "ed24e6c3346263a550006c78",
+    // },
   }),
   computed: {
     news() {
@@ -160,7 +196,35 @@ export default {
       return getCurrentNews;
     },
   },
-  methods: {},
+  methods: {
+    formatDate(dateString) {
+      const dateObject = new Date(dateString);
+      const day = dateObject.getDate();
+      const month = this.formatMonthName(dateObject.getMonth() + 1);
+      const year = dateObject.getFullYear();
+
+      return `${day < 10 ? "0" : ""}${day} ${
+        month < 10 ? "0" : ""
+      }${month}, ${year}`;
+    },
+    formatMonthName(monthNumber) {
+      const monthNames = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
+      return monthNames[monthNumber - 1] || "";
+    },
+  },
   head() {
     return {
       title: this.dataheader.title,
@@ -171,11 +235,14 @@ export default {
     };
   },
   mounted() {
-    if (this.news) {
-      this.datafetch = true;
-      this.dataheader.title = this.news.header;
-      this.dataheader.desc = this.news.detail;
-    }
+    window.scrollTo({ top: 0 });
+    // console.log(this.Detail);
+    // this.NewsDetail = this.Detail;
+    // if (this.news) {
+    //   this.datafetch = true;
+    //   this.dataheader.title = this.news.header;
+    //   this.dataheader.desc = this.news.detail;
+    // }
   },
 };
 </script>
