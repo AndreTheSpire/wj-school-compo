@@ -9,16 +9,16 @@
   </v-sheet>
 </template>
 
-<script>
-// useHead({
-//   title:'Info Untuk Orang Tua TKK Wijana Jombang',
-//   meta: [
-//     { name: 'description', content: 'semua info untuk orang tua dari TKK Wijana Jombang' }
-//   ],
-//   bodyAttrs: {
-//     class: 'test'
-//   },
-// })
+<script setup>
+useHead({
+  title:'Info Untuk Orang Tua TKK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua info untuk orang tua dari TKK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
 
 definePageMeta({
   pageTransition: {

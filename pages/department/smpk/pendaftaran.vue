@@ -9,16 +9,16 @@
   </v-sheet>
 </template>
 
-<script>
-// useHead({
-//   title:'Pendaftaran SMPK Wijana Jombang',
-//   meta: [
-//     { name: 'description', content: 'semua tentang pendaftaran di SMPK Wijana Jombang' }
-//   ],
-//   bodyAttrs: {
-//     class: 'test'
-//   },
-// })
+<script setup>
+useHead({
+  title:'Pendaftaran SMPK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua tentang pendaftaran di SMPK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
 
 definePageMeta({
   pageTransition: {

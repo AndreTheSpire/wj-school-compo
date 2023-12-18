@@ -13,13 +13,21 @@
       <v-col cols="6" sm="6" md="3" lg="3" class="footer-content-item">
         <div class="footer-item-header">Tautan Cepat</div>
         <div class="footer-item-text">
-          <NuxtLink class="tautan-cepat-item" :to="'/department/tkk'">TKK</NuxtLink>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/tkk'"
+            >TKK</NuxtLink
+          >
           <br />
-          <NuxtLink class="tautan-cepat-item" :to="'/department/sdk'">SDK</NuxtLink>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/sdk'"
+            >SDK</NuxtLink
+          >
           <br />
-          <NuxtLink class="tautan-cepat-item" :to="'/department/smpk'">SMPK</NuxtLink>
+          <NuxtLink class="tautan-cepat-item" :to="'/department/smpk'"
+            >SMPK</NuxtLink
+          >
           <br />
-           <NuxtLink class="tautan-cepat-item" :to="'/contactus'">Hubungi Kami</NuxtLink>
+          <NuxtLink class="tautan-cepat-item" :to="'/contactus'"
+            >Hubungi Kami</NuxtLink
+          >
           <br />
           <span class="tautan-cepat-item" @click="navigatefooter(4)"
             >Kebijakan Kerahasiaan</span
@@ -74,31 +82,23 @@
   </v-footer>
 </template>
 
-
-<script>
-export default {
-  data() {
-    return {
-    };
-  
-  },
-  methods:{
-    navigatefooter(index){
-      if(index==0){
-        this.$router.push("/department/tkk");
-      }
-      else if(index==1){
-        this.$router.push("/department/sdk");
-      }
-       else if(index==2){
-        this.$router.push("/department/smpk");
-      }
-       else if(index==3){
-        this.$router.push("/contactus");
-      }
-    }
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const data = reactive({});
+function navigatefooter(index) {
+  if (index == 0) {
+    router.push("/department/tkk");
+  } else if (index == 1) {
+    router.push("/department/sdk");
+  } else if (index == 2) {
+    router.push("/department/smpk");
+  } else if (index == 3) {
+    router.push("/contactus");
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

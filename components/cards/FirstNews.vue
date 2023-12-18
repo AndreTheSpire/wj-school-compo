@@ -30,16 +30,19 @@
   </v-hover>
 </template>
 
-<script>
-export default {
-  data: () => ({}),
-  props: {
-    news: Object,
-  },
-  methods: {
-    
-  },
-};
+
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const autoplay = reactive({
+  delay: 4000,
+  disableOnInteraction: false,
+});
+const props = defineProps({
+  news: Object,
+});
 </script>
 
 <style lang="scss" scoped>

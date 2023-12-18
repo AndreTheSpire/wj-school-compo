@@ -10,18 +10,14 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  props: {
-    navigations: Array,
-    navigatepage: Function,
-  },
-  methods: {
-    navigate(url) {
-      this.navigatepage(url);
-    },
-  },
-};
+<script setup>
+const props = defineProps({
+  navigations: Array,
+  navigatepage: Function,
+});
+function navigate(url) {
+  props.navigatepage(url);
+}
 </script>
 
 <style lang="scss" scoped>

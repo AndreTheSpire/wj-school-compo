@@ -30,165 +30,173 @@
   </v-sheet>
 </template>
 
-<script>
-import { NewsStore } from "../stores/newsstore";
-export default {
-  data: () => ({
-    blocktext:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aspernatur tempore ducimus nemo voluptas, omnis, optio! Illo unde enim odio tempora deserunt provident autem repellat voluptatum distinctio architecto! Animi, veritatis.",
-    headerimg: [
-      {
-        nama: "slide1",
-        urlimg: "/img/media/slidehome/slide1.jpg",
-      },
-      {
-        nama: "slide2",
-        urlimg: "/img/media/slidehome/slide2.jpg",
-      },
-      {
-        nama: "slide3",
-        urlimg: "/img/media/slidehome/slide3.jpg",
-      },
-      {
-        nama: "slide4",
-        urlimg: "/img/media/slidehome/slide4.jpg",
-      },
-      {
-        nama: "slide5",
-        urlimg: "/img/media/slidehome/slide5.jpg",
-      },
-      {
-        nama: "slide6",
-        urlimg: "/img/media/slidehome/slide6.jpg",
-      },
-    ],
-    gukar: [
-      {
-        nama: "ANISA PURWANINGSIH, S.Pd",
-        jabatan: "GURU KELAS V-A",
-        imgurl: "/img/gukar/sdk/Anisa_Purwaningsih_S_pd.jpg",
-      },
-      {
-        nama: "ARIES KRISTYANTO, S.Pd",
-        jabatan: "Kepala Sekolah",
-        imgurl: "/img/gukar/sdk/Aries_Kristyanto_SPd.jpg",
-      },
-      {
-        nama: "ARIS SETIYAWAN.",
-        jabatan: "STAFF TATA USAHA",
-        imgurl: "/img/gukar/sdk/Aris_Setiyawan.jpg",
-      },
-      {
-        nama: "BENEDICTA BANJARIANI, S.Pd",
-        jabatan: "GURU KELAS II",
-        imgurl: "/img/gukar/sdk/Benedicta_Banjariani_S_pd_0mCaWmt.jpg",
-      },
-      {
-        nama: "BETTY APPRIN ANDARI",
-        jabatan: "PEMBANTU UMUM",
-        imgurl: "/img/gukar/sdk/BM_Pujiani.jpg",
-      },
-      {
-        nama: "C.B SAMIDI",
-        jabatan: "GURU BAHASA JAWA",
-        imgurl: "/img/gukar/sdk/CB_Samidi.jpg",
-      },
-      {
-        nama: "FITA RINA SURYANI",
-        jabatan: "STAFF TATA USAHA",
-        imgurl: "/img/gukar/sdk/Fita_Rina_Suryani.jpg",
-      },
-      {
-        nama: "KUSHARYANTI",
-        jabatan: "PETUGAS UKS",
-        imgurl: "/img/gukar/sdk/Kusharyanti.jpg",
-      },
-      {
-        nama: "MUJIB HARIADI, S.Pd",
-        jabatan: "GURU KELAS IV",
-        imgurl: "/img/gukar/sdk/Mujib_Hariadi_S_pd.jpg",
-      },
-      {
-        nama: "NANING WINARSIH",
-        jabatan: "PETUGAS PERPUSTAKAAN",
-        imgurl: "/img/gukar/sdk/Naning_Winarsih.jpg",
-      },
-      {
-        nama: "PRASOJO ADI WIBOWO, S.Pd",
-        jabatan: "GURU PENDIDIKAN AGAMA",
-        imgurl: "/img/gukar/sdk/Prasojo_Adi_Wibowo_S_pd.jpg",
-      },
-      {
-        nama: "SANTHA NUGRAHENI, S.Pd",
-        jabatan: "GURU KELAS 3-B",
-        imgurl: "/img/gukar/sdk/Santha_Nugraheni_S_pd.jpg",
-      },
-      {
-        nama: "SULISWANTO, S.Pd",
-        jabatan: "GURU KELAS V-B",
-        imgurl: "/img/gukar/sdk/Suliswanto_S_pd.jpg",
-      },
-      {
-        nama: "VINA ANDERITA, S.Pd",
-        jabatan: "GURU KELAS VI",
-        imgurl: "/img/gukar/sdk/Vina_Anderita_S_pd.jpg",
-      },
-      {
-        nama: "YOHANES AGUS PRASETYO, S.Pd",
-        jabatan: "GURU PENJASKES",
-        imgurl: "/img/gukar/sdk/Yohanes_Agus_Prasetyo_S_pd_RfbCH91.jpg",
-      },
-    ],
-    navigations: [
-      {
-        text: "TENTANG KAMI",
-        url: "/department/sdk/about",
-      },
-      {
-        text: "PROGRAM",
-        url: "/department/sdk/program",
-      },
-      {
-        text: "PENDAFTARAN",
-        url: "/department/sdk/pendaftaran",
-      },
-      {
-        text: "UNTUK ORANG TUA",
-        url: "/department/sdk/orangtua",
-      },
-      {
-        text: "BERITA",
-        url: "/department/sdk",
-      },
-    ],
-  }),
-  computed: {
-    news() {
-      const getCurrentNews = NewsStore().news.filter((x) => {
-        return x.type.toLowerCase().includes("sdk");
-      });
+<script setup>
+useHead({
+  title: "SDK Wijana Jombang",
+  meta: [{ name: "description", content: "SDK Wijana Jombang" }],
+  bodyAttrs: {
+    class: "test",
+  },
+});
 
-      return getCurrentNews;
-    },
+// definePageMeta({
+//   pageTransition: {
+//     name: "page",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0 });
+//     },
+//   },
+// });
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { NewsStore } from "../stores/newsstore";
+const newsstore = NewsStore();
+const router = useRouter();
+const route = useRoute();
+const blocktext =
+  "SDK Wijana adalah lembaga pendidikan dasar dengan sejarah 60 tahun lebih mendidik anak-anak Jombang menjadi kader Gereja dan masyarakat.";
+const headerimg = [
+  {
+    nama: "slide1",
+    urlimg: "/img/media/slidehome/slide1.jpg",
   },
-  watch: {},
-  methods: {
-    navigatenews(id) {
-      this.$router.push({
-        path: "/news/detail",
-        query: { id: id }, // Replace 123 with the actual value you want to pass
-      });
-    },
-    navigatepage(url) {
-      this.$router.push({
-        path: url, // Replace 123 with the actual value you want to pass
-      });
-    },
+  {
+    nama: "slide2",
+    urlimg: "/img/media/slidehome/slide2.jpg",
   },
-  mounted() {
-    window.scrollTo({ top: 0 });
+  {
+    nama: "slide3",
+    urlimg: "/img/media/slidehome/slide3.jpg",
   },
-};
+  {
+    nama: "slide4",
+    urlimg: "/img/media/slidehome/slide4.jpg",
+  },
+  {
+    nama: "slide5",
+    urlimg: "/img/media/slidehome/slide5.jpg",
+  },
+  {
+    nama: "slide6",
+    urlimg: "/img/media/slidehome/slide6.jpg",
+  },
+];
+const gukar = [
+  {
+    nama: "ANISA PURWANINGSIH, S.Pd",
+    jabatan: "GURU KELAS V-A",
+    imgurl: "/img/gukar/sdk/Anisa_Purwaningsih_S_pd.jpg",
+  },
+  {
+    nama: "ARIES KRISTYANTO, S.Pd",
+    jabatan: "Kepala Sekolah",
+    imgurl: "/img/gukar/sdk/Aries_Kristyanto_SPd.jpg",
+  },
+  {
+    nama: "ARIS SETIYAWAN.",
+    jabatan: "STAFF TATA USAHA",
+    imgurl: "/img/gukar/sdk/Aris_Setiyawan.jpg",
+  },
+  {
+    nama: "BENEDICTA BANJARIANI, S.Pd",
+    jabatan: "GURU KELAS II",
+    imgurl: "/img/gukar/sdk/Benedicta_Banjariani_S_pd_0mCaWmt.jpg",
+  },
+  {
+    nama: "BETTY APPRIN ANDARI",
+    jabatan: "PEMBANTU UMUM",
+    imgurl: "/img/gukar/sdk/BM_Pujiani.jpg",
+  },
+  {
+    nama: "C.B SAMIDI",
+    jabatan: "GURU BAHASA JAWA",
+    imgurl: "/img/gukar/sdk/CB_Samidi.jpg",
+  },
+  {
+    nama: "FITA RINA SURYANI",
+    jabatan: "STAFF TATA USAHA",
+    imgurl: "/img/gukar/sdk/Fita_Rina_Suryani.jpg",
+  },
+  {
+    nama: "KUSHARYANTI",
+    jabatan: "PETUGAS UKS",
+    imgurl: "/img/gukar/sdk/Kusharyanti.jpg",
+  },
+  {
+    nama: "MUJIB HARIADI, S.Pd",
+    jabatan: "GURU KELAS IV",
+    imgurl: "/img/gukar/sdk/Mujib_Hariadi_S_pd.jpg",
+  },
+  {
+    nama: "NANING WINARSIH",
+    jabatan: "PETUGAS PERPUSTAKAAN",
+    imgurl: "/img/gukar/sdk/Naning_Winarsih.jpg",
+  },
+  {
+    nama: "PRASOJO ADI WIBOWO, S.Pd",
+    jabatan: "GURU PENDIDIKAN AGAMA",
+    imgurl: "/img/gukar/sdk/Prasojo_Adi_Wibowo_S_pd.jpg",
+  },
+  {
+    nama: "SANTHA NUGRAHENI, S.Pd",
+    jabatan: "GURU KELAS 3-B",
+    imgurl: "/img/gukar/sdk/Santha_Nugraheni_S_pd.jpg",
+  },
+  {
+    nama: "SULISWANTO, S.Pd",
+    jabatan: "GURU KELAS V-B",
+    imgurl: "/img/gukar/sdk/Suliswanto_S_pd.jpg",
+  },
+  {
+    nama: "VINA ANDERITA, S.Pd",
+    jabatan: "GURU KELAS VI",
+    imgurl: "/img/gukar/sdk/Vina_Anderita_S_pd.jpg",
+  },
+  {
+    nama: "YOHANES AGUS PRASETYO, S.Pd",
+    jabatan: "GURU PENJASKES",
+    imgurl: "/img/gukar/sdk/Yohanes_Agus_Prasetyo_S_pd_RfbCH91.jpg",
+  },
+];
+const navigations = [
+  {
+    text: "TENTANG KAMI",
+    url: "/department/sdk/about",
+  },
+  {
+    text: "PROGRAM",
+    url: "/department/sdk/program",
+  },
+  {
+    text: "PENDAFTARAN",
+    url: "/department/sdk/pendaftaran",
+  },
+  {
+    text: "UNTUK ORANG TUA",
+    url: "/department/sdk/orangtua",
+  },
+  {
+    text: "BERITA",
+    url: "/department/sdk",
+  },
+];
+let news = computed(() => {
+  const getCurrentNews = newsstore.news.filter((x) => {
+    return x.type.toLowerCase().includes("smpk");
+  });
+
+  return getCurrentNews;
+});
+function navigatepage(url) {
+  router.push({
+    path: url, // Replace 123 with the actual value you want to pass
+  });
+}
+onMounted(() => {
+  window.scrollTo({ top: 0 });
+  console.log(headerimg);
+});
 </script>
 
 <style lang="scss" scoped>

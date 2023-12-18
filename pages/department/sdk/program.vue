@@ -9,16 +9,16 @@
   </v-sheet>
 </template>
 
-<script>
-// useHead({
-//   title:'Program SDK Wijana Jombang',
-//   meta: [
-//     { name: 'description', content: 'semua tentang program-program di SDK Wijana Jombang' }
-//   ],
-//   bodyAttrs: {
-//     class: 'test'
-//   },
-// })
+<script setup>
+useHead({
+  title:'Program SDK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua tentang program-program di SDK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
 
 definePageMeta({
   pageTransition: {

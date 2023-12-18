@@ -41,41 +41,30 @@
   </v-hover>
 </template>
 
-<script>
-export default {
-  data: () => ({}),
-  props: {
-    news: Object,
-  },
-  methods: {
-    formatDate(dateString) {
-      const dateObject = new Date(dateString);
-      const day = dateObject.getDate();
-      const month = this.formatMonthName(dateObject.getMonth() + 1);
-      const year = dateObject.getFullYear();
+<script setup>
+import { reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const autoplay = reactive({
+  delay: 4000,
+  disableOnInteraction: false,
+});
+const props = defineProps({
+  news: Object,
+});
+const formatDate = (dateString) => {
+  const dateObject = new Date(dateString);
+  const day = dateObject.getDate();
+  const month = formatMonthName(dateObject.getMonth() + 1);
+  const year = dateObject.getFullYear();
 
-      return `${day < 10 ? "0" : ""}${day} ${
-        month < 10 ? "0" : ""
-      }${month}, ${year}`;
-    },
-    formatMonthName(monthNumber) {
-      const monthNames = [
-        "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember",
-      ];
-      return monthNames[monthNumber - 1] || "";
-    },
-  },
+  return `${day < 10 ? '0' : ''}${day} ${month < 10 ? '0' : ''}${month}, ${year}`;
+};
+
+const formatMonthName = (monthNumber) => {
+  const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+  return monthNames[monthNumber - 1] || '';
 };
 </script>
 

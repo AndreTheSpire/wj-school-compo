@@ -4,16 +4,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({}),
-  props: {
-    blocktext: {
-      type: String,
-      default: null,
-    },
+<script setup>
+const props = defineProps({
+  blocktext: {
+    type: String,
+    default: null,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

@@ -97,20 +97,16 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  head() {
-    return {
-      title: "About TKK Wijana Jombang",
-      meta: [
-        { name: "description", content: "semua tentang TKK Wijana Jombang" },
-      ],
-      bodyAttrs: {
-        class: "test",
-      },
-    };
+<script setup>
+useHead({
+  title:'About TKK Wijana Jombang',
+  meta: [
+    { name: 'description', content: 'semua tentang TKK Wijana Jombang' }
+  ],
+  bodyAttrs: {
+    class: 'test'
   },
-};
+})
 
 definePageMeta({
   pageTransition: {

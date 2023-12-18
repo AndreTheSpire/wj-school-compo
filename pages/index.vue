@@ -203,7 +203,7 @@
   </v-sheet>
 </template>
 
-<!-- <script setup>
+<script setup>
 // Ini fungsinya apa?
 definePageMeta({
   pageTransition: {
@@ -228,43 +228,35 @@ const props = defineProps({
   bar: Number,
 });
 
-let slidepage = ref(true);
-
-const data = reactive({
-  name: "",
-  password: "",
-  hovered: false,
-  load: true,
-  slidepage: 0,
-  urlimg: "/img/media/slidehome/slide2.jpg",
-  color: "red",
-  headerimg: [
-    {
-      nama: "slide1",
-      urlimg: "/img/media/slidehome/slide1.jpg",
-    },
-    {
-      nama: "slide2",
-      urlimg: "/img/media/slidehome/slide2.jpg",
-    },
-    {
-      nama: "slide3",
-      urlimg: "/img/media/slidehome/slide3.jpg",
-    },
-    {
-      nama: "slide4",
-      urlimg: "/img/media/slidehome/slide4.jpg",
-    },
-    {
-      nama: "slide5",
-      urlimg: "/img/media/slidehome/slide5.jpg",
-    },
-    {
-      nama: "slide6",
-      urlimg: "/img/media/slidehome/slide6.jpg",
-    },
-  ],
-});
+let hovered = true;
+let load = ref(true);
+let slidepage = ref(0);
+const headerimg = [
+  {
+    nama: "slide1",
+    urlimg: "/img/media/slidehome/slide1.jpg",
+  },
+  {
+    nama: "slide2",
+    urlimg: "/img/media/slidehome/slide2.jpg",
+  },
+  {
+    nama: "slide3",
+    urlimg: "/img/media/slidehome/slide3.jpg",
+  },
+  {
+    nama: "slide4",
+    urlimg: "/img/media/slidehome/slide4.jpg",
+  },
+  {
+    nama: "slide5",
+    urlimg: "/img/media/slidehome/slide5.jpg",
+  },
+  {
+    nama: "slide6",
+    urlimg: "/img/media/slidehome/slide6.jpg",
+  },
+];
 
 if (!newsstore.alreadyfetch) {
   //dispatch function
@@ -286,20 +278,20 @@ function navigate(index) {
 }
 
 watch(
-  () => slidepage,
+  () => slidepage.value,
   (count) => {
-    load = false;
+    load.value = false;
   }
 );
 
 onMounted(() => {
   window.scrollTo({ top: 0 });
 });
-</script> -->
+</script>
 
 <!-- format scriptnya harus mengikuti yang ini, karena
 penggunaannya yang secara javascript sudah menjadi standar disini -->
-<script>
+<!-- <script>
 import { NewsStore } from "../stores/newsstore";
 export default {
   name: "Home",
@@ -340,35 +332,7 @@ export default {
       ],
     };
   },
-  async fetch() {
-    // try {
-    //   const response = await this.$axios.$get("api/stories/home-contents");
-    //   this.banners = response.banners;
-    //   this.trendingList = response.trendingList;
-    //   this.profVideos = response.profVideos;
-    //   this.majorVideos = response.majorVideos;
-    //   this.induVideos = response.induVideos;
-    //   this.poShowVideos = response.poShowVideos;
-    //   this.dualCombinations = response.dualCombinations;
-    //   const lang = this.$i18n.locale;
-    //   if (this.$cookies.get("story-profile")) {
-    //     const response2 = await this.$axios.$get(
-    //       "api/stories/profiles/home/recommendations/" + lang,
-    //       {
-    //         headers: {
-    //           Authorization:
-    //             "Bearer " + this.$cookies.get("story-profile").profileToken,
-    //         },
-    //       }
-    //     );
-    //     // console.log(response2)
-    //     this.recommendationList = response2;
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   throw error;
-    // }
-  },
+  async fetch() {},
   head() {
     return {
       title: "Home",
@@ -401,7 +365,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 @keyframes floating {

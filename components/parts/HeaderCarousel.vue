@@ -28,25 +28,23 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    load: true,
-    slidepage: 0,
-  }),
-  props: {
-    logo: {
-      type: String,
-      default: null,
-    },
-    headerimg: Array,
+<script setup>
+const props = defineProps({
+  logo: {
+    type: String,
+    default: null,
   },
-  watch: {
-    slidepage() {
-      this.load = false;
-    },
-  },
-};
+  headerimg: Array,
+});
+let load = ref(true);
+let slidepage = ref(0);
+
+watch(
+  () => slidepage.value,
+  () => {
+    load.value = false;
+  }
+);
 </script>
 
 <style lang="scss" scoped>
