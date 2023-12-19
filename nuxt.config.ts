@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         ital: [100]
       },
     },display: 'swap' 
-  }], '@pinia/nuxt'],
+  }], '@pinia/nuxt','nuxt-simple-sitemap'],
   vite: {
     define: {
       'process.env.DEBUG': false,
@@ -59,6 +59,9 @@ export default defineNuxtConfig({
       APP_SECRET: process.env.APP_SECRET,
       PARTNER: process.env.PARTNER,
     },
+  },
+  site: {
+    url: 'https://wijana.netlify.app',
   },
   hooks: {
     async 'nitro:config'(nitroConfig) {
