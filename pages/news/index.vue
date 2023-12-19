@@ -64,12 +64,7 @@ const newsstore = NewsStore();
 const router = useRouter();
 const route = useRoute();
 const runTimeConfig = useRuntimeConfig();
-const posts = await fetch("https://api.imavi.org/imavi/news/get-all", {
-  headers: {
-    Id: runTimeConfig.public.APP_ID,
-    Secret: runTimeConfig.public.APP_SECRET,
-    partner: runTimeConfig.public.PARTNER,
-  },
+const posts = await fetch("/.netlify/functions/test-view", {
   lazy: true,
 });
 const datapost = ref(await posts.json());

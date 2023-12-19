@@ -8,14 +8,18 @@ export const handler = async (event) => {
     // const data = JSON.parse(event.body);
     // const runtimeConfig = useRuntimeConfig();
     // console.log("API_Secret "+process.env.API_SECRET);
-    const url='https://datausa.io/api/data?drilldowns=Nation&measures=Population'
+    const url="https://api.imavi.org/imavi/news/get-all"
     // const requestUrl = settings.wrapUrl('evaluations/detail/' + data.templateId)
     // axios.defaults.headers.common.Id = process.env.APP_ID
     // axios.defaults.headers.common.Secret = process.env.APP_SECRET
     // axios.defaults.headers.common.Authorization = 'Bearer ' + data.profileToken
-   
     const response = await fetch(url, {
       method: 'GET',
+      headers: {
+        Id: process.env.APP_ID,
+        Secret: process.env.APP_SECRET,
+        partner: process.env.PARTNER,
+      },
    });
   const data = await response.json() ;
   // const response = await axios.get(url)
