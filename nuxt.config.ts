@@ -12,10 +12,41 @@ export default defineNuxtConfig({
     head: {
       title: 'Sekolah Wijana Jombang ',
       meta: [
-        { name: 'description', content: 'My amazing site.' }
+        { name: 'description', content: 'Website Sekolah Wijana Jombang' }
       ],
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      script: [
+        {
+          hid: "breadcrumbs-json-ld",
+          type: "application/ld+json",
+          textContent: JSON.stringify({
+            "@context": "https://wijana.netlify.app",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "TKK Wijana",
+              "item": "https://wijana.netlify.app/department/tkk"
+            }, {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "SDK Wijana",
+              "item": "https://wijana.netlify.app/department/sdk"
+            }, {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "SMPK Wijana",
+              "item": "https://wijana.netlify.app/department/smpk"
+          }, {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "News",
+            "item": "https://wijana.netlify.app/news"
+          }]
+          })
+        }
+      ]
     }
   },
   devtools: { enabled: true },
