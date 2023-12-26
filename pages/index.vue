@@ -214,19 +214,33 @@ definePageMeta({
     },
   },
 });
+const runTimeConfig = useRuntimeConfig();
+const { data: posts } = await useFetch(
+  "https://api.imavi.org/imavi/news/get-all",
+  {
+    headers: {
+      Id: runTimeConfig.public.APP_ID,
+      Secret: runTimeConfig.public.APP_SECRET,
+      partner: runTimeConfig.public.PARTNER,
+    },
+  }
+);
 
 import { onMounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { NewsStore } from "../stores/newsstore";
 
-const newsstore = NewsStore();
 const router = useRouter();
 const route = useRoute();
 
-const props = defineProps({
-  foo: { type: String, required: true },
-  bar: Number,
-});
+console.log(posts.value);
+
+// const nuxtApp = useNuxtApp();
+// if (nuxtApp.payload) {
+//   console.log("ada data dari payload");
+//   console.log(nuxtApp.payload);
+// } else {
+//   console.log("gada data di payload");
+// }
 
 let hovered = true;
 let load = ref(true);
@@ -258,12 +272,13 @@ const headerimg = [
   },
 ];
 
-if (!newsstore.alreadyfetch) {
-  //dispatch function
-}
 let news = computed(() => {
-  const getCurrentNews = newsstore.news;
-  return getCurrentNews;
+  const getCurrentNews = posts.value;
+  const indexMin = 0;
+  const indexMax = 3;
+  return getCurrentNews.filter(
+    (x, index) => index >= indexMin && index < indexMax
+  );
 });
 // biasakan kasih jarak
 

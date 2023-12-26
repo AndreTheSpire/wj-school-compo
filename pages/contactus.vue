@@ -1,21 +1,11 @@
 <template>
   <v-sheet class="d-flex justify-center">
-    <FetchStateHandler
-      v-if="pending || error"
-      :fetchpending="pending"
-      :fetcherror="error"
-      :fetchfunction="refresh"
-    />
-    <Transition name="slide-fade" mode="out-in" appear v-else>
+   
+    <Transition name="slide-fade" mode="out-in" appear>
       <div class="content-page" v-if="animate">
         <div class="page-title">CONTACT US</div>
         <div class="page-content">
-          <v-text-field
-            label="Coba Search"
-            v-model="search"
-            @input="searchdata(search)"
-          ></v-text-field>
-          <div>{{ filterpost }}</div>
+         
           <v-form class="w-100" ref="formcontact" v-model="valid">
             <InputsTextField
               v-model="name"
@@ -76,24 +66,7 @@ definePageMeta({
   pageTransition: false,
 });
 export default {
-  async setup() {
-    const {
-      pending,
-      data: posts,
-      error,
-      execute,
-      refresh,
-    } = await useFetch("https://api.imavi.org/imavi/news/get-all", {
-      headers: {
-        Id: "6163b0c663bd513e8b3b8553",
-        Secret: "2213be40-3625-4111-9b52-e828b5d335d8",
-        partner: "cim",
-      },
-      lazy: true,
-    });
-    let filterpost = posts;
-    return { pending, error, refresh, posts, filterpost };
-  },
+ 
   data: () => ({
     valid: true,
     name: "",

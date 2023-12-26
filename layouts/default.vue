@@ -1,5 +1,5 @@
 <template>
-  <v-app class="background-container" v-if="!isSSR">
+  <v-app class="background-container">
     <v-navigation-drawer
       v-model="leftdrawer"
       app
@@ -116,9 +116,7 @@ export default {
     };
   },
   computed: {
-    isSSR() {
-      return process.server;
-    },
+
   },
 
   methods: {

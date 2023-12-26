@@ -93,22 +93,45 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { NewsStore } from "../stores/newsstore";
 
-const newsstore = NewsStore();
-const router = useRouter();
 const route = useRoute();
 const runTimeConfig = useRuntimeConfig();
 
+// const nuxtApp = useNuxtApp();
+// if (nuxtApp.payload) {
+//   console.log("ada data dari payload");
+//   console.log(nuxtApp.payload);
+// } else {
+//   console.log("gada data di payload");
+// }
 const endpoint = "https://api.imavi.org/imavi/news/view/" + route.params.slug;
-const News = await fetch(endpoint, {
+const { data: News } = await useFetch(endpoint, {
   headers: {
     Id: runTimeConfig.public.APP_ID,
     Secret: runTimeConfig.public.APP_SECRET,
     partner: runTimeConfig.public.PARTNER,
   },
 });
-const NewsDetail = await News.json();
+// const { data: News, error } = await useAsyncData(
+//   `${route.params.slug}`,
+//   () =>
+//     $fetch(endpoint, {
+//       headers: {
+//         Id: runTimeConfig.public.APP_ID,
+//         Secret: runTimeConfig.public.APP_SECRET,
+//         partner: runTimeConfig.public.PARTNER,
+//       },
+//     }).catch((error) => error.data)
+//   // {
+//   //   transform: (resData) => {
+//   //     return resData.length ? resData[0] : {};
+//   //   },
+//   // }
+// );
+// console.log(News);
+
+const NewsDetail = News.value;
+console.log(NewsDetail);
 let datafetch = ref(false);
 let dataheader = reactive({
   title: "Error! News Doesnt Found",

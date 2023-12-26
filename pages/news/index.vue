@@ -58,19 +58,40 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { NewsStore } from "../stores/newsstore";
 
-const newsstore = NewsStore();
-const router = useRouter();
 const route = useRoute();
 const runTimeConfig = useRuntimeConfig();
-const posts = await fetch("/.netlify/functions/test-view", {
-  lazy: true,
-});
-const datapost = ref(await posts.json());
-let filterpost = ref(datapost.value);
-console.log("post");
-console.log(filterpost);
+
+const { data: posts } = await useFetch(
+  "https://api.imavi.org/imavi/news/get-all",
+  {
+    headers: {
+      Id: runTimeConfig.public.APP_ID,
+      Secret: runTimeConfig.public.APP_SECRET,
+      partner: runTimeConfig.public.PARTNER,
+    },
+  }
+);
+// const { data: posts, error } = await useAsyncData(`news`, () =>
+//   $fetch("https://api.imavi.org/imavi/news/get-all", {
+//     headers: {
+//       Id: runTimeConfig.public.APP_ID,
+//       Secret: runTimeConfig.public.APP_SECRET,
+//       partner: runTimeConfig.public.PARTNER,
+//     },
+//   }).catch((error) => error.data)
+// );
+// posts = fetchposts;
+console.log("data ini nongol ga ya ");
+// console.log(posts);
+// console.log(posts.value);
+// const posts = await fetch("/.netlify/functions/test-view", {
+//   lazy: true,
+// });
+const datapost = ref(posts.value);
+let filterpost = ref(posts.value);
+// console.log("post");
+// console.log(filterpost);
 let currentPage = ref(1);
 let category = ref("");
 let Sort = ref("");
@@ -105,20 +126,21 @@ let rows = computed(() => {
 let showpost = computed(() => {
   const indexMin = (currentPage.value - 1) * 5;
   const indexMax = indexMin + 5;
-
-  return filterpost.value.slice(indexMin, indexMax);
+  return filterpost.value.filter(
+    (x, index) => index >= indexMin && index < indexMax
+  );
 });
-console.log("show");
-console.log(showpost);
+// console.log("show");
+// console.log(showpost);
 
 function searchnews(word) {
   //--------Search
-  console.log("masuk" + word);
+  // console.log("masuk" + word);
   filterpost.value = datapost.value.filter(function (item) {
     return item.title.toLowerCase().includes(word.toLowerCase());
   });
-  console.log(filterpost.value);
-  console.log(showpost);
+  // console.log(filterpost.value);
+  // console.log(showpost);
 }
 function sortnews(selected) {
   if (selected) {
@@ -161,7 +183,7 @@ function sortnews(selected) {
     //   (x, index) => index >= indexMin && index < indexMax
     // );
     // this.currentPage = 1;
-    console.log(showpost);
+    // console.log(showpost);
   }
 }
 
