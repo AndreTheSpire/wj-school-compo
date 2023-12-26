@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
-  ssr:false,
+  ssr:true,
   css: ['vuetify/lib/styles/main.sass','@mdi/font/css/materialdesignicons.min.css'],
   build: {
     transpile: ['vuetify'],
@@ -102,7 +102,6 @@ export default defineNuxtConfig({
       if (nitroConfig.dev) {
         return;
       }
-
       try {
 
         const response = await fetch('https://api.imavi.org/imavi/news/get-all', {
@@ -146,11 +145,11 @@ export default defineNuxtConfig({
           if (response.ok) {
             
             const news: News[] = await response.json();
-            console.log(news);
+            // console.log(news);
             const routes2 = news.map((news) => `/news/${news.slug}`);
             nitroConfig.prerender.routes.push(...routes2);
   
-            console.log('ini routes2', routes2);
+            // console.log('ini routes2', routes2);
           } else {
             console.error('Error fetching data:', response.statusText);
           }
