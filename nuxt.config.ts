@@ -85,11 +85,9 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    public: {
-      APP_ID: process.env.APP_ID,
-      APP_SECRET: process.env.APP_SECRET,
-      PARTNER: process.env.PARTNER,
-    },
+    APP_ID: process.env.APP_ID,
+    APP_SECRET: process.env.APP_SECRET,
+    PARTNER: process.env.PARTNER,
   },
   site: {
     url: 'https://wijana.netlify.app',

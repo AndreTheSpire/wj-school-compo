@@ -66,9 +66,9 @@ const { data: posts } = await useFetch(
   "https://api.imavi.org/imavi/news/get-all",
   {
     headers: {
-      Id: runTimeConfig.public.APP_ID,
-      Secret: runTimeConfig.public.APP_SECRET,
-      partner: runTimeConfig.public.PARTNER,
+      Id: runTimeConfig.APP_ID,
+      Secret: runTimeConfig.APP_SECRET,
+      partner: runTimeConfig.PARTNER,
     },
   }
 );

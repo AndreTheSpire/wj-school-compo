@@ -106,9 +106,9 @@ const runTimeConfig = useRuntimeConfig();
 const endpoint = "https://api.imavi.org/imavi/news/view/" + route.params.slug;
 const { data: News } = await useFetch(endpoint, {
   headers: {
-    Id: runTimeConfig.public.APP_ID,
-    Secret: runTimeConfig.public.APP_SECRET,
-    partner: runTimeConfig.public.PARTNER,
+    Id: runTimeConfig.APP_ID,
+    Secret: runTimeConfig.APP_SECRET,
+    partner: runTimeConfig.PARTNER,
   },
 });
 // const { data: News, error } = await useAsyncData(
