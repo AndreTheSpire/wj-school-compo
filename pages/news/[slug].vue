@@ -62,7 +62,6 @@
             </li>
             <li>
               <a
-                href="/cdn-cgi/l/email-protection#06397573646c6365723b56564244263436343420676b763d6469627f3b71717128716f6c6768672875656e286f62296863717529767662642b3436343429"
                 ><v-icon
                   class="shareicon"
                   size="x-large"
