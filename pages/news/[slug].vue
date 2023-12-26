@@ -187,15 +187,15 @@ useHead({
   },
 });
 
-definePageMeta({
-  pageTransition: {
-    name: "slide",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0 });
-    },
-  },
-});
+// definePageMeta({
+//   pageTransition: {
+//     name: "slide",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0 });
+//     },
+//   },
+// });
 </script>
 <!-- 
 <script>

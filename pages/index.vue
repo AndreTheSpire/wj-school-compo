@@ -205,15 +205,15 @@
 
 <script setup>
 // Ini fungsinya apa?
-definePageMeta({
-  pageTransition: {
-    name: "page",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0 });
-    },
-  },
-});
+// definePageMeta({
+//   pageTransition: {
+//     name: "page",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0 });
+//     },
+//   },
+// });
 const runTimeConfig = useRuntimeConfig();
 const { data: posts } = await useFetch(
   "https://api.imavi.org/imavi/news/get-all",

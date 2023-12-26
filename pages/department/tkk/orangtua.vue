@@ -20,15 +20,15 @@ useHead({
   },
 })
 
-definePageMeta({
-  pageTransition: {
-    name: "page",
-    mode: "out-in",
-    onBeforeEnter: (el) => {
-      window.scrollTo({ top: 0});
-    },
-  },
-});
+// definePageMeta({
+//   pageTransition: {
+//     name: "page",
+//     mode: "out-in",
+//     onBeforeEnter: (el) => {
+//       window.scrollTo({ top: 0});
+//     },
+//   },
+// });
 </script>
 <style lang="scss" scoped>
 p {
