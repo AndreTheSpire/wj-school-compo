@@ -197,9 +197,9 @@ useHead({
   },
 });
 
-definePageMeta({
-  pageTransition: false,
-});
+// definePageMeta({
+//   pageTransition: false,
+// });
 </script>
 
 <style lang="scss" scoped>

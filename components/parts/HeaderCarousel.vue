@@ -36,15 +36,17 @@ const props = defineProps({
   },
   headerimg: Array,
 });
-let load = ref(true);
+
 let slidepage = ref(0);
 
-watch(
-  () => slidepage.value,
-  () => {
-    load.value = false;
+let load = computed(() => {
+  const index = slidepage.value;
+  if (index == 0) {
+    return true;
+  } else {
+    return false;
   }
-);
+});
 </script>
 
 <style lang="scss" scoped>

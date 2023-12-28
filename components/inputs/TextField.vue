@@ -114,7 +114,6 @@ export default {
       dataMessages: [],
       telObject: null,
       state: "default",
-      inputValue: "",
       inputOptions: {
         // Untuk vue-tel-input: https://iamstevendao.github.io/vue-tel-input/documentation/props.html
         id: "username",
@@ -130,20 +129,32 @@ export default {
       this.inputfunc(this.inputValue);
     },
   },
-  watch: {
-    inputValue() {
-      this.$emit("update:modelValue", this.inputValue);
-      if (this.type == "selected" && this.name == "selectedsort") {
-        this.inputfunc(this.inputValue);
-      }
-      if (this.type == "field" && this.name == "search") {
-        this.inputfunc(this.inputValue);
-      }
-    },
-    value() {
-      this.inputValue = this.value;
-    },
-  },
+  // computed: {
+  //   inputValue() {
+  //     this.$emit("update:modelValue", this.inputValue);
+  //     if (this.type == "selected" && this.name == "selectedsort") {
+  //       this.inputfunc(this.inputValue);
+  //     }
+  //     if (this.type == "field" && this.name == "search") {
+  //       this.inputfunc(this.inputValue);
+  //     }
+  //     return this.value;
+  //   },
+  // },
+  // watch: {
+  //   inputValue() {
+  //     this.$emit("update:modelValue", this.inputValue);
+  //     if (this.type == "selected" && this.name == "selectedsort") {
+  //       this.inputfunc(this.inputValue);
+  //     }
+  //     if (this.type == "field" && this.name == "search") {
+  //       this.inputfunc(this.inputValue);
+  //     }
+  //   },
+  //   value() {
+  //     this.inputValue = this.value;
+  //   },
+  // },
   mounted() {
     this.inputValue = this.initialValue;
   },

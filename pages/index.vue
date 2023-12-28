@@ -243,7 +243,6 @@ console.log(posts.value);
 // }
 
 let hovered = true;
-let load = ref(true);
 let slidepage = ref(0);
 const headerimg = [
   {
@@ -280,6 +279,14 @@ let news = computed(() => {
     (x, index) => index >= indexMin && index < indexMax
   );
 });
+let load = computed(() => {
+  const index = slidepage.value;
+  if (index == 0) {
+    return true;
+  } else {
+    return false;
+  }
+});
 // biasakan kasih jarak
 
 function navigate(index) {
@@ -291,13 +298,6 @@ function navigate(index) {
     router.push("/department/smpk");
   }
 }
-
-watch(
-  () => slidepage.value,
-  (count) => {
-    load.value = false;
-  }
-);
 
 onMounted(() => {
   window.scrollTo({ top: 0 });
@@ -374,11 +374,7 @@ export default {
   mounted() {
     window.scrollTo({ top: 0 });
   },
-  watch: {
-    slidepage() {
-      this.load = false;
-    },
-  },
+ 
 };
 </script> -->
 

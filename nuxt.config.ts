@@ -8,7 +8,6 @@ interface News {
 export default defineNuxtConfig({
   
   app: {
-    pageTransition: false,
     head: {
       title: 'Sekolah Wijana Jombang ',
       meta: [
