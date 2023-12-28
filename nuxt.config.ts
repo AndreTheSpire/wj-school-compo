@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Sekolah Wijana Jombang ',
       meta: [
-        { name: 'description', content: 'Website Sekolah Wijana Jombang' },
+        { name: 'description', content: 'Website dari Sekolah Wijana Jombang' },
         { name:"google-site-verification",content:"vRnUy77AhYqAB8odewZk1cfYkEOJeOO89ng2hc83mrg"}
       ],
       charset: 'utf-8',
