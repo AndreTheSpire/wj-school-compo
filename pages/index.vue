@@ -204,6 +204,55 @@
 </template>
 
 <script setup>
+useHead({
+  title: "Sekolah Wijana Jombang ",
+  meta: [
+    { name: "description", content: "Website Sekolah Wijana Jombang" },
+    { property: "og:image", content: "/slide1.jpg" },
+    {
+      name: "google-site-verification",
+      content: "vRnUy77AhYqAB8odewZk1cfYkEOJeOO89ng2hc83mrg",
+    },
+  ],
+  charset: "utf-8",
+  viewport: "width=device-width, initial-scale=1",
+  script: [
+    {
+      hid: "breadcrumbs-json-ld",
+      type: "application/ld+json",
+      textContent: JSON.stringify({
+        "@context": "https://wijana.netlify.app",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "TKK Wijana",
+            item: "https://wijana.netlify.app/department/tkk",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "SDK Wijana",
+            item: "https://wijana.netlify.app/department/sdk",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "SMPK Wijana",
+            item: "https://wijana.netlify.app/department/smpk",
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: "News",
+            item: "https://wijana.netlify.app/news",
+          },
+        ],
+      }),
+    },
+  ],
+});
 // Ini fungsinya apa?
 // definePageMeta({
 //   pageTransition: {
