@@ -9,10 +9,26 @@ export default defineNuxtConfig({
   
   app: {
     head: {
-      title: 'Sekolah Wijana Jombang ',
+      title: 'Sekolah Wijana Jombang',
       meta: [
         { name: 'description', content: 'Website dari Sekolah Wijana Jombang' },
-        { name:"google-site-verification",content:"vRnUy77AhYqAB8odewZk1cfYkEOJeOO89ng2hc83mrg"}
+        { name:"google-site-verification",content:"vRnUy77AhYqAB8odewZk1cfYkEOJeOO89ng2hc83mrg"},
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: 'Sekolah Wijana Jombang',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `/slide1.jpg`,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Website dari Sekolah Wijana Jombang',
+        },
+        
       ],
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
