@@ -15,7 +15,7 @@
         </v-card-title>
         <v-divider thickness="4" color="red"> </v-divider>
 
-        <div class=" d-flex news-content">
+        <div class="d-flex news-content">
           <div class="pr-0">
             <v-img
               :src="news.imageLink"
@@ -24,7 +24,7 @@
               cover
             ></v-img>
           </div>
-          <div class="px-0">
+          <div class="px-0" style="width: 100vw">
             <v-card-text class="news-title py-0">
               {{ news.title }}
             </v-card-text>
@@ -59,12 +59,27 @@ const formatDate = (dateString) => {
   const month = formatMonthName(dateObject.getMonth() + 1);
   const year = dateObject.getFullYear();
 
-  return `${day < 10 ? '0' : ''}${day} ${month < 10 ? '0' : ''}${month}, ${year}`;
+  return `${day < 10 ? "0" : ""}${day} ${
+    month < 10 ? "0" : ""
+  }${month}, ${year}`;
 };
 
 const formatMonthName = (monthNumber) => {
-  const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-  return monthNames[monthNumber - 1] || '';
+  const monthNames = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+  return monthNames[monthNumber - 1] || "";
 };
 </script>
 
