@@ -23,12 +23,12 @@
       </div>
       <div class="page-content">
         <v-card class="mx-auto card-news" width="100%" flat>
-          <v-card-title class="d-flex justify-space-between news-head">
+          <div class="d-flex justify-space-between news-head pb-4">
             <div class="news-tag">Pengumuman</div>
             <div class="news-date d-flex align-center">
               {{ formatDate(NewsDetail.publishDate) }}
             </div>
-          </v-card-title>
+          </div>
           <div class="d-flex flex-column justify-center align-center">
             <v-divider thickness="4" color="red"> </v-divider>
             <FancyBox :options="{}">
@@ -48,9 +48,10 @@
             </FancyBox>
           </div>
           <div class="news-content">
-            <v-card-text class="news-detail">
-              <div v-dompurify-html="NewsDetail.content"></div>
-            </v-card-text>
+            <div
+              class="news-detail"
+              v-dompurify-html="NewsDetail.content"
+            ></div>
           </div>
         </v-card>
       </div>
