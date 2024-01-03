@@ -1,74 +1,76 @@
 <template>
-  <label
-    v-if="label"
-    class="paragraph-normal text-label weight--600"
-    :for="name"
-    >{{ label }}</label
-  >
-  <v-text-field
-    ref="input"
-    v-if="type == 'password'"
-    v-model="inputValue"
-    hide-details
-    :name="name"
-    :placeholder="placeholder"
-    variant="outlined"
-    class="paragraph-normal my-2 text-input"
-    :type="!showText && type === 'password' ? 'password' : 'text'"
-    :append-inner-icon="showText ? 'mdi-eye' : 'mdi-eye-off'"
-    prepend-inner-icon="mdi-lock"
-    @click:append-inner="showText = !showText"
-  />
+  <div>
+    <label
+      v-if="label"
+      class="paragraph-normal text-label weight--600"
+      :for="name"
+      >{{ label }}</label
+    >
+    <v-text-field
+      ref="input"
+      v-if="type == 'password'"
+      v-model="inputValue"
+      hide-details
+      :name="name"
+      :placeholder="placeholder"
+      variant="outlined"
+      class="paragraph-normal my-2 text-input"
+      :type="!showText && type === 'password' ? 'password' : 'text'"
+      :append-inner-icon="showText ? 'mdi-eye' : 'mdi-eye-off'"
+      prepend-inner-icon="mdi-lock"
+      @click:append-inner="showText = !showText"
+    />
 
-  <v-textarea
-    v-else-if="type == 'areafield'"
-    v-model="inputValue"
-    :name="name"
-    variant="outlined"
-    auto-grow
-    rows="2"
-    :placeholder="placeholder"
-    :rules="[rules.required]"
-    class="paragraph-normal my-2 text-input"
-  >
-  </v-textarea>
-  <v-select
-    v-else-if="type == 'selected'"
-    v-model="inputValue"
-    :items="selectitems"
-    density="compact"
-    label="Select"
-    item-title="state"
-    item-value="value"
-    variant="outlined"
-    @input="this.doparentfunc()"
-    return-object
-    :rules="name == 'selectedemail' ? [rules.required] : ''"
-    single-line
-    :error="false"
-    :hint="false"
-  ></v-select>
+    <v-textarea
+      v-else-if="type == 'areafield'"
+      v-model="inputValue"
+      :name="name"
+      variant="outlined"
+      auto-grow
+      rows="2"
+      :placeholder="placeholder"
+      :rules="[rules.required]"
+      class="paragraph-normal my-2 text-input"
+    >
+    </v-textarea>
+    <v-select
+      v-else-if="type == 'selected'"
+      v-model="inputValue"
+      :items="selectitems"
+      density="compact"
+      label="Select"
+      item-title="state"
+      item-value="value"
+      variant="outlined"
+      @input="this.doparentfunc()"
+      return-object
+      :rules="name == 'selectedemail' ? [rules.required] : ''"
+      single-line
+      :error="false"
+      :hint="false"
+    ></v-select>
 
-  <v-file-input
-    v-else-if="type == 'upload'"
-    v-model="inputValue"
-    :name="name"
-    variant="outlined"
-    :placeholder="placeholder"
-    class="paragraph-normal my-2 text-input"
-  ></v-file-input>
-  <v-text-field
-    ref="input"
-    v-else
-    v-model="inputValue"
-    :name="name"
-    variant="outlined"
-    density="compact"
-    :rules="name != 'search' ? [rules.required] : ''"
-    :placeholder="placeholder"
-    class="paragraph-normal text-input"
-  >
-  </v-text-field>
+    <v-file-input
+      v-else-if="type == 'upload'"
+      v-model="inputValue"
+      :name="name"
+      variant="outlined"
+      :placeholder="placeholder"
+      class="paragraph-normal my-2 text-input"
+    ></v-file-input>
+    <v-text-field
+      ref="input"
+      v-else
+      v-model="inputValue"
+      :name="name"
+      variant="outlined"
+      density="compact"
+      :rules="name != 'search' ? [rules.required] : ''"
+      :placeholder="placeholder"
+      class="paragraph-normal text-input"
+    >
+    </v-text-field>
+  </div>
 </template>
 
 <script>
@@ -100,7 +102,6 @@ export default {
       default: null,
     },
     inputfunc: Function,
-
     value: {
       type: String,
       default: "",
@@ -114,6 +115,7 @@ export default {
       dataMessages: [],
       telObject: null,
       state: "default",
+      inputValue: "",
       inputOptions: {
         // Untuk vue-tel-input: https://iamstevendao.github.io/vue-tel-input/documentation/props.html
         id: "username",
@@ -129,34 +131,27 @@ export default {
       this.inputfunc(this.inputValue);
     },
   },
-  // computed: {
-  //   inputValue() {
-  //     this.$emit("update:modelValue", this.inputValue);
-  //     if (this.type == "selected" && this.name == "selectedsort") {
-  //       this.inputfunc(this.inputValue);
-  //     }
-  //     if (this.type == "field" && this.name == "search") {
-  //       this.inputfunc(this.inputValue);
-  //     }
-  //     return this.value;
-  //   },
-  // },
-  // watch: {
-  //   inputValue() {
-  //     this.$emit("update:modelValue", this.inputValue);
-  //     if (this.type == "selected" && this.name == "selectedsort") {
-  //       this.inputfunc(this.inputValue);
-  //     }
-  //     if (this.type == "field" && this.name == "search") {
-  //       this.inputfunc(this.inputValue);
-  //     }
-  //   },
-  //   value() {
-  //     this.inputValue = this.value;
-  //   },
-  // },
+  watch: {
+    inputValue() {
+      this.$emit("update:modelValue", this.inputValue);
+      if (this.type == "selected" && this.name == "selectedsort") {
+        this.inputfunc(this.inputValue);
+      }
+      if (this.type == "field" && this.name == "search") {
+        this.inputfunc(this.inputValue);
+      }
+    },
+    value() {
+      this.inputValue = this.value;
+    },
+  },
   mounted() {
     this.inputValue = this.initialValue;
+    if (this.type == "selected" && this.name == "selectedsort") {
+      this.inputValue = { state: "Terbaru", value: 3 };
+    } else if (this.type == "selected" && this.name == "selectedcategory") {
+      this.inputValue = { state: "Semua kategori", value: 1 };
+    }
   },
 };
 </script>

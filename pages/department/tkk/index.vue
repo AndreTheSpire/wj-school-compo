@@ -141,12 +141,31 @@ const navigations = [
     url: "/department/tkk",
   },
 ];
-let news = computed(() => {
-  const getCurrentNews = newsstore.news.filter((x) => {
-    return x.type.toLowerCase().includes("smpk");
-  });
+const runTimeConfig = useRuntimeConfig();
+const { data: posts } = await useFetch(
+  "https://api.imavi.org/imavi/news/get-all",
+  {
+    headers: {
+      Id: runTimeConfig.APP_ID,
+      Secret: runTimeConfig.APP_SECRET,
+      partner: runTimeConfig.PARTNER,
+    },
+  }
+);
+// let news = computed(() => {
+//   const getCurrentNews = newsstore.news.filter((x) => {
+//     return x.type.toLowerCase().includes("smpk");
+//   });
 
-  return getCurrentNews;
+//   return getCurrentNews;
+// });
+let news = computed(() => {
+  const getCurrentNews = posts.value;
+  const indexMin = 0;
+  const indexMax = 3;
+  return getCurrentNews.filter(
+    (x, index) => index >= indexMin && index < indexMax
+  );
 });
 function navigatepage(url) {
   router.push({

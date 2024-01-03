@@ -12,7 +12,7 @@
   <v-sheet class="d-flex justify-center">
     <div class="content-news">
       <PartsBlockText :blocktext="blocktext"></PartsBlockText>
-      <div class="section-page" v-if="news.size > 0">
+      <div class="section-page">
         <div class="section-title">Berita Terkini</div>
         <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
@@ -82,6 +82,18 @@ const headerimg = [
     urlimg: "/img/media/slidehome/slide6.jpg",
   },
 ];
+const runTimeConfig = useRuntimeConfig();
+const { data: posts } = await useFetch(
+  "https://api.imavi.org/imavi/news/get-all",
+  {
+    headers: {
+      Id: runTimeConfig.APP_ID,
+      Secret: runTimeConfig.APP_SECRET,
+      partner: runTimeConfig.PARTNER,
+    },
+  }
+);
+
 const gukar = [
   {
     nama: "ANISA PURWANINGSIH, S.Pd",
@@ -181,12 +193,20 @@ const navigations = [
     url: "/department/sdk",
   },
 ];
-let news = computed(() => {
-  const getCurrentNews = newsstore.news.filter((x) => {
-    return x.type.toLowerCase().includes("smpk");
-  });
+// let news = computed(() => {
+//   const getCurrentNews = newsstore.news.filter((x) => {
+//     return x.type.toLowerCase().includes("smpk");
+//   });
 
-  return getCurrentNews;
+//   return getCurrentNews;
+// });
+let news = computed(() => {
+  const getCurrentNews = posts.value;
+  const indexMin = 0;
+  const indexMax = 3;
+  return getCurrentNews.filter(
+    (x, index) => index >= indexMin && index < indexMax
+  );
 });
 function navigatepage(url) {
   router.push({

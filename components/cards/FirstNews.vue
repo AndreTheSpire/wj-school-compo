@@ -14,14 +14,15 @@
           </div>
         </v-card-title>
         <v-divider thickness="4" color="red"> </v-divider>
-        <v-img :src="news.imgurl" height="200px" cover></v-img>
+        <v-img :src="news.imageLink" height="200px" cover></v-img>
         <div class="news-content">
           <v-card-text class="news-title">
-            {{ news.header }}
+            {{ news.title }}
           </v-card-text>
 
           <v-card-text class="news-detail">
-            {{ news.detail }}
+            <!-- <p v-dompurify-html="news.content"></p> -->
+            <div class="text-content" v-dompurify-html="news.content"></div>
           </v-card-text>
           <v-card-subtitle class="news-read-more"> Lihat </v-card-subtitle>
         </div>
@@ -29,7 +30,6 @@
     </v-card>
   </v-hover>
 </template>
-
 
 <script setup>
 import { reactive, ref } from "vue";
@@ -46,6 +46,13 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+.text-content {
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
 .news-head {
   padding: 0.15rem 0.25rem 0.25rem;
 }

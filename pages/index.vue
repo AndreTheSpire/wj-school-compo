@@ -208,8 +208,8 @@ useHead({
   title: "Sekolah Wijana Jombang ",
   meta: [
     { name: "description", content: "Website dari Sekolah Wijana Jombang" },
-    { hid:"image", property: "image", content: "/slide1.jpg" },
-    { hid:"og:image", property: "og:image", content: "/slide1.jpg" },
+    { hid: "image", property: "image", content: "/slide1.jpg" },
+    { hid: "og:image", property: "og:image", content: "/slide1.jpg" },
     {
       name: "google-site-verification",
       content: "vRnUy77AhYqAB8odewZk1cfYkEOJeOO89ng2hc83mrg",
@@ -284,13 +284,7 @@ const route = useRoute();
 
 console.log(posts.value);
 
-// const nuxtApp = useNuxtApp();
-// if (nuxtApp.payload) {
-//   console.log("ada data dari payload");
-//   console.log(nuxtApp.payload);
-// } else {
-//   console.log("gada data di payload");
-// }
+
 
 let hovered = true;
 let slidepage = ref(0);
@@ -461,6 +455,7 @@ export default {
   animation-timing-function: ease-in-out;
 }
 .section-page {
+  max-width: 1000px;
   padding: 2rem;
 }
 .section-title {

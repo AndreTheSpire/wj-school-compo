@@ -5,17 +5,17 @@
         <ul class="breadcrumbs">
           <li><NuxtLink :to="`/`">HOME</NuxtLink></li>
           <li><a> / </a></li>
-          <li><b>NEWS</b></li>
+          <li><b>BERITA</b></li>
         </ul>
       </div>
-      <div class="page-title">NEWS</div>
+      <div class="page-title">BERITA</div>
       <div class="page-content">
         <v-row class="pa-4">
           <v-col>
             <InputsTextField
               v-model="category"
               :selectitems="categoryitem"
-              label="Category"
+              label="Kategori"
               name="selectedcategory"
               type="selected"
               placeholder=""
@@ -25,7 +25,7 @@
             <InputsTextField
               v-model="Sort"
               :selectitems="sortitem"
-              label="Sort"
+              label="Urutan"
               name="selectedsort"
               type="selected"
               :inputfunc="sortnews"
@@ -35,7 +35,7 @@
           <v-col>
             <InputsTextField
               v-model="Search"
-              label="Search"
+              label="Cari"
               name="search"
               type="field"
               placeholder="ketik Untuk Mencari"
@@ -97,16 +97,16 @@ let category = ref("");
 let Sort = ref("");
 let Search = ref("");
 const categoryitem = [
-  { state: "All Category", value: 1 },
+  { state: "Semua Category", value: 1 },
   { state: "Pencapaian", value: 2 },
   { state: "Kejadian", value: 3 },
   { state: "Pengumuman", value: 4 },
 ];
 const sortitem = [
-  { state: "Title A-Z", value: 1 },
-  { state: "Title Z-A", value: 2 },
-  { state: "Latest Date", value: 3 },
-  { state: "Oldest Date", value: 4 },
+  { state: "judul A-Z", value: 1 },
+  { state: "Judul Z-A", value: 2 },
+  { state: "Terbaru", value: 3 },
+  { state: "Terlama", value: 4 },
 ];
 let datafetch = ref(false);
 let dataheader = reactive({
@@ -134,13 +134,9 @@ let showpost = computed(() => {
 // console.log(showpost);
 
 function searchnews(word) {
-  //--------Search
-  // console.log("masuk" + word);
   filterpost.value = datapost.value.filter(function (item) {
     return item.title.toLowerCase().includes(word.toLowerCase());
   });
-  // console.log(filterpost.value);
-  // console.log(showpost);
 }
 function sortnews(selected) {
   if (selected) {

@@ -15,16 +15,16 @@
         </v-card-title>
         <v-divider thickness="4" color="red"> </v-divider>
 
-        <v-row class="news-content">
-          <v-col sm="1" cols="3" class="pr-0">
+        <div class=" d-flex news-content">
+          <div class="pr-0">
             <v-img
               :src="news.imageLink"
               height="65px"
               width="65px"
               cover
             ></v-img>
-          </v-col>
-          <v-col sm="11" cols="9" class="px-0">
+          </div>
+          <div class="px-0">
             <v-card-text class="news-title py-0">
               {{ news.title }}
             </v-card-text>
@@ -34,8 +34,8 @@
               <div class="text-content" v-dompurify-html="news.content"></div>
             </v-card-text>
             <v-card-text class="news-read-more"> Lihat </v-card-text>
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </NuxtLink>
     </v-card>
   </v-hover>

@@ -10,7 +10,7 @@
         <ul class="breadcrumbs">
           <li><a href="/" to="/">HOME</a></li>
           <li><a> / </a></li>
-          <li><a href="/news">NEWS</a></li>
+          <li><a href="/news">BERITA</a></li>
           <li><a> / </a></li>
           <li>
             <b>{{ NewsDetail.title }}</b>
@@ -37,13 +37,19 @@
                   :src="NewsDetail.imageLink"
                   max-width="768px"
                   cover
+                  style="
+                    max-height: 300px;
+                    max-width: 960px;
+                    width: 100vw;
+                    object-fit: cover;
+                  "
                 /><img />
               </a>
             </FancyBox>
           </div>
           <div class="news-content">
             <v-card-text class="news-detail">
-              <p v-dompurify-html="NewsDetail.content"></p>
+              <div v-dompurify-html="NewsDetail.content"></div>
             </v-card-text>
           </div>
         </v-card>
@@ -55,17 +61,12 @@
             <li>
               <a
                 href="https://www.facebook.com/sharer.php?u=www.wijana.sch.id/news/ppdb-2022/"
-                ><v-icon class="shareicon" size="x-large"
-                  >mdi-facebook</v-icon
-                ></a
+                ><v-icon class="shareicon" size="40">mdi-facebook</v-icon></a
               >
             </li>
             <li>
               <a
-                ><v-icon
-                  class="shareicon"
-                  size="x-large"
-                  @click="navigateshare(2)"
+                ><v-icon class="shareicon" size="40" @click="navigateshare(2)"
                   >mdi-email</v-icon
                 >
               </a>
@@ -73,11 +74,7 @@
             <li>
               <a
                 href="https://wa.me/?text=%2APPDB%202022%2A%0A%20_Menerima%20peserta%20didik%20baru%202022_%0A%0Ahttps%3A%2F%2Fwww.wijana.sch.id/news/ppdb-2022/"
-                ><v-icon
-                  class="shareicon"
-                  size="x-large"
-                  @click="navigateshare(3)"
-                >
+                ><v-icon class="shareicon" size="40" @click="navigateshare(3)">
                   mdi-whatsapp</v-icon
                 ></a
               >
