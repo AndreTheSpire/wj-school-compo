@@ -11,7 +11,7 @@
       <div class="page-title">BERITA</div>
       <div class="page-content">
         <v-row class="pa-4">
-          <v-col>
+          <v-col cols="6" sm="4">
             <InputsTextField
               v-model="category"
               :selectitems="categoryitem"
@@ -21,7 +21,7 @@
               placeholder=""
             />
           </v-col>
-          <v-col>
+          <v-col cols="6" sm="4">
             <InputsTextField
               v-model="Sort"
               :selectitems="sortitem"
@@ -32,7 +32,7 @@
               placeholder=""
             />
           </v-col>
-          <v-col>
+          <v-col cols="12" sm="4">
             <InputsTextField
               v-model="Search"
               label="Cari"
