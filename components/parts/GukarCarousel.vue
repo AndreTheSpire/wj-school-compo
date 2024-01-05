@@ -130,7 +130,7 @@ const modules = [Pagination, Navigation, Autoplay];
   margin: 0px;
 }
 .img-swiper {
-  height: 300px;
+  height: 300px !important;
 }
 @media screen and (max-width: 599px) {
   .swiper {

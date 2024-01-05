@@ -27,4 +27,9 @@ const props = defineProps({
   font-weight: 700;
   display: block;
 }
+@media screen and (max-width: 599px) {
+  .block-section {
+    padding: 1rem;
+  }
+}
 </style>

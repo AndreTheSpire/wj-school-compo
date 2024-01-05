@@ -4,37 +4,13 @@
     <v-carousel
       cycle
       fade
-      :height="$vuetify.display.smAndDown ? '40vh' : '90vh'"
+      :height="$vuetify.display.smAndDown ? '65vh' : '90vh'"
       v-model="slidepage"
       hide-delimiters
-      @mouseenter="hovered = true"
-      @mouseleave="hovered = false"
       show-arrows="hover"
     >
       <!-- $vuetify.display.smAndDown dan hovered ini tujuannya apa ya? -->
-      <template v-slot:prev="{ props }">
-        <v-btn
-          v-show="hovered"
-          variant="elevated"
-          color="success"
-          @click="props.onClick"
-          icon="mdi-chevron-left"
-        ></v-btn>
-      </template>
 
-      <!-- Sering"-in kasih jarak antar elemen agar gak kelihatan berdempetan -->
-      <template v-slot:next="{ props }">
-        <v-btn
-          v-show="hovered"
-          variant="elevated"
-          color="success"
-          @click="props.onClick"
-          icon="mdi-chevron-right"
-        ></v-btn>
-      </template>
-
-      <!-- hindari menggunakan i saja sebagai index
-        jauh lebih baik menggunakan index sebagai nama -->
       <v-carousel-item
         v-for="(img, index) in headerimg"
         class="header-style"
@@ -45,9 +21,57 @@
         reverse-transition="fade"
       >
         <div class="d-flex justify-center align-center h-100">
+          <div
+            class="d-flex flex-column align-center justify-center"
+            v-if="$vuetify.display.smAndDown"
+          >
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+              @click="navigate(1)"
+            >
+              <img src="/img/icon/logo-sdk.png" alt="" class="header-img-md" />
+              <div class="header-item-text weight--700 ml-2">TKK</div>
+            </div>
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+              @click="navigate(2)"
+            >
+              <img
+                src="/img/icon/logo-sdk.png"
+                alt=""
+                class="header-img-md"
+                height="90px"
+              />
+              <div class="header-item-text weight--700 ml-2">SDK</div>
+            </div>
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+              @click="navigate(3)"
+            >
+              <img
+                src="/img/icon/logo-smpk.png"
+                alt=""
+                class="header-img-md"
+                height="90px"
+              />
+              <div class="header-item-text weight--700 ml-2">SMPK</div>
+            </div>
+          </div>
           <v-row
             class="d-flex align-center justify-center"
-            v-if="$vuetify.display.smAndDown"
+            v-else-if="$vuetify.display.mdAndDown"
           >
             <v-col
               cols="4"
@@ -99,51 +123,7 @@
               <div class="header-item-text weight--700">SMPK</div>
             </v-col>
           </v-row>
-          <div
-            class="d-flex flex-column align-center justify-center"
-            v-else-if="$vuetify.display.mdAndDown"
-          >
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-            >
-              <img src="/img/icon/logo-sdk.png" alt="" class="header-img-md" />
-              <div class="header-item-text weight--700 ml-2">TKK</div>
-            </div>
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-            >
-              <img
-                src="/img/icon/logo-sdk.png"
-                alt=""
-                class="header-img-md"
-                height="90px"
-              />
-              <div class="header-item-text weight--700 ml-2">SDK</div>
-            </div>
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-            >
-              <img
-                src="/img/icon/logo-smpk.png"
-                alt=""
-                class="header-img-md"
-                height="90px"
-              />
-              <div class="header-item-text weight--700 ml-2">SMPK</div>
-            </div>
-          </div>
+
           <div class="d-flex align-center justify-center animate" v-else>
             <div
               transition="slide-x-transition"
@@ -283,8 +263,6 @@ const router = useRouter();
 const route = useRoute();
 
 console.log(posts.value);
-
-
 
 let hovered = true;
 let slidepage = ref(0);

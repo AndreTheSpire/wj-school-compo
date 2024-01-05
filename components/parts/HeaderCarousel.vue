@@ -4,7 +4,7 @@
       cycle
       fade
       v-model="slidepage"
-      height="80vh"
+      :height="$vuetify.display.smAndDown ? '65vh' : '80vh'"
       hide-delimiters
       show-arrows="hover"
     >
