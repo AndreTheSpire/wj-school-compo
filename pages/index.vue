@@ -172,7 +172,7 @@
     <!-- Alasannya apa widthnya dispesifikkan begini, apakah pengaruh ke responsivenya juga? -->
     <v-card flat>
       <div class="section-page">
-        <div class="section-title">Berita Utama</div>
+        <div class="page-subtitle">Berita Utama</div>
         <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
@@ -436,17 +436,7 @@ export default {
   max-width: 1000px;
   padding: 2rem;
 }
-.section-title {
-  font-size: 2rem;
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-  font-style: normal;
-  @include phone {
-    font-size: 19px;
-  }
-}
+
 .container-header {
   top: 40%;
 }

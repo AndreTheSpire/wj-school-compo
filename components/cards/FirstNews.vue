@@ -102,11 +102,5 @@ const props = defineProps({
   font-size: 0.875rem;
   line-height: 1.2;
 }
-.content-news {
-  padding: 2rem 1rem 5rem;
-  min-height: 70vh;
-  max-width: 1080px;
-  margin: auto;
-  background-color: #f7f7f7;
-}
+
 </style>

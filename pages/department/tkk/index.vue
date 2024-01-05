@@ -13,7 +13,7 @@
     <div class="content-news">
       <PartsBlockText :blocktext="blocktext"></PartsBlockText>
       <div class="section-page">
-        <div class="section-title">Berita Terkini</div>
+        <div class="page-subtitle">Berita Terkini</div>
         <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
@@ -21,7 +21,7 @@
         </template>
       </div>
       <div class="section-page">
-        <div class="gukar-title">Daftar Guru & Karyawan</div>
+        <div class="page-subtitle">Daftar Guru & Karyawan</div>
         <div class="d-flex align-center justify-center">
           <PartsGukarCarousel :items="gukar" />
         </div>

@@ -99,6 +99,8 @@
 </template>
 
 <script setup>
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
 const nuxtApp = useNuxtApp();
 const loading = ref(true);
 nuxtApp.hook("page:start", () => {
@@ -110,6 +112,7 @@ nuxtApp.hook("page:finish", () => {
 let leftdrawer = ref(false);
 let rightdrawer = ref(false);
 let miniVariant = ref(false);
+let selectedIndex = ref(0);
 const routes = [
   { text: "TKK", route: "/department/tkk" },
   { text: "SDK", route: "/department/sdk" },
@@ -117,8 +120,8 @@ const routes = [
   { text: "Yayasan yohanes Gabriel Jombang", route: "/" },
 ];
 function navigateroute(route, index) {
-  this.$router.push(route.route);
-  this.selectedIndex = index;
+  router.push(route.route);
+  selectedIndex.value = index;
 }
 </script>
 
