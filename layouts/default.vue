@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"></Loading>
   <v-app class="background-container">
     <v-navigation-drawer
       v-model="leftdrawer"
@@ -97,34 +98,28 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      leftdrawer: false, // Controls whether the sidebar is open
-      rightdrawer: false,
-      miniVariant: false, // Controls whether the sidebar is in mini-variant mode (for mobile)
-      routes: [
-        // { text: 'Home', route: '/home', icon:'mdi-home' },
-        { text: "TKK", route: "/department/tkk" },
-        { text: "SDK", route: "/department/sdk" },
-        { text: "SMPK", route: "/department/smpk" },
-        { text: "Yayasan yohanes Gabriel Jombang", route: "/" },
-        // Add more menu items as needed
-      ],
-      selectedIndex: 0, // Index of the selected item
-    };
-  },
-  computed: {},
-
-  methods: {
-    navigateroute(route, index) {
-      this.$router.push(route.route);
-      this.selectedIndex = index;
-    },
-  },
-  mounted() {},
-};
+<script setup>
+const nuxtApp = useNuxtApp();
+const loading = ref(true);
+nuxtApp.hook("page:start", () => {
+  loading.value = true;
+});
+nuxtApp.hook("page:finish", () => {
+  loading.value = false;
+});
+let leftdrawer = ref(false);
+let rightdrawer = ref(false);
+let miniVariant = ref(false);
+const routes = [
+  { text: "TKK", route: "/department/tkk" },
+  { text: "SDK", route: "/department/sdk" },
+  { text: "SMPK", route: "/department/smpk" },
+  { text: "Yayasan yohanes Gabriel Jombang", route: "/" },
+];
+function navigateroute(route, index) {
+  this.$router.push(route.route);
+  this.selectedIndex = index;
+}
 </script>
 
 <style lang="scss" scoped>
