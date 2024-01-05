@@ -57,27 +57,22 @@
       </div>
       <div class="d-flex flex-column justify-center align-center">
         <div class="share-header">Share</div>
+
         <div class="pb-4">
           <ul class="breadcrumbs">
             <li>
-              <a
-                href="https://www.facebook.com/sharer.php?u=www.wijana.sch.id/news/ppdb-2022/"
+              <a :href="linkfb" target="_blank"
                 ><v-icon class="shareicon" size="40">mdi-facebook</v-icon></a
               >
             </li>
             <li>
-              <a
-                ><v-icon class="shareicon" size="40" @click="navigateshare(2)"
-                  >mdi-email</v-icon
-                >
+              <a :href="linkemail" target="_blank"
+                ><v-icon class="shareicon" size="40">mdi-email</v-icon>
               </a>
             </li>
             <li>
-              <a
-                href="https://wa.me/?text=%2APPDB%202022%2A%0A%20_Menerima%20peserta%20didik%20baru%202022_%0A%0Ahttps%3A%2F%2Fwww.wijana.sch.id/news/ppdb-2022/"
-                ><v-icon class="shareicon" size="40" @click="navigateshare(3)">
-                  mdi-whatsapp</v-icon
-                ></a
+              <a :href="linkwa" target="_blank"
+                ><v-icon class="shareicon" size="40"> mdi-whatsapp</v-icon></a
               >
             </li>
           </ul>
@@ -128,6 +123,20 @@ const { data: News } = await useFetch(endpoint, {
 // console.log(News);
 
 const NewsDetail = News.value;
+
+const linkwa =
+  "https://wa.me/?text=" +
+  NewsDetail.title +
+  "www.localhost:3000/news/" +
+  route.params.slug;
+const linkfb =
+  "https://www.facebook.com/sharer.php?u=www.localhost:3000/news/" +
+  route.params.slug;
+const linkemail =
+  "mailto:?subject=" +
+  NewsDetail.title +
+  "&body=http://localhost:3000/news/" +
+  route.params.slug;
 console.log(NewsDetail);
 let datafetch = ref(false);
 let dataheader = reactive({

@@ -116,8 +116,6 @@ const modules = [Pagination, Navigation, Autoplay];
 
   /* Center slide text vertically */
 }
-.swiper-slide-style {
-}
 .swiper-div {
   width: 100%;
 }

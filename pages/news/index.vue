@@ -8,7 +8,9 @@
           <li><b>BERITA</b></li>
         </ul>
       </div>
+
       <div class="page-title">BERITA</div>
+
       <div class="page-content">
         <v-row class="pa-4">
           <v-col cols="6" sm="4">
@@ -21,6 +23,7 @@
               placeholder=""
             />
           </v-col>
+
           <v-col cols="6" sm="4">
             <InputsTextField
               v-model="Sort"
@@ -32,6 +35,7 @@
               placeholder=""
             />
           </v-col>
+
           <v-col cols="12" sm="4">
             <InputsTextField
               v-model="Search"
@@ -48,6 +52,7 @@
             <CardsNews :news="content"></CardsNews>
             <br />
           </template>
+
           <v-pagination v-model="currentPage" :length="rows"></v-pagination>
         </div>
       </div>
@@ -72,26 +77,12 @@ const { data: posts } = await useFetch(
     },
   }
 );
-// const { data: posts, error } = await useAsyncData(`news`, () =>
-//   $fetch("https://api.imavi.org/imavi/news/get-all", {
-//     headers: {
-//       Id: runTimeConfig.public.APP_ID,
-//       Secret: runTimeConfig.public.APP_SECRET,
-//       partner: runTimeConfig.public.PARTNER,
-//     },
-//   }).catch((error) => error.data)
-// );
-// posts = fetchposts;
+
 console.log("data ini nongol ga ya ");
-// console.log(posts);
-// console.log(posts.value);
-// const posts = await fetch("/.netlify/functions/test-view", {
-//   lazy: true,
-// });
+
 const datapost = ref(posts.value);
 let filterpost = ref(posts.value);
-// console.log("post");
-// console.log(filterpost);
+
 let currentPage = ref(1);
 let category = ref("");
 let Sort = ref("");
@@ -108,18 +99,7 @@ const sortitem = [
   { state: "Terbaru", value: 3 },
   { state: "Terlama", value: 4 },
 ];
-let datafetch = ref(false);
-let dataheader = reactive({
-  title: "Error! News Doesnt Found",
-  desc: "Error! News Doesnt Found",
-});
-let news = computed(() => {
-  const getCurrentNews = newsstore.news.find((x) => {
-    return x.slug === route.params.slug;
-  });
 
-  return getCurrentNews;
-});
 let rows = computed(() => {
   return Math.ceil(filterpost.value.length / 5);
 });
@@ -173,13 +153,6 @@ function sortnews(selected) {
         return dateA - dateB; //sort by date ascending
       });
     }
-    // const indexMin = (this.currentPage - 1) * 5;
-    // const indexMax = indexMin + 5;
-    // this.showpost = this.filterpost.filter(
-    //   (x, index) => index >= indexMin && index < indexMax
-    // );
-    // this.currentPage = 1;
-    // console.log(showpost);
   }
 }
 

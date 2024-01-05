@@ -115,9 +115,7 @@ export default {
       selectedIndex: 0, // Index of the selected item
     };
   },
-  computed: {
-
-  },
+  computed: {},
 
   methods: {
     navigateroute(route, index) {
@@ -135,7 +133,7 @@ export default {
 }
 .text-sidebar {
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 20px;
   padding: 0.6rem 1rem;
   display: block;
   border-bottom: solid 1px #be272c;

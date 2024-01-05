@@ -3,12 +3,7 @@
     <v-row class="d-flex justify-center footer-content">
       <v-col cols="6" sm="6" md="3" lg="3" class="footer-content-item">
         <div class="footer-item-header">Yayasan Yohanes Gabriel</div>
-        <div class="footer-item-text">
-          Lorem ipsum dolor, sit, amet consectetur adipisicing elit. Impedit
-          commodi, placeat molestiae veritatis quod, eligendi, voluptatem dolore
-          voluptatibus fuga quaerat harum corrupti porro est. Perspiciatis
-          soluta officiis illum, animi consequuntur. Lebih lanjut
-        </div>
+        <div class="footer-item-text">yayasan yohanes gabrial adalah....</div>
       </v-col>
       <v-col cols="6" sm="6" md="3" lg="3" class="footer-content-item">
         <div class="footer-item-header">Tautan Cepat</div>

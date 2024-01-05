@@ -199,31 +199,4 @@ onMounted(() => {
   console.log(headerimg);
 });
 </script>
-<style lang="scss" scoped>
-.gukar-title {
-  font-size: 2rem;
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  font-weight: 700;
-  font-style: normal;
-}
-.section-page {
-  padding-bottom: 3rem;
-}
-
-.content-news {
-  padding: 2rem 1rem 5rem;
-  min-height: 70vh;
-  max-width: 1080px;
-  margin: auto;
-  background-color: #f7f7f7;
-}
-.section-title {
-  font-size: 2rem;
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-  font-style: normal;
-}
-</style>
+<style lang="scss" scoped></style>
