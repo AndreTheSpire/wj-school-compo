@@ -34,7 +34,7 @@
         <div class="swiper-div d-flex flex-column align-center">
           <img class="img-swiper" :src="images.imgurl" />
           <div style="margin-top: 16px">
-            <p class="gukar-name text-center">{{ images.nama }}</p>
+            <div class="gukar-name text-center">{{ images.nama }}</div>
             <p class="gukar-role text-center">{{ images.jabatan }}</p>
           </div>
         </div>
@@ -68,7 +68,7 @@ const wiper = useSwiper();
 const modules = [Pagination, Navigation, Autoplay];
 </script>
 
-<style>
+<style lang="scss">
 .gukar-name {
   font-weight: 700 !important;
   text-transform: uppercase;
@@ -77,6 +77,16 @@ const modules = [Pagination, Navigation, Autoplay];
   font-style: bold;
   color: #0a0a0a;
   word-wrap: break-word;
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  height: 25px;
+  -webkit-box-orient: vertical;
+  @include phone {
+    -webkit-line-clamp: 2;
+    height: 50px;
+  }
 }
 .gukar-role {
   text-transform: uppercase;

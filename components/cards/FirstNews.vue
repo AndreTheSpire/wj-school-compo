@@ -46,6 +46,9 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
 .text-content {
   overflow: hidden;
   width: 100%;
@@ -102,5 +105,4 @@ const props = defineProps({
   font-size: 0.875rem;
   line-height: 1.2;
 }
-
 </style>

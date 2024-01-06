@@ -4,13 +4,36 @@
     <v-carousel
       cycle
       fade
-      :height="$vuetify.display.smAndDown ? '65vh' : '90vh'"
+      :height="$vuetify.display.smAndDown ? '40vh' : '90vh'"
       v-model="slidepage"
       hide-delimiters
       show-arrows="hover"
+      @mouseenter="hovered = true"
+      @mouseleave="hovered = false"
     >
-      <!-- $vuetify.display.smAndDown dan hovered ini tujuannya apa ya? -->
+      <template v-slot:prev="{ props }">
+        <v-btn
+          v-show="hovered"
+          variant="elevated"
+          color="success"
+          @click="props.onClick"
+          icon="mdi-chevron-left"
+          class="arrowanimation"
+          :style="$vuetify.display.smAndDown ? 'top: 75px' : ''"
+        ></v-btn>
+      </template>
 
+      <template v-slot:next="{ props }">
+        <v-btn
+          v-show="hovered"
+          variant="elevated"
+          color="success"
+          @click="props.onClick"
+          class="arrowanimation"
+          icon="mdi-chevron-right"
+          :style="$vuetify.display.smAndDown ? 'top: 75px' : ''"
+        ></v-btn>
+      </template>
       <v-carousel-item
         v-for="(img, index) in headerimg"
         class="header-style"
@@ -21,57 +44,9 @@
         reverse-transition="fade"
       >
         <div class="d-flex justify-center align-center h-100">
-          <div
-            class="d-flex flex-column align-center justify-center"
-            v-if="$vuetify.display.smAndDown"
-          >
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-              @click="navigate(1)"
-            >
-              <img src="/img/icon/logo-sdk.png" alt="" class="header-img-md" />
-              <div class="header-item-text weight--700 ml-2">TKK</div>
-            </div>
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-              @click="navigate(2)"
-            >
-              <img
-                src="/img/icon/logo-sdk.png"
-                alt=""
-                class="header-img-md"
-                height="90px"
-              />
-              <div class="header-item-text weight--700 ml-2">SDK</div>
-            </div>
-            <div
-              :class="
-                load == true
-                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
-                  : 'header-item d-flex align-center justify-center pa-4'
-              "
-              @click="navigate(3)"
-            >
-              <img
-                src="/img/icon/logo-smpk.png"
-                alt=""
-                class="header-img-md"
-                height="90px"
-              />
-              <div class="header-item-text weight--700 ml-2">SMPK</div>
-            </div>
-          </div>
           <v-row
             class="d-flex align-center justify-center"
-            v-else-if="$vuetify.display.mdAndDown"
+            v-if="$vuetify.display.smAndDown"
           >
             <v-col
               cols="4"
@@ -123,7 +98,51 @@
               <div class="header-item-text weight--700">SMPK</div>
             </v-col>
           </v-row>
-
+          <div
+            class="d-flex flex-column align-center justify-center"
+            v-else-if="$vuetify.display.mdAndDown"
+          >
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+            >
+              <img src="/img/icon/logo-sdk.png" alt="" class="header-img-md" />
+              <div class="header-item-text weight--700 ml-2">TKK</div>
+            </div>
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+            >
+              <img
+                src="/img/icon/logo-sdk.png"
+                alt=""
+                class="header-img-md"
+                height="90px"
+              />
+              <div class="header-item-text weight--700 ml-2">SDK</div>
+            </div>
+            <div
+              :class="
+                load == true
+                  ? 'header-item animate1 d-flex align-center justify-center pa-4'
+                  : 'header-item d-flex align-center justify-center pa-4'
+              "
+            >
+              <img
+                src="/img/icon/logo-smpk.png"
+                alt=""
+                class="header-img-md"
+                height="90px"
+              />
+              <div class="header-item-text weight--700 ml-2">SMPK</div>
+            </div>
+          </div>
           <div class="d-flex align-center justify-center animate" v-else>
             <div
               transition="slide-x-transition"
@@ -169,10 +188,9 @@
   Jangan terlalu sering pakai v-sheet -->
 
   <v-sheet class="d-flex justify-center news-page">
-    <!-- Alasannya apa widthnya dispesifikkan begini, apakah pengaruh ke responsivenya juga? -->
     <v-card flat>
       <div class="section-page">
-        <div class="page-subtitle">Berita Utama</div>
+        <div class="section-title">Berita Utama</div>
         <template v-for="(content, index) in news" :key="content.slug">
           <CardsFirstNews v-if="index == 0" :news="content"></CardsFirstNews>
           <CardsNews v-else :news="content"></CardsNews>
@@ -264,7 +282,7 @@ const route = useRoute();
 
 console.log(posts.value);
 
-let hovered = true;
+let hovered = ref(true);
 let slidepage = ref(0);
 const headerimg = [
   {
@@ -432,11 +450,27 @@ export default {
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }
+.arrowanimation {
+  animation-name: floating;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
 .section-page {
   max-width: 1000px;
   padding: 2rem;
 }
-
+.section-title {
+  font-size: 2rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  font-style: normal;
+  @include phone {
+    font-size: 19px;
+  }
+}
 .container-header {
   top: 40%;
 }

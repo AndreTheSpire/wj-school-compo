@@ -84,6 +84,10 @@ const formatMonthName = (monthNumber) => {
 </script>
 
 <style lang="scss" scoped>
+
+a{
+  text-decoration: none;
+}
 .text-content {
   overflow: hidden;
   width: 100%;
