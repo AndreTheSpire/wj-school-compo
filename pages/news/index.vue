@@ -53,7 +53,12 @@
             <br />
           </template>
 
-          <v-pagination v-model="currentPage" :length="rows"></v-pagination>
+          <v-pagination
+            v-model="currentPage"
+            :length="rows"
+            :total-visible="$vuetify.display.smAndUp ? '5' : '3'"
+            :size="$vuetify.display.smAndUp ? 'default' : 'small'"
+          ></v-pagination>
         </div>
       </div>
     </div>
