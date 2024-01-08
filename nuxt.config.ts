@@ -5,6 +5,14 @@ interface News {
   slug: string;
 }
 
+const useLocal = process.env.USE_LOCAL
+let activeurl=""
+if(useLocal==='false'){
+  activeurl="https://wijana.netlify.app";
+}else{
+  activeurl="http://localhost:3001"
+}
+
 export default defineNuxtConfig({
   
   app: {
@@ -104,9 +112,12 @@ export default defineNuxtConfig({
     APP_ID: process.env.APP_ID,
     APP_SECRET: process.env.APP_SECRET,
     PARTNER: process.env.PARTNER,
+    public:{
+      baseURL:activeurl
+    }
   },
   site: {
-    url: 'https://wijana.netlify.app',
+    url: activeurl,
   },
   hooks: {
     async 'nitro:config'(nitroConfig) {
